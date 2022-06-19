@@ -81,18 +81,15 @@ struct Sys: Codable {
 
 // зделал через enum переключение между единицами измерения
 enum UnitsOfMeasurement {
-    case standart
     case metric
     case imperial
     
     var description: String {
         switch self {
-        case .standart:
-            return ""
         case .metric:
-            return "&units=metric"
+            return "metric"
         case .imperial:
-            return "&units=imperial"
+            return "imperial"
         }
     }
 }

@@ -9,7 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let APIKey = "52e0cef2e795eb013506ecb52fb1c280"
     var nameCity = "Minsk"
     var measurement = UnitsOfMeasurement.metric
     
@@ -28,7 +27,7 @@ class ViewController: UIViewController {
     // Запрос для получения данных
     
     func requestToServer(nameCity: String, measurement: UnitsOfMeasurement) {
-        if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(nameCity)&appid=\(APIKey)\(measurement.description)") {
+        if let apikey = Bundle.main.object(forInfoDictionaryKey: "ApiKey") as? String, let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(nameCity)&appid=\(apikey)&units=\(measurement.description)") {
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = "GET"
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
