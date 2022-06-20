@@ -13,7 +13,7 @@
 		AE0C1442285F2E7A007C0BFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE0C1440285F2E7A007C0BFD /* Main.storyboard */; };
 		AE0C1444285F2E7B007C0BFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE0C1443285F2E7B007C0BFD /* Assets.xcassets */; };
 		AE0C1447285F2E7B007C0BFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE0C1445285F2E7B007C0BFD /* LaunchScreen.storyboard */; };
-		AE0C144F285F433F007C0BFD /* WeatherData .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C144E285F433F007C0BFD /* WeatherData .swift */; };
+		AE0C144F285F433F007C0BFD /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C144E285F433F007C0BFD /* WeatherData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		AE0C1443285F2E7B007C0BFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE0C1446285F2E7B007C0BFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE0C1448285F2E7B007C0BFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AE0C144E285F433F007C0BFD /* WeatherData .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherData .swift"; sourceTree = "<group>"; };
+		AE0C144E285F433F007C0BFD /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +61,7 @@
 				AE0C143A285F2E7A007C0BFD /* AppDelegate.swift */,
 				AE0C143C285F2E7A007C0BFD /* SceneDelegate.swift */,
 				AE0C143E285F2E7A007C0BFD /* ViewController.swift */,
-				AE0C144E285F433F007C0BFD /* WeatherData .swift */,
+				AE0C144E285F433F007C0BFD /* WeatherData.swift */,
 				AE0C1440285F2E7A007C0BFD /* Main.storyboard */,
 				AE0C1443285F2E7B007C0BFD /* Assets.xcassets */,
 				AE0C1445285F2E7B007C0BFD /* LaunchScreen.storyboard */,
@@ -141,7 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE0C144F285F433F007C0BFD /* WeatherData .swift in Sources */,
+				AE0C144F285F433F007C0BFD /* WeatherData.swift in Sources */,
 				AE0C143F285F2E7A007C0BFD /* ViewController.swift in Sources */,
 				AE0C143B285F2E7A007C0BFD /* AppDelegate.swift in Sources */,
 				AE0C143D285F2E7A007C0BFD /* SceneDelegate.swift in Sources */,
