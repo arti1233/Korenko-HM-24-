@@ -20,7 +20,7 @@ struct DailyWeaterData: Codable {
     let windGust: Double
     let weather: [WeatherElement]
     let clouds: Int
-    let pop, uvi: Double
+    let pop, uvi: Double?
     let rain: Double?
 
     enum CodingKeys: String, CodingKey {

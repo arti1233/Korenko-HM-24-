@@ -39,6 +39,7 @@ class WeatherViewController: UIViewController {
             case .success(let value):
                 if let city = value.first {
                     self.getWeatherByCoordinates(city: city, measurement: self.measurement.description)
+                    print(value)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -51,7 +52,7 @@ class WeatherViewController: UIViewController {
             switch result {
             case .success(let value):
                 self.weatherData = value
-                print(value.daily)
+                print(value.current)
             case .failure(let error):
                 print(error)
             }
