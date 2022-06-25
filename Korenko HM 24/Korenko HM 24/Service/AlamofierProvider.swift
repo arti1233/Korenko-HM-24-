@@ -12,15 +12,15 @@ import UIKit
 protocol RestAPIProviderProtocol {
     
     func getCoordinateByName(name: String, completion: @escaping (Result<[Geocoding], Error>) -> Void)
-    func getWeatherForCityCoordinates(lat: Double, lon: Double, measurement: UnitsOfMeasurement, completion: @escaping (Result<WeatherData, Error>) -> Void)
+    func getWeatherForCityCoordinates(lat: Double, lon: Double, measurement: String, completion: @escaping (Result<WeatherData, Error>) -> Void)
 }
 
 
 
 class AlamofireProvider: RestAPIProviderProtocol {
-    func getWeatherForCityCoordinates(lat: Double, lon: Double, measurement: UnitsOfMeasurement, completion completion: @escaping (Result<WeatherData, Error>) -> Void) {
+    func getWeatherForCityCoordinates(lat: Double, lon: Double, measurement: String, completion completion: @escaping (Result<WeatherData, Error>) -> Void) {
         
-        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exlcude": "minutely,alerts", "units": measurement.description])
+        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exclude": "minutely,alerts", "units": measurement])
         
         AF.request(Constants.weatherURL, method: .get, parameters: params).responseDecodable(of: WeatherData.self) { response in
             switch response.result {
