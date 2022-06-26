@@ -23,7 +23,6 @@ class WeatherViewController: UIViewController {
         apiProvider = AlamofireProvider()
         
         
-        
         getCoordinatesByName(name: nameCity)
         
         

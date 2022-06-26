@@ -14,6 +14,7 @@
 		AE0C1444285F2E7B007C0BFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE0C1443285F2E7B007C0BFD /* Assets.xcassets */; };
 		AE0C1447285F2E7B007C0BFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE0C1445285F2E7B007C0BFD /* LaunchScreen.storyboard */; };
 		AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */; };
+		AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D33452868C2EE009DDDD1 /* MapViewController.swift */; };
 		AE9968C52865D53D002BB058 /* HourlyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C42865D53D002BB058 /* HourlyWeatherData.swift */; };
 		AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C62865D57D002BB058 /* CurrentWeatherData.swift */; };
 		AE9968CA2865D5B5002BB058 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C92865D5B5002BB058 /* Geocoding.swift */; };
@@ -32,6 +33,7 @@
 		AE0C1446285F2E7B007C0BFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE0C1448285F2E7B007C0BFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherData.swift; sourceTree = "<group>"; };
+		AE4D33452868C2EE009DDDD1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		AE9968C42865D53D002BB058 /* HourlyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherData.swift; sourceTree = "<group>"; };
 		AE9968C62865D57D002BB058 /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
 		AE9968C92865D5B5002BB058 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				AE0C143E285F2E7A007C0BFD /* WeatherViewController.swift */,
+				AE4D33452868C2EE009DDDD1 /* MapViewController.swift */,
 			);
 			path = "ViewController ";
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */,
 				AE0C143F285F2E7A007C0BFD /* WeatherViewController.swift in Sources */,
 				AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */,
+				AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */,
 				AE0C143B285F2E7A007C0BFD /* AppDelegate.swift in Sources */,
 				AE9968C52865D53D002BB058 /* HourlyWeatherData.swift in Sources */,
 				AE9968CD2865D693002BB058 /* AlamofierProvider.swift in Sources */,
