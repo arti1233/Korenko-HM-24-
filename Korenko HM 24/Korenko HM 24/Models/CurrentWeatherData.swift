@@ -103,6 +103,25 @@ enum Description: String, Codable {
     case moderateRain = "moderate rain"
     case overcastClouds = "overcast clouds"
     case scatteredClouds = "scattered clouds"
+    
+    var description: String {
+        switch self {
+        case .brokenClouds:
+            return "broken clouds"
+        case .clearSky:
+            return  "clear sky"
+        case .fewClouds:
+            return "few clouds"
+        case .lightRain:
+            return "light rain"
+        case .moderateRain:
+            return "moderate rain"
+        case .overcastClouds:
+            return "overcast clouds"
+        case .scatteredClouds:
+            return "scattered clouds"
+        }
+    }
 }
 
 // MARK: - FeelsLike
