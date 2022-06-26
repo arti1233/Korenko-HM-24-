@@ -11,23 +11,38 @@
         <!--Weather-->
         <scene sceneID="ZKj-wh-zBB">
             <objects>
-                <viewController id="vN7-oE-Dct" customClass="MapViewController" customModule="Korenko_HM_24" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vN7-oE-Dct" customClass="WeatherViewController" customModule="Korenko_HM_24" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6zu-c6-0R5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pc-j7-5Be">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="gU8-aF-R5J"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8pc-j7-5Be" firstAttribute="bottom" secondItem="gU8-aF-R5J" secondAttribute="bottom" id="5Zd-xs-0Lv"/>
+                            <constraint firstItem="8pc-j7-5Be" firstAttribute="top" secondItem="gU8-aF-R5J" secondAttribute="top" id="8Ex-Uv-acD"/>
+                            <constraint firstItem="8pc-j7-5Be" firstAttribute="trailing" secondItem="gU8-aF-R5J" secondAttribute="trailing" id="gIg-MN-MB3"/>
+                            <constraint firstItem="8pc-j7-5Be" firstAttribute="leading" secondItem="gU8-aF-R5J" secondAttribute="leading" id="l3U-T7-Q4o"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" image="cloud" catalog="system" id="EHx-Xw-fXu"/>
+                    <connections>
+                        <outlet property="viewForMaps" destination="8pc-j7-5Be" id="gmz-4s-I8g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0KT-GZ-4aM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1783" y="443"/>
+            <point key="canvasLocation" x="1782.608695652174" y="442.63392857142856"/>
         </scene>
         <!--Map-->
         <scene sceneID="Zft-Y2-ER2">
             <objects>
-                <viewController id="J3j-fa-w6m" customClass="WeatherViewController" customModule="Korenko_HM_24" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="J3j-fa-w6m" customClass="MapViewController" customModule="Korenko_HM_24" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nzV-hr-7Og">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

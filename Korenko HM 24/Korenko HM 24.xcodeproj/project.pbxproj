@@ -15,6 +15,7 @@
 		AE0C1447285F2E7B007C0BFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE0C1445285F2E7B007C0BFD /* LaunchScreen.storyboard */; };
 		AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */; };
 		AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D33452868C2EE009DDDD1 /* MapViewController.swift */; };
+		AE4D33492868CCA4009DDDD1 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = AE4D33482868CCA4009DDDD1 /* GoogleMaps */; };
 		AE9968C52865D53D002BB058 /* HourlyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C42865D53D002BB058 /* HourlyWeatherData.swift */; };
 		AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C62865D57D002BB058 /* CurrentWeatherData.swift */; };
 		AE9968CA2865D5B5002BB058 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C92865D5B5002BB058 /* Geocoding.swift */; };
@@ -46,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4D33492868CCA4009DDDD1 /* GoogleMaps in Frameworks */,
 				AE9968D12865D806002BB058 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +134,7 @@
 			name = "Korenko HM 24";
 			packageProductDependencies = (
 				AE9968D02865D806002BB058 /* Alamofire */,
+				AE4D33482868CCA4009DDDD1 /* GoogleMaps */,
 			);
 			productName = "Korenko HM 24";
 			productReference = AE0C1437285F2E7A007C0BFD /* Korenko HM 24.app */;
@@ -163,6 +166,7 @@
 			mainGroup = AE0C142E285F2E7A007C0BFD;
 			packageReferences = (
 				AE9968CF2865D806002BB058 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AE4D33472868CCA4009DDDD1 /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */,
 			);
 			productRefGroup = AE0C1438285F2E7A007C0BFD /* Products */;
 			projectDirPath = "";
@@ -420,6 +424,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AE4D33472868CCA4009DDDD1 /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/YAtechnologies/GoogleMaps-SP.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		AE9968CF2865D806002BB058 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -431,6 +443,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AE4D33482868CCA4009DDDD1 /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE4D33472868CCA4009DDDD1 /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */;
+			productName = GoogleMaps;
+		};
 		AE9968D02865D806002BB058 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AE9968CF2865D806002BB058 /* XCRemoteSwiftPackageReference "Alamofire" */;
