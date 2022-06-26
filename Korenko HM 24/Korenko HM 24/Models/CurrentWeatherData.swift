@@ -22,14 +22,14 @@ enum UnitsOfMeasurement {
     }
 }
 
-// MARK: - Weather
+// MARK: - WeatherData
 struct WeatherData: Codable {
     let lat, lon: Double
     let timezone: String
     let timezoneOffset: Int
-    let current: CurrentWeaterData
-    let hourly: [HourlyWeaterData]
-    let daily: [DailyWeaterData]
+    let current: Current
+    let hourly: [Hourly]
+    let daily: [Daily]
 
     enum CodingKeys: String, CodingKey {
         case lat, lon, timezone
@@ -39,7 +39,7 @@ struct WeatherData: Codable {
 }
 
 // MARK: - Current
-struct CurrentWeaterData: Codable {
+struct Current: Codable {
     let dt: Int
     let sunrise, sunset: Int?
     let temp, feelsLike: Double
@@ -49,8 +49,9 @@ struct CurrentWeaterData: Codable {
     let windSpeed: Double
     let windDeg: Int
     let windGust: Double
-    let weather: [WeatherElement]
+    let weather: [Weather]
     let pop: Double?
+    let rain: Rain?
 
     enum CodingKeys: String, CodingKey {
         case dt, sunrise, sunset, temp
@@ -61,12 +62,21 @@ struct CurrentWeaterData: Codable {
         case windSpeed = "wind_speed"
         case windDeg = "wind_deg"
         case windGust = "wind_gust"
-        case weather, pop
+        case weather, pop, rain
     }
 }
 
+// MARK: - Rain
+struct Rain: Codable {
+    let the1H: Double
 
-struct WeatherElement: Codable {
+    enum CodingKeys: String, CodingKey {
+        case the1H = "1h"
+    }
+}
+
+// MARK: - Weather
+struct Weather: Codable {
     let id: Int
     let main: Main
     let weatherDescription: Description
@@ -90,13 +100,17 @@ enum Description: String, Codable {
     case clearSky = "clear sky"
     case fewClouds = "few clouds"
     case lightRain = "light rain"
+    case moderateRain = "moderate rain"
+    case overcastClouds = "overcast clouds"
     case scatteredClouds = "scattered clouds"
 }
 
+// MARK: - FeelsLike
 struct FeelsLike: Codable {
     let day, night, eve, morn: Double
 }
 
+// MARK: - Temp
 struct Temp: Codable {
     let day, min, max, night: Double
     let eve, morn: Double

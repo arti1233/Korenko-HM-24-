@@ -52,7 +52,7 @@ class WeatherViewController: UIViewController {
             switch result {
             case .success(let value):
                 self.weatherData = value
-                print(value.current)
+                print(value.daily)
             case .failure(let error):
                 print(error)
             }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HourlyWeaterData: Codable {
+struct Hourly: Codable {
     let dt: Int
     let sunrise, sunset: Int?
     let temp, feelsLike: Double
@@ -17,8 +17,9 @@ struct HourlyWeaterData: Codable {
     let windSpeed: Double
     let windDeg: Int
     let windGust: Double
-    let weather: [WeatherElement]
+    let weather: [Weather]
     let pop: Double?
+    let rain: Rain?
 
     enum CodingKeys: String, CodingKey {
         case dt, sunrise, sunset, temp
@@ -29,6 +30,6 @@ struct HourlyWeaterData: Codable {
         case windSpeed = "wind_speed"
         case windDeg = "wind_deg"
         case windGust = "wind_gust"
-        case weather, pop
+        case weather, pop, rain
     }
 }

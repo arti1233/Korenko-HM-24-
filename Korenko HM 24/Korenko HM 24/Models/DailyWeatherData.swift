@@ -8,7 +8,7 @@
 import Foundation
 import CoreText
 
-struct DailyWeaterData: Codable {
+struct Daily: Codable {
     let dt, sunrise, sunset, moonrise: Int
     let moonset: Int
     let moonPhase: Double
@@ -18,9 +18,9 @@ struct DailyWeaterData: Codable {
     let dewPoint, windSpeed: Double
     let windDeg: Int
     let windGust: Double
-    let weather: [WeatherElement]
+    let weather: [Weather]
     let clouds: Int
-    let pop, uvi: Double?
+    let pop, uvi: Double
     let rain: Double?
 
     enum CodingKeys: String, CodingKey {
