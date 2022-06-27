@@ -16,6 +16,10 @@
 		AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */; };
 		AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D33452868C2EE009DDDD1 /* MapViewController.swift */; };
 		AE4D33492868CCA4009DDDD1 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = AE4D33482868CCA4009DDDD1 /* GoogleMaps */; };
+		AE4D33502869CEC2009DDDD1 /* myTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D334E2869CEC2009DDDD1 /* myTableViewCell.swift */; };
+		AE4D33512869CEC2009DDDD1 /* myTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4D334F2869CEC2009DDDD1 /* myTableViewCell.xib */; };
+		AE4D33542869CEFB009DDDD1 /* myCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D33522869CEFB009DDDD1 /* myCollectionCell.swift */; };
+		AE4D33552869CEFB009DDDD1 /* myCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4D33532869CEFB009DDDD1 /* myCollectionCell.xib */; };
 		AE9968C52865D53D002BB058 /* HourlyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C42865D53D002BB058 /* HourlyWeatherData.swift */; };
 		AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C62865D57D002BB058 /* CurrentWeatherData.swift */; };
 		AE9968CA2865D5B5002BB058 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C92865D5B5002BB058 /* Geocoding.swift */; };
@@ -35,6 +39,10 @@
 		AE0C1448285F2E7B007C0BFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherData.swift; sourceTree = "<group>"; };
 		AE4D33452868C2EE009DDDD1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		AE4D334E2869CEC2009DDDD1 /* myTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myTableViewCell.swift; sourceTree = "<group>"; };
+		AE4D334F2869CEC2009DDDD1 /* myTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = myTableViewCell.xib; sourceTree = "<group>"; };
+		AE4D33522869CEFB009DDDD1 /* myCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myCollectionCell.swift; sourceTree = "<group>"; };
+		AE4D33532869CEFB009DDDD1 /* myCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = myCollectionCell.xib; sourceTree = "<group>"; };
 		AE9968C42865D53D002BB058 /* HourlyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherData.swift; sourceTree = "<group>"; };
 		AE9968C62865D57D002BB058 /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
 		AE9968C92865D5B5002BB058 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
@@ -74,6 +82,7 @@
 		AE0C1439285F2E7A007C0BFD /* Korenko HM 24 */ = {
 			isa = PBXGroup;
 			children = (
+				AE4D334C2869CE5E009DDDD1 /* New Group */,
 				AE0C143A285F2E7A007C0BFD /* AppDelegate.swift */,
 				AE0C143C285F2E7A007C0BFD /* SceneDelegate.swift */,
 				AE9968D22865F6DB002BB058 /* Constants .swift */,
@@ -86,6 +95,34 @@
 				AE0C1448285F2E7B007C0BFD /* Info.plist */,
 			);
 			path = "Korenko HM 24";
+			sourceTree = "<group>";
+		};
+		AE4D334B2869CE54009DDDD1 /* CellForCollectionView  */ = {
+			isa = PBXGroup;
+			children = (
+				AE4D33522869CEFB009DDDD1 /* myCollectionCell.swift */,
+				AE4D33532869CEFB009DDDD1 /* myCollectionCell.xib */,
+			);
+			name = "CellForCollectionView ";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		AE4D334C2869CE5E009DDDD1 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				AE4D334B2869CE54009DDDD1 /* CellForCollectionView  */,
+				AE4D334D2869CE74009DDDD1 /* CellForTableView */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		AE4D334D2869CE74009DDDD1 /* CellForTableView */ = {
+			isa = PBXGroup;
+			children = (
+				AE4D334E2869CEC2009DDDD1 /* myTableViewCell.swift */,
+				AE4D334F2869CEC2009DDDD1 /* myTableViewCell.xib */,
+			);
+			path = CellForTableView;
 			sourceTree = "<group>";
 		};
 		AE9968C32865D4B8002BB058 /* ViewController  */ = {
@@ -183,7 +220,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE0C1447285F2E7B007C0BFD /* LaunchScreen.storyboard in Resources */,
+				AE4D33512869CEC2009DDDD1 /* myTableViewCell.xib in Resources */,
 				AE0C1444285F2E7B007C0BFD /* Assets.xcassets in Resources */,
+				AE4D33552869CEFB009DDDD1 /* myCollectionCell.xib in Resources */,
 				AE0C1442285F2E7A007C0BFD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +237,8 @@
 				AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */,
 				AE0C143F285F2E7A007C0BFD /* WeatherViewController.swift in Sources */,
 				AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */,
+				AE4D33542869CEFB009DDDD1 /* myCollectionCell.swift in Sources */,
+				AE4D33502869CEC2009DDDD1 /* myTableViewCell.swift in Sources */,
 				AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */,
 				AE0C143B285F2E7A007C0BFD /* AppDelegate.swift in Sources */,
 				AE9968C52865D53D002BB058 /* HourlyWeatherData.swift in Sources */,
