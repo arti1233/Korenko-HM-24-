@@ -17,25 +17,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMO-xv-P8y">
-                        <rect key="frame" x="80" y="0.0" width="160" height="160"/>
+                        <rect key="frame" x="16" y="0.0" width="288" height="160"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACn-9i-BbS">
-                                <rect key="frame" x="0.0" y="86.5" width="160" height="33.5"/>
+                                <rect key="frame" x="0.0" y="86.5" width="288" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LsX-qm-28D">
-                                <rect key="frame" x="40" y="31" width="80" height="47.5"/>
+                                <rect key="frame" x="72" y="31" width="144" height="47.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFr-eA-GEr">
-                                <rect key="frame" x="0.0" y="8" width="160" height="23"/>
+                                <rect key="frame" x="0.0" y="8" width="288" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsc-6k-onD">
-                                <rect key="frame" x="0.0" y="128" width="160" height="24"/>
+                                <rect key="frame" x="0.0" y="128" width="288" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -63,7 +63,7 @@
                     <constraint firstAttribute="bottom" secondItem="CMO-xv-P8y" secondAttribute="bottom" id="4Sd-Gk-PbH"/>
                     <constraint firstItem="CMO-xv-P8y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Hxv-BG-ISZ"/>
                     <constraint firstItem="CMO-xv-P8y" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="P3L-Ke-FPA"/>
-                    <constraint firstItem="CMO-xv-P8y" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="Qb4-ul-hnz"/>
+                    <constraint firstItem="CMO-xv-P8y" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.9" id="Qb4-ul-hnz"/>
                     <constraint firstItem="CMO-xv-P8y" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="dtX-81-DnG"/>
                 </constraints>
             </tableViewCellContentView>

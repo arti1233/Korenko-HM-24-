@@ -7,11 +7,13 @@
 
 import UIKit
 import GoogleMaps
+import RealmSwift
 
 class MapViewController: UIViewController {
     static let key = "MapViewController"
     private var apiProvider: RestAPIProviderProtocol!
     var measurement = UnitsOfMeasurement.metric
+    let realm = try! Realm()
     
 // MARK: IBOutlet
     @IBOutlet weak var mainView: UIView!
@@ -53,6 +55,7 @@ class MapViewController: UIViewController {
             switch result {
             case .success(let value):
                 self.reloadMainView(weather: value.current)
+                addObjectInRealm(weather: value, realm: self.realm)
             case .failure(let error):
                 self.errorAlertController(error: error.localizedDescription)
             }
