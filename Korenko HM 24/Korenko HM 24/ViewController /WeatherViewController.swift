@@ -7,187 +7,144 @@
 
 import UIKit
 
+enum WeatherQueue: Int {
+    case current
+    case hourly
+    case daily
+    
+    
+}
+
+
+
+
 class WeatherViewController: UIViewController {
 
     private var apiProvider: RestAPIProviderProtocol!
+
+// MARK: IBOutlet
     
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var feelsLikeLabel: UILabel!
-    @IBOutlet weak var weatherDescriptionLabel: UILabel!
+    @IBOutlet weak var mainTableView: UITableView!
     
     
-    @IBOutlet weak var collectionTable: UICollectionView!
-    
-    
-    
-    
-    
-    
+    var cityName = String()
     var weatherData: WeatherData?
-    var nameCity = String()
     var measurement = UnitsOfMeasurement.metric
-    var image = UIImage()
-    var hourly: [Hourly]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionTable.delegate = self
-        collectionTable.dataSource = self
-        collectionTable.register(UINib(nibName: myCollectionCell.key, bundle: nil), forCellWithReuseIdentifier: myCollectionCell.key)
-        
         apiProvider = AlamofireProvider()
-      
+        
+        mainTableView.dataSource = self
+        mainTableView.delegate = self
+    
+        mainTableView.register(UINib(nibName: CurrentWeatherCell.key, bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
+        mainTableView.register(UINib(nibName: HourlyWeatherCell.key, bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
+        mainTableView.register(UINib(nibName: DailyWeatherCell.key, bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
+        
         
     }
 
-    @IBAction func choseCity(_ sender: Any) {
-        alertControllerForChoseCity()
-        
-        
+    @IBAction func choseCityButton(_ sender: Any) {
+        choseCityAlertController()
     }
     
     
     
     
     
+// MARK: METODS
     
-// MARK: Metods
+    // Chose City alertController
     
-    func getCoordinatesByName(name: String) {
-        apiProvider.getCoordinateByName(name: name) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let value):
-                if let city = value.first {
-                    self.getWeatherByCoordinates(city: city, measurement: self.measurement.description)
-                    print(value)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-
-    func getWeatherByCoordinates(city: Geocoding, measurement: String) {
-        apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon, measurement: measurement) { result in
-            switch result {
-            case .success(let value):
-                self.weatherData = value
-                self.hourly = value.hourly
-                print(value.current)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    // Метод для alertController
-    
-    func alertControllerForChoseCity() {
-        let choseCityAlert = UIAlertController(title: "Chose city", message: "Enter the name of the city", preferredStyle: .alert)
-        choseCityAlert.addTextField { textField in
+    func choseCityAlertController() {
+        let alertController = UIAlertController(title: "Chose city", message: "Please, enter the name of the city", preferredStyle: .alert)
+        alertController.addTextField { textField in
             textField.placeholder = "Name city"
         }
-        let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
-        let setPasswordButton = UIAlertAction(title: "OK", style: .cancel){ [weak self] _ in
-            guard let textField = choseCityAlert.textFields?[0],
+        let okButton = UIAlertAction(title: "Enter", style: .default) { [weak self] _ in
+            guard let textField = alertController.textFields?[0],
                   let text = textField.text,
                   let self = self else { return }
             let textWithoutWhitespace = text.trimmingCharacters(in: .whitespaces)
-            self.nameCity = textWithoutWhitespace
-            DispatchQueue.global().async { [weak self]  in
-                guard let self = self else { return }
-                self.getCoordinatesByName(name: self.nameCity)
-                DispatchQueue.main.async {
-                    self.changeMainView()
-                    self.collectionTable.reloadData()
+            self.getCoordinatesByName(name: textWithoutWhitespace)
+        }
+        let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
+        
+        alertController.addAction(okButton)
+        alertController.addAction(cancelButton)
+        present(alertController, animated: true)
+    }
+    
+    fileprivate func getCoordinatesByName(name: String) {
+        apiProvider.getCoordinateByName(name: name) { [weak self] result in
+                guard let self = self else {return}
+                switch result {
+                case .success(let value):
+                    if let city = value.first {
+                        self.getWeatherByCoordinates(city: city)
+                    }
+                case .failure(let error):
+                    self.errorAlertController(error: error.localizedDescription)
                 }
             }
         }
-            
-            choseCityAlert.addAction(setPasswordButton)
-            choseCityAlert.addAction(cancelButton)
-            present(choseCityAlert, animated: true)
-    }
-    
-    
-    func changeMainView() {
-        guard let weatherData = weatherData,
-              let weatherdescription = weatherData.current.weather.first else { return }
-        let API = "https://openweathermap.org/img/wn/\(weatherdescription.icon)@2x.png"
-        getIconImage(API: API)
-
-        tempLabel.text = String(weatherData.current.temp)
-        feelsLikeLabel.text = "Feels like \(weatherData.current.feelsLike)"
-        weatherDescriptionLabel.text = weatherdescription.weatherDescription.description
-        imageView.image = image
         
-    }
-    
-    func getIconImage(API: String) {
-        let api = API
-        guard let apiURL = URL(string: api) else { return }
-        let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: apiURL) { (data, response, error) in
-            guard let data = data, let icon = UIImage(data: data), error == nil else { return }
-            self.image = icon
+        private func getWeatherByCoordinates(city: Geocoding) {
+            apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon, measurement: measurement.description) { result in
+                switch result {
+                case .success(let value):
+                    self.weatherData = value
+                    self.mainTableView.reloadData()
+                case .failure(let error):
+                    self.errorAlertController(error: error.localizedDescription)
+                }
+            }
         }
-        task.resume()
+    
+    
+    func errorAlertController(error: String) {
+        let alrtController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Repeat", style: .cancel)
+        alrtController.addAction(okButton)
+        present(alrtController, animated: true)
     }
     
-    func convertUnixType(dt: Double) -> String {
-        let date = Date(timeIntervalSince1970: dt)
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "HH:mm" //Specify your format that you want
-        let strDate = dateFormatter.string(from: date)
-        return strDate
-    }
+    
+    
     
     
     
     
 }
-
-//extension WeatherViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        0
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        UITableViewCell()
-//    }
-//
-//
-//}
-
-
-extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let hourly = hourly else { return 0 }
-        return hourly.count
+   
+extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        3
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myCollectionCell.key, for: indexPath) as? myCollectionCell else { return UICollectionViewCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let currentCell = mainTableView.dequeueReusableCell(withIdentifier: CurrentWeatherCell.key) as? CurrentWeatherCell,
+              let weather = weatherData else { return UITableViewCell()}
+        currentCell.reloadWeatheData(weatherData: weather)
         
-        guard let weatherHourly = hourly,
-              let weather = weatherHourly[indexPath.row].weather.first else { return UICollectionViewCell() }
-      
-        var hourly = weatherHourly[indexPath.row]
         
-        cell.timeLabel.text = convertUnixType(dt: Double(hourly.dt))
-        cell.tempLabel.text = String(hourly.temp)
-        cell.layer.cornerRadius = 20 
-        return cell
+        guard let hourlyCell = mainTableView.dequeueReusableCell(withIdentifier: HourlyWeatherCell.key) as? HourlyWeatherCell else { return UITableViewCell() }
+        hourlyCell.weatherHourly = weather.hourly
+        
+        guard let dailyCell = mainTableView.dequeueReusableCell(withIdentifier: DailyWeatherCell.key) as? DailyWeatherCell else { return UITableViewCell() }
+        dailyCell.dailyWeather = weather.daily
+        
+        if indexPath.row == 0 {
+            return currentCell
+        } else if indexPath.row == 1 {
+            return hourlyCell
+        } else if indexPath.row == 2 {
+            return dailyCell
+        } else {
+            return UITableViewCell()
+        }
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150)
-    }
     
 }
