@@ -55,7 +55,7 @@ class MapViewController: UIViewController {
             switch result {
             case .success(let value):
                 self.reloadMainView(weather: value.current)
-                addObjectInRealm(weather: value, realm: self.realm)
+                self.addObjectInRealm(weather: value)
             case .failure(let error):
                 self.errorAlertController(error: error.localizedDescription)
             }
@@ -85,7 +85,7 @@ class MapViewController: UIViewController {
             self.temperatureLabel.text = "\(String(Int(weather.temp))) C"
             self.feelsLikeLabel.text = "Feels like \(Int(weather.feelsLike)) C"
             self.weatherDescriptionLabel.text = weatherDescription.weatherDescription.description
-            self.imageView.image = getIconImage(iconId: weatherDescription.icon)
+            self.imageView.image = self.getIconImage(iconId: weatherDescription.icon)
             self.mainView.isHidden = false
         }
     }
@@ -103,22 +103,3 @@ extension MapViewController: GMSMapViewDelegate {
     }
 }
 
-// запрос для получения картинки
-func getIconImage(iconId: String) -> UIImage {
-    let api = "https://openweathermap.org/img/wn/\(iconId)@2x.png"
-    guard let apiURL = URL(string: api) else { return UIImage() }
-    let data = try! Data(contentsOf: apiURL)
-    guard let image = UIImage(data: data) else { return UIImage() }
-    return image
-}
-
-// конвертор времени
-func confertUnixTypeToNormal(time: Double, typeTime: String) -> String {
-    let date = Date(timeIntervalSince1970: time)
-    let dateFormatter = DateFormatter()
-    dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
-    dateFormatter.locale = NSLocale.current
-    dateFormatter.dateFormat = typeTime //Specify your format that you want
-    let strDate = dateFormatter.string(from: date)
-    return strDate
-}

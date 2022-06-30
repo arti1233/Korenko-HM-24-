@@ -18,7 +18,7 @@ protocol RestAPIProviderProtocol {
 
 
 class AlamofireProvider: RestAPIProviderProtocol {
-    func getWeatherForCityCoordinates(lat: Double, lon: Double, measurement: String, completion completion: @escaping (Result<WeatherData, Error>) -> Void) {
+    func getWeatherForCityCoordinates(lat: Double, lon: Double, measurement: String, completion: @escaping (Result<WeatherData, Error>) -> Void) {
         
         let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exclude": "minutely,alerts", "units": measurement])
         

@@ -16,8 +16,6 @@ class WeatherViewController: UIViewController {
 // MARK: IBOutlet
     
     @IBOutlet weak var mainTableView: UITableView!
-    
-    let realm = try! Realm()
     var cityName = String()
     var weatherData: WeatherData?
     var measurement = UnitsOfMeasurement.metric
@@ -32,7 +30,6 @@ class WeatherViewController: UIViewController {
         mainTableView.register(UINib(nibName: CurrentWeatherCell.key, bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
         mainTableView.register(UINib(nibName: HourlyWeatherCell.key, bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         mainTableView.register(UINib(nibName: DailyWeatherCell.key, bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
-        print(realm.configuration.fileURL)
     }
 
     @IBAction func choseCityButton(_ sender: Any) {
@@ -85,7 +82,7 @@ class WeatherViewController: UIViewController {
                 switch result {
                 case .success(let value):
                     self.weatherData = value
-                    addObjectInRealm(weather: value, realm: self.realm)
+                    self.addObjectInRealm(weather: value)
                     self.mainTableView.reloadData()
                 case .failure(let error):
                     self.errorAlertController(error: error.localizedDescription)

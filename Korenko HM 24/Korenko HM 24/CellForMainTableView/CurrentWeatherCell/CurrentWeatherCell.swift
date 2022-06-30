@@ -39,9 +39,9 @@ class CurrentWeatherCell: UITableViewCell {
             guard let weatherDescription = weather.weather.first,
                   let self = self else { return }
             self.nameCityLabel.text = weatherData.timezone
-            self.tempLabel.text = "\(String(Int(weather.temp))) C"
+            self.tempLabel.text = "\(Int(weather.temp)) C"
             self.weatherDescriptionLabel.text = String(weatherDescription.weatherDescription.description)
-            self.iconView.image = getIconImage(iconId: weatherDescription.icon)
+            self.iconView.image = self.getIconImage(iconId: weatherDescription.icon)
         }
     }
 }
