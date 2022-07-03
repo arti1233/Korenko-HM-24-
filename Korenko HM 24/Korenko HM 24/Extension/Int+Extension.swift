@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-extension Double{
+extension Int{
   
     var timeHHmm: String {
         let date = Date(timeIntervalSince1970: self)
