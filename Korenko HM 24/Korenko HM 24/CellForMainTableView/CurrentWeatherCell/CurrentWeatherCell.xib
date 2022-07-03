@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="CurrentWeatherCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentWeatherCell" rowHeight="160" id="KGk-i7-Jjw" customClass="CurrentWeatherCell" customModule="Korenko_HM_24" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMO-xv-P8y">
+                        <rect key="frame" x="16" y="0.0" width="288" height="160"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACn-9i-BbS">
+                                <rect key="frame" x="0.0" y="86.5" width="288" height="33.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LsX-qm-28D">
+                                <rect key="frame" x="72" y="31" width="144" height="47.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFr-eA-GEr">
+                                <rect key="frame" x="0.0" y="8" width="288" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsc-6k-onD">
+                                <rect key="frame" x="0.0" y="128" width="288" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.59804571370000004" green="0.44773390759999998" blue="0.77961373140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="LsX-qm-28D" firstAttribute="centerX" secondItem="CMO-xv-P8y" secondAttribute="centerX" id="8ym-Tl-ZIS"/>
+                            <constraint firstItem="fsc-6k-onD" firstAttribute="top" secondItem="ACn-9i-BbS" secondAttribute="bottom" constant="8" id="99K-UH-cUH"/>
+                            <constraint firstItem="kFr-eA-GEr" firstAttribute="top" secondItem="CMO-xv-P8y" secondAttribute="top" constant="8" id="ChZ-Q8-LtY"/>
+                            <constraint firstItem="kFr-eA-GEr" firstAttribute="leading" secondItem="CMO-xv-P8y" secondAttribute="leading" id="Ftt-PD-GIy"/>
+                            <constraint firstItem="fsc-6k-onD" firstAttribute="leading" secondItem="CMO-xv-P8y" secondAttribute="leading" id="JaF-PZ-pOD"/>
+                            <constraint firstItem="LsX-qm-28D" firstAttribute="top" secondItem="kFr-eA-GEr" secondAttribute="bottom" id="PaL-ee-m0r"/>
+                            <constraint firstItem="ACn-9i-BbS" firstAttribute="top" secondItem="LsX-qm-28D" secondAttribute="bottom" constant="8" symbolic="YES" id="Sy1-JV-KE7"/>
+                            <constraint firstAttribute="trailing" secondItem="fsc-6k-onD" secondAttribute="trailing" id="ZeN-Mc-BaX"/>
+                            <constraint firstItem="ACn-9i-BbS" firstAttribute="leading" secondItem="CMO-xv-P8y" secondAttribute="leading" id="b6J-2v-1GE"/>
+                            <constraint firstItem="ACn-9i-BbS" firstAttribute="centerX" secondItem="CMO-xv-P8y" secondAttribute="centerX" id="bZv-8f-xDR"/>
+                            <constraint firstItem="LsX-qm-28D" firstAttribute="width" secondItem="CMO-xv-P8y" secondAttribute="width" multiplier="0.5" id="dWL-j3-MFD"/>
+                            <constraint firstAttribute="bottom" secondItem="fsc-6k-onD" secondAttribute="bottom" constant="8" id="ozp-xx-iOB"/>
+                            <constraint firstAttribute="trailing" secondItem="kFr-eA-GEr" secondAttribute="trailing" id="uRy-tG-KJD"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="CMO-xv-P8y" secondAttribute="bottom" id="4Sd-Gk-PbH"/>
+                    <constraint firstItem="CMO-xv-P8y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Hxv-BG-ISZ"/>
+                    <constraint firstItem="CMO-xv-P8y" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="P3L-Ke-FPA"/>
+                    <constraint firstItem="CMO-xv-P8y" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.9" id="Qb4-ul-hnz"/>
+                    <constraint firstItem="CMO-xv-P8y" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="dtX-81-DnG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="iconView" destination="LsX-qm-28D" id="Nta-Zg-YRj"/>
+                <outlet property="mainView" destination="CMO-xv-P8y" id="q5O-Ed-N8i"/>
+                <outlet property="nameCityLabel" destination="kFr-eA-GEr" id="KL8-gJ-hXE"/>
+                <outlet property="tempLabel" destination="ACn-9i-BbS" id="MPn-2o-adM"/>
+                <outlet property="weatherDescriptionLabel" destination="fsc-6k-onD" id="xTb-Py-if1"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="26.116071428571427"/>
+        </tableViewCell>
+    </objects>
+</document>
