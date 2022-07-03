@@ -30,6 +30,9 @@ class WeatherViewController: UIViewController {
         mainTableView.register(UINib(nibName: CurrentWeatherCell.key, bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
         mainTableView.register(UINib(nibName: HourlyWeatherCell.key, bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         mainTableView.register(UINib(nibName: DailyWeatherCell.key, bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
+        
+    
+        
     }
 
     @IBAction func choseCityButton(_ sender: Any) {

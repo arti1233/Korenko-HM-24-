@@ -14,7 +14,7 @@ class ListViewController: UIViewController {
     let realm = try! Realm()
     var items: Results<RequestListRealmData>!
     var itemsWeather: Results<WeatherDataRealm>!
-    
+    var notificationToken: NotificationToken?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,16 +22,27 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let results = realm.objects(RequestListRealmData.self)
+        
+        notificationToken = results.observe{ [weak self] (changes: RealmCollectionChange) in
+            guard let self = self else { return }
+            switch changes {
+            case .initial:
+                self.tableView.reloadData()
+            case .update:
+                self.tableView.reloadData()
+            case .error(_):
+                fatalError()
+            }
+        }
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: TableViewCellForListReqest.key, bundle: nil), forCellReuseIdentifier: TableViewCellForListReqest.key)
         
         items = realm.objects(RequestListRealmData.self)
         itemsWeather = realm.objects(WeatherDataRealm.self)
-        tableView.reloadData()
     }
-    
-
 }
 
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
