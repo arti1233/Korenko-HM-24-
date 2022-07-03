@@ -41,7 +41,7 @@ class CurrentWeatherCell: UITableViewCell {
             self.nameCityLabel.text = weatherData.timezone
             self.tempLabel.text = "\(Int(weather.temp)) C"
             self.weatherDescriptionLabel.text = String(weatherDescription.weatherDescription.description)
-            self.iconView.image = self.getIconImage(iconId: weatherDescription.icon)
+            self.iconView.image = weatherDescription.icon.image
         }
     }
 }

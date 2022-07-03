@@ -11,6 +11,7 @@ class DailyWeatherCell: UITableViewCell {
 
     static let key = "DailyWeatherCell"
     
+    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var tableView: UITableView!
  
     
@@ -23,7 +24,6 @@ class DailyWeatherCell: UITableViewCell {
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: DailyWeatherForTableCell.key, bundle: nil), forCellReuseIdentifier: DailyWeatherForTableCell.key)
-        
         
         
         

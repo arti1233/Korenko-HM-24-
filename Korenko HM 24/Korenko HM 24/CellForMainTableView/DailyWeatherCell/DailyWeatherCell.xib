@@ -17,21 +17,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="443" height="529"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mbD-b9-XdQ">
-                        <rect key="frame" x="0.0" y="0.0" width="443" height="529"/>
+                    <view contentMode="scaleToFill" id="VXG-Dc-kDB">
+                        <rect key="frame" x="20" y="11" width="403" height="507"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="3l6-MX-go7">
+                                <rect key="frame" x="0.0" y="0.0" width="403" height="507"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </tableView>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="3l6-MX-go7" secondAttribute="trailing" id="IwY-ab-qyq"/>
+                            <constraint firstItem="3l6-MX-go7" firstAttribute="top" secondItem="VXG-Dc-kDB" secondAttribute="top" id="Jb3-89-HnW"/>
+                            <constraint firstItem="3l6-MX-go7" firstAttribute="leading" secondItem="VXG-Dc-kDB" secondAttribute="leading" id="lD3-or-NtZ"/>
+                            <constraint firstAttribute="bottom" secondItem="3l6-MX-go7" secondAttribute="bottom" id="n7d-b5-6eF"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="mbD-b9-XdQ" secondAttribute="trailing" id="9NZ-Wt-31k"/>
-                    <constraint firstItem="mbD-b9-XdQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="CAN-fW-G4l"/>
-                    <constraint firstItem="mbD-b9-XdQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="CTq-DE-9hE"/>
-                    <constraint firstAttribute="bottom" secondItem="mbD-b9-XdQ" secondAttribute="bottom" id="iHh-qF-kSN"/>
+                    <constraint firstItem="VXG-Dc-kDB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="20E-2U-c7J"/>
+                    <constraint firstItem="VXG-Dc-kDB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="DEY-h4-mef"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="VXG-Dc-kDB" secondAttribute="trailing" id="iGc-76-1dW"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="VXG-Dc-kDB" secondAttribute="bottom" id="mbJ-mY-x4R"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="tableView" destination="mbD-b9-XdQ" id="QYW-G5-TPW"/>
+                <outlet property="mainView" destination="VXG-Dc-kDB" id="osU-fH-IB5"/>
+                <outlet property="tableView" destination="3l6-MX-go7" id="iPx-im-LNW"/>
             </connections>
             <point key="canvasLocation" x="370.28985507246381" y="-37.165178571428569"/>
         </tableViewCell>

@@ -85,7 +85,7 @@ class MapViewController: UIViewController {
             self.temperatureLabel.text = "\(String(Int(weather.temp))) C"
             self.feelsLikeLabel.text = "Feels like \(Int(weather.feelsLike)) C"
             self.weatherDescriptionLabel.text = weatherDescription.weatherDescription.description
-            self.imageView.image = self.getIconImage(iconId: weatherDescription.icon)
+            self.imageView.image = weatherDescription.icon.image
             self.mainView.isHidden = false
         }
     }

@@ -34,8 +34,8 @@ class DailyWeatherForTableCell: UITableViewCell {
         DispatchQueue.main.async { [weak self] in
             guard let self = self,
                   let weather = weatherData.weather.first else { return }
-            self.timeLabel.text = self.confertUnixTypeToNormal(time: Double(weatherData.dt), typeTime: "MMM d")
-            self.iconView.image = self.getIconImage(iconId: weather.icon)
+            self.timeLabel.text = Double(weatherData.dt).timeMMMd
+            self.iconView.image = weather.icon.image
             self.tempLabel.text = "\(Int(weatherData.temp.min)) - \(Int(weatherData.temp.max)) C"
         }
     }
