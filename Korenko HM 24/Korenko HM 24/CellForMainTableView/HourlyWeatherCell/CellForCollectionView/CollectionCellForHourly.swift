@@ -27,7 +27,7 @@ class CollectionCellForHourly: UICollectionViewCell {
         DispatchQueue.main.async { [weak self] in
             guard let self = self,
                   let weather = weatherData.weather.first else { return }
-            self.timeLabel.text = Double(weatherData.dt).timeHHmm
+            self.timeLabel.text = weatherData.dt.timeHHmm
             self.iconImageView.image = weather.icon.image
             self.tempLabel.text = "\(Int(weatherData.temp)) C"
         }

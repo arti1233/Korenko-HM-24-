@@ -12,7 +12,7 @@ import RealmSwift
 extension Int{
   
     var timeHHmm: String {
-        let date = Date(timeIntervalSince1970: self)
+        let date = Date(timeIntervalSince1970: TimeInterval(self))
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.locale = NSLocale.current
@@ -21,7 +21,7 @@ extension Int{
         return strDate
     }
     var timeMMMd: String {
-        let date = Date(timeIntervalSince1970: self)
+        let date = Date(timeIntervalSince1970: TimeInterval(self))
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.locale = NSLocale.current
