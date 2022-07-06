@@ -82,7 +82,7 @@ class MapViewController: UIViewController {
     func reloadMainView(weather: Current) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self, let weatherDescription = weather.weather.first else { return }
-            self.temperatureLabel.text = "\(String(Int(weather.temp))) C"
+            self.temperatureLabel.text = "\(Int(weather.temp)) C"
             self.feelsLikeLabel.text = "Feels like \(Int(weather.feelsLike)) C"
             self.weatherDescriptionLabel.text = weatherDescription.weatherDescription.description
             self.imageView.image = weatherDescription.icon.image

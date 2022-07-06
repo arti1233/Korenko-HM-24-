@@ -61,6 +61,5 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.informationLabel.text = "lat = \(item.lat), lot = \(item.lon), time = \(time), temp = \(weather.temp), feelsLike = \(weather.feelsLike)"
         cell.iconView.image = weather.icon.image
         return cell
-    }
-    
+    }    
 }
