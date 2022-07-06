@@ -29,8 +29,12 @@ class ListViewController: UIViewController {
             switch changes {
             case .initial:
                 self.tableView.reloadData()
-            case .update:
-                self.tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                self.tableView.performBatchUpdates {
+                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+                }
             case .error(_):
                 fatalError()
             }

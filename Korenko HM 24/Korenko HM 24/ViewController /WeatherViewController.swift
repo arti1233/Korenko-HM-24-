@@ -101,18 +101,21 @@ class WeatherViewController: UIViewController {
     
     // метод проверки почасовой погоды
     func getNotificationForWeather(weatherData: [Hourly]) {
-        let weatherArray = weatherData.dropFirst()
-        for weather in weatherArray {
-            guard let weatherId = weather.weather.first else { return }
+        for weather in weatherData.dropFirst() {
+            var counter = 0
+            guard let weatherId = weather.weather.first, counter == 0 else { return }
             switch weatherId.id {
             case 200...232:
-                addNotification(weather: weatherId.main.rawValue, time: getTimeForNotification(time: weather.dt))
+                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification)
+                counter += 1
                 break
             case 500...531:
-                addNotification(weather: weatherId.main.rawValue, time: getTimeForNotification(time: weather.dt))
+                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification)
+                counter += 1
                 break
             case 600...622:
-                addNotification(weather: weatherId.main.rawValue, time: getTimeForNotification(time:  weather.dt))
+                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification)
+                counter += 1 
                 break
             default:
                 break
@@ -133,17 +136,6 @@ class WeatherViewController: UIViewController {
             print(error?.localizedDescription)
         }
     }
-    
-    //метод конвертации времени
-    func getTimeForNotification(time: Int) -> DateComponents {
-        let calendar = Calendar.current
-        let date = Date(timeIntervalSince1970: Double(time - 30 * 60))
-        var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-        dateComponents.timeZone = .current
-        return dateComponents
-    }
-
-    
 }
    
 // MARK: TableView extension

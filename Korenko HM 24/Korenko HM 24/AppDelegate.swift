@@ -12,7 +12,6 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let notificationCentre = UNUserNotificationCenter.current()
-    @objc let weatherObject = WeatherDataRealm()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if let key = Bundle.main.object(forInfoDictionaryKey: "ApiKeyForMaps") as? String {
