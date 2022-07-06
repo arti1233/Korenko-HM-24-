@@ -47,6 +47,11 @@ class ListViewController: UIViewController {
         items = realm.objects(RequestListRealmData.self)
         itemsWeather = realm.objects(WeatherDataRealm.self)
     }
+    
+    deinit{
+        guard let token = notificationToken else { return }
+        token.invalidate()
+    }
 }
 
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
