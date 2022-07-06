@@ -18,7 +18,10 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var mainTableView: UITableView!
     var cityName = String()
     var weatherData: WeatherData?
+    var weatherDataHourly: [Hourly]?
     var measurement = UnitsOfMeasurement.metric
+    let notificationCenter = UNUserNotificationCenter.current()
+    let notificationIdentifier = "WeatherNotification"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +38,6 @@ class WeatherViewController: UIViewController {
     @IBAction func choseCityButton(_ sender: Any) {
         choseCityAlertController()
     }
-    
-    
-    
-    
     
 // MARK: METODS
     
@@ -83,6 +82,7 @@ class WeatherViewController: UIViewController {
                 case .success(let value):
                     self.weatherData = value
                     self.addObjectInRealm(weather: value)
+                    self.getNotificationForWeather(weatherData: value.hourly)
                     self.mainTableView.reloadData()
                 case .failure(let error):
                     self.errorAlertController(error: error.localizedDescription)
@@ -98,10 +98,47 @@ class WeatherViewController: UIViewController {
         present(alrtController, animated: true)
     }
     
-
     
+    // метод проверки почасовой погоды
+    func getNotificationForWeather(weatherData: [Hourly]) {
+        for weather in weatherData.dropFirst() {
+            var counter = 0
+            guard let weatherId = weather.weather.first, counter == 0 else { return }
+            switch weatherId.id {
+            case 200...232:
+                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification)
+                counter += 1
+                break
+            case 500...531:
+                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification)
+                counter += 1
+                break
+            case 600...622:
+                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification)
+                counter += 1 
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    // метод добавления уведомления
+    func addNotification(weather: String, time: DateComponents) {
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
+        let content = UNMutableNotificationContent()
+        content.title = "Warning"
+        content.body = "\(weather) will be in 30 minute!"
+        content.sound = UNNotificationSound.default
+        let triger = UNCalendarNotificationTrigger(dateMatching: time, repeats: false)
+        let request = UNNotificationRequest(identifier: notificationIdentifier, content: content, trigger: triger)
+        notificationCenter.add(request) { error in
+            print(error?.localizedDescription)
+        }
+    }
 }
    
+// MARK: TableView extension
 extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3

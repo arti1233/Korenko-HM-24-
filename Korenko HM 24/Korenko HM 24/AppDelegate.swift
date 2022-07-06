@@ -11,12 +11,17 @@ import GoogleMaps
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    let notificationCentre = UNUserNotificationCenter.current()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if let key = Bundle.main.object(forInfoDictionaryKey: "ApiKeyForMaps") as? String {
             GMSServices.provideAPIKey(key)
         }
+
+        notificationCentre.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            guard granted else { return }
+        }
+        
         return true
     }
 
@@ -33,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
 
 }
 
