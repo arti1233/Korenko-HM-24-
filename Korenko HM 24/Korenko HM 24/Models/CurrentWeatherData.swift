@@ -41,7 +41,7 @@ struct WeatherData: Codable {
 // MARK: - Current
 struct Current: Codable {
     let dt: Int
-    let sunrise, sunset: Int?
+    let sunrise, sunset: Int
     let temp, feelsLike: Double
     let pressure, humidity: Int
     let dewPoint, uvi: Double

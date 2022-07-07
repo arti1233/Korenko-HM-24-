@@ -14,11 +14,13 @@ class DailyWeatherForTableCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var mainView: UIView!
     
     var daily: Daily?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        mainView.layer.cornerRadius = 15
         
     }
 

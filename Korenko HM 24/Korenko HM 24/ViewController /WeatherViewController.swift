@@ -8,6 +8,27 @@
 import UIKit
 import RealmSwift
 
+enum SectionTableView: Int {
+    case current = 0
+    case hourly = 1
+    case daily = 2
+    case changeCity = 3
+    
+    var description: String {
+        switch self {
+        case .current:
+            return "CURRENT FORECAST"
+        case .hourly:
+            return "HOURLY FORECAST"
+        case .daily:
+            return "8-DAY FORECAST"
+        case .changeCity:
+            return "CHOOSE CITY"
+        }
+    }
+}
+
+
 
 class WeatherViewController: UIViewController {
 
@@ -19,6 +40,8 @@ class WeatherViewController: UIViewController {
     var cityName = String()
     var weatherData: WeatherData?
     var weatherDataHourly: [Hourly]?
+    var weatherDataCurrent: Current?
+    var weatherDataDaily: [Daily]?
     var measurement = UnitsOfMeasurement.metric
     let notificationCenter = UNUserNotificationCenter.current()
     let notificationIdentifier = "WeatherNotification"
@@ -26,17 +49,20 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         apiProvider = AlamofireProvider()
-        
         mainTableView.dataSource = self
         mainTableView.delegate = self
-    
+        
+        
         mainTableView.register(UINib(nibName: CurrentWeatherCell.key, bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
         mainTableView.register(UINib(nibName: HourlyWeatherCell.key, bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
-        mainTableView.register(UINib(nibName: DailyWeatherCell.key, bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
-    }
-
-    @IBAction func choseCityButton(_ sender: Any) {
-        choseCityAlertController()
+        mainTableView.register(UINib(nibName: DailyWeatherForTableCell.key, bundle: nil), forCellReuseIdentifier: DailyWeatherForTableCell.key)
+        mainTableView.register(UINib(nibName: ButtonCell.key, bundle: nil), forCellReuseIdentifier: ButtonCell.key)
+        getCoordinatesByName(name: "moscow")
+        
+        
+    
+        
+        
     }
     
 // MARK: METODS
@@ -80,9 +106,11 @@ class WeatherViewController: UIViewController {
             apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon, measurement: measurement.description) { result in
                 switch result {
                 case .success(let value):
+                    guard let weather = value.current.weather.first else { return }
                     self.weatherData = value
                     self.addObjectInRealm(weather: value)
                     self.getNotificationForWeather(weatherData: value.hourly)
+                    self.getImageForWeatherView(weather: weather.id)
                     self.mainTableView.reloadData()
                 case .failure(let error):
                     self.errorAlertController(error: error.localizedDescription)
@@ -136,36 +164,87 @@ class WeatherViewController: UIViewController {
             print(error?.localizedDescription)
         }
     }
+    
+    func getImageForWeatherView(weather: Int) {
+           switch weather {
+           case 500...531:
+               view.backgroundColor = UIColor(patternImage: UIImage(named: "Rain")!)
+           case 800:
+               view.backgroundColor = UIColor(patternImage: UIImage(named: "Vilage")!)
+           case 801...804:
+               view.backgroundColor = UIColor(patternImage: UIImage(named: "Cloudly")!)
+           case 210...232:
+               view.backgroundColor = UIColor(patternImage: UIImage(named: "groza")!)
+           default:
+               view.backgroundColor = UIColor(patternImage: UIImage(named: "Sun")!)
+           }
+       }
 }
    
 // MARK: TableView extension
 extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+    func numberOfSections(in tableView: UITableView) -> Int {
+        4
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let weather = weatherData else { return 0}
+        
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return weather.daily.count
+        case 3:
+            return 1
+        default:
+            return 0
+        }
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let currentCell = mainTableView.dequeueReusableCell(withIdentifier: CurrentWeatherCell.key) as? CurrentWeatherCell,
               let weather = weatherData else { return UITableViewCell()}
-        currentCell.reloadWeatheData(weatherData: weather)
-        
-        
+
         guard let hourlyCell = mainTableView.dequeueReusableCell(withIdentifier: HourlyWeatherCell.key) as? HourlyWeatherCell else { return UITableViewCell() }
-        hourlyCell.weatherHourly = weather.hourly
-        
-        guard let dailyCell = mainTableView.dequeueReusableCell(withIdentifier: DailyWeatherCell.key) as? DailyWeatherCell else { return UITableViewCell() }
-        dailyCell.dailyWeather = weather.daily
-        
-        if indexPath.row == 0 {
+       
+        guard let dailyCell = mainTableView.dequeueReusableCell(withIdentifier: DailyWeatherForTableCell.key) as? DailyWeatherForTableCell else { return UITableViewCell() }
+       
+        guard let buttonCell = mainTableView.dequeueReusableCell(withIdentifier: ButtonCell.key) as? ButtonCell else { return UITableViewCell() }
+    
+        switch indexPath.section{
+        case 0:
+            currentCell.reloadWeatheData(weatherData: weather)
             return currentCell
-        } else if indexPath.row == 1 {
+        case 1:
+            hourlyCell.weatherHourly = weather.hourly
             return hourlyCell
-        } else if indexPath.row == 2 {
+        case 2:
+            dailyCell.reloadWeatherData(weatherData: weather.daily[indexPath.row])
             return dailyCell
-        } else {
-            return UITableViewCell()
+        case 3:
+            return  buttonCell
+        default:
+            return  UITableViewCell()
         }
     }
+
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let key = SectionTableView(rawValue: section) else { return ""}
+        return key.description
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let key = SectionTableView(rawValue: indexPath.section) else { return }
+        
+        if key == .changeCity {
+            choseCityAlertController()
+        }
+    }
+    
     
     
 }

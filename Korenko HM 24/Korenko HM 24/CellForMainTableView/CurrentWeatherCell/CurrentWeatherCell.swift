@@ -11,19 +11,20 @@ class CurrentWeatherCell: UITableViewCell {
 
     static let key = "CurrentWeatherCell"
     
-    @IBOutlet weak var nameCityLabel: UILabel!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var weatherDescriptionLabel: UILabel!
-    @IBOutlet weak var iconView: UIImageView!
+    @IBOutlet weak var cloudlyLabel: UILabel!
+    @IBOutlet weak var speedWindLabel: UILabel!
+    @IBOutlet weak var sunriseLabel: UILabel!
+    @IBOutlet weak var sunsetLabel: UILabel!
 
-        
     override func awakeFromNib() {
         super.awakeFromNib()
+
         mainView.layer.cornerRadius = 20
-        
-        
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,10 +39,15 @@ class CurrentWeatherCell: UITableViewCell {
             let weather = weatherData.current
             guard let weatherDescription = weather.weather.first,
                   let self = self else { return }
-            self.nameCityLabel.text = weatherData.timezone
+            self.timeLabel.text = weather.dt.timeHHmmDDMMYYYY
+            self.cityLabel.text = weatherData.timezone
+            self.weatherLabel.text = weatherDescription.weatherDescription.description
             self.tempLabel.text = "\(Int(weather.temp)) C"
-            self.weatherDescriptionLabel.text = String(weatherDescription.weatherDescription.description)
-            self.iconView.image = weatherDescription.icon.image
+            self.cloudlyLabel.text = "\(weather.clouds) %"
+            self.speedWindLabel.text = "\(Int(weather.windSpeed)) m/s"
+            self.sunriseLabel.text = "\(weather.sunrise.timeHHmm)"
+            self.sunsetLabel.text = "\(weather.sunset.timeHHmm)"
+            
         }
     }
 }

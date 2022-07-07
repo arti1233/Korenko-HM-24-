@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,47 +16,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="146"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0M-aw-57L">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kqd-cT-DkD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aAF-LJ-XJP">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Kqd-cT-DkD" firstAttribute="leading" secondItem="m0M-aw-57L" secondAttribute="leading" id="OLf-ki-hjp"/>
-                            <constraint firstAttribute="trailing" secondItem="Kqd-cT-DkD" secondAttribute="trailing" id="VcW-5t-yXH"/>
-                            <constraint firstAttribute="bottom" secondItem="Kqd-cT-DkD" secondAttribute="bottom" id="fNR-kF-NNS"/>
-                            <constraint firstItem="Kqd-cT-DkD" firstAttribute="top" secondItem="m0M-aw-57L" secondAttribute="top" id="k6R-n4-Gge"/>
-                        </constraints>
-                    </view>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kqd-cT-DkD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aAF-LJ-XJP">
+                            <size key="itemSize" width="100" height="100"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="m0M-aw-57L" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="4Pw-3x-zYk"/>
-                    <constraint firstItem="m0M-aw-57L" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="EU3-zf-iDc"/>
-                    <constraint firstAttribute="bottom" secondItem="m0M-aw-57L" secondAttribute="bottom" id="GHX-Gb-PXR"/>
-                    <constraint firstAttribute="trailing" secondItem="m0M-aw-57L" secondAttribute="trailing" id="Vi4-Yn-sr2"/>
-                    <constraint firstItem="m0M-aw-57L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="b25-L4-GR5"/>
+                    <constraint firstAttribute="trailing" secondItem="Kqd-cT-DkD" secondAttribute="trailing" id="3nS-ci-I3J"/>
+                    <constraint firstItem="Kqd-cT-DkD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5jo-Oc-2rh"/>
+                    <constraint firstItem="Kqd-cT-DkD" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="6Zd-7K-fGY"/>
+                    <constraint firstItem="Kqd-cT-DkD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="GB0-Ov-2hX"/>
+                    <constraint firstAttribute="bottom" secondItem="Kqd-cT-DkD" secondAttribute="bottom" id="dUS-VV-sfY"/>
+                    <constraint firstItem="Kqd-cT-DkD" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.35" id="h8N-9Y-nWy"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="collectionView" destination="Kqd-cT-DkD" id="2B4-JA-my0"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="101.11607142857143"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

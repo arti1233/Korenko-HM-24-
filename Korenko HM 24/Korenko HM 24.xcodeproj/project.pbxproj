@@ -16,14 +16,14 @@
 		AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */; };
 		AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D33452868C2EE009DDDD1 /* MapViewController.swift */; };
 		AE4D33492868CCA4009DDDD1 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = AE4D33482868CCA4009DDDD1 /* GoogleMaps */; };
+		AE65F6172877165E00306FB8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE65F6152877165E00306FB8 /* ButtonCell.swift */; };
+		AE65F6182877165E00306FB8 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE65F6162877165E00306FB8 /* ButtonCell.xib */; };
 		AE70AEA3286B8C7400B518F6 /* CurrentWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEA1286B8C7400B518F6 /* CurrentWeatherCell.swift */; };
 		AE70AEA4286B8C7400B518F6 /* CurrentWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEA2286B8C7400B518F6 /* CurrentWeatherCell.xib */; };
 		AE70AEA8286BAD7700B518F6 /* HourlyWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEA6286BAD7700B518F6 /* HourlyWeatherCell.swift */; };
 		AE70AEA9286BAD7700B518F6 /* HourlyWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEA7286BAD7700B518F6 /* HourlyWeatherCell.xib */; };
 		AE70AEAD286BAE9500B518F6 /* CollectionCellForHourly.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEAB286BAE9500B518F6 /* CollectionCellForHourly.swift */; };
 		AE70AEAE286BAE9500B518F6 /* CollectionCellForHourly.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEAC286BAE9500B518F6 /* CollectionCellForHourly.xib */; };
-		AE70AEB2286BC90C00B518F6 /* DailyWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEB0286BC90C00B518F6 /* DailyWeatherCell.swift */; };
-		AE70AEB3286BC90C00B518F6 /* DailyWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEB1286BC90C00B518F6 /* DailyWeatherCell.xib */; };
 		AE70AEB7286BCA6200B518F6 /* DailyWeatherForTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEB5286BCA6200B518F6 /* DailyWeatherForTableCell.swift */; };
 		AE70AEB8286BCA6200B518F6 /* DailyWeatherForTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEB6286BCA6200B518F6 /* DailyWeatherForTableCell.xib */; };
 		AE70AEBC286C8EA800B518F6 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AE70AEBB286C8EA800B518F6 /* Realm */; };
@@ -53,14 +53,14 @@
 		AE0C1448285F2E7B007C0BFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherData.swift; sourceTree = "<group>"; };
 		AE4D33452868C2EE009DDDD1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		AE65F6152877165E00306FB8 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		AE65F6162877165E00306FB8 /* ButtonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		AE70AEA1286B8C7400B518F6 /* CurrentWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCell.swift; sourceTree = "<group>"; };
 		AE70AEA2286B8C7400B518F6 /* CurrentWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWeatherCell.xib; sourceTree = "<group>"; };
 		AE70AEA6286BAD7700B518F6 /* HourlyWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherCell.swift; sourceTree = "<group>"; };
 		AE70AEA7286BAD7700B518F6 /* HourlyWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyWeatherCell.xib; sourceTree = "<group>"; };
 		AE70AEAB286BAE9500B518F6 /* CollectionCellForHourly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellForHourly.swift; sourceTree = "<group>"; };
 		AE70AEAC286BAE9500B518F6 /* CollectionCellForHourly.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCellForHourly.xib; sourceTree = "<group>"; };
-		AE70AEB0286BC90C00B518F6 /* DailyWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherCell.swift; sourceTree = "<group>"; };
-		AE70AEB1286BC90C00B518F6 /* DailyWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyWeatherCell.xib; sourceTree = "<group>"; };
 		AE70AEB5286BCA6200B518F6 /* DailyWeatherForTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherForTableCell.swift; sourceTree = "<group>"; };
 		AE70AEB6286BCA6200B518F6 /* DailyWeatherForTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyWeatherForTableCell.xib; sourceTree = "<group>"; };
 		AE70AEBF286C8F6C00B518F6 /* RequestListRealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListRealmData.swift; sourceTree = "<group>"; };
@@ -131,11 +131,21 @@
 		AE4D334C2869CE5E009DDDD1 /* CellForMainTableView */ = {
 			isa = PBXGroup;
 			children = (
+				AE65F612287715FE00306FB8 /* Button Cell  */,
+				AE70AEB9286BCA6E00B518F6 /* DailyCell */,
 				AE70AEA5286B8C9000B518F6 /* CurrentWeatherCell */,
 				AE70AEAA286BAD7D00B518F6 /* HourlyWeatherCell */,
-				AE70AEB4286BC92000B518F6 /* DailyWeatherCell */,
 			);
 			path = CellForMainTableView;
+			sourceTree = "<group>";
+		};
+		AE65F612287715FE00306FB8 /* Button Cell  */ = {
+			isa = PBXGroup;
+			children = (
+				AE65F6152877165E00306FB8 /* ButtonCell.swift */,
+				AE65F6162877165E00306FB8 /* ButtonCell.xib */,
+			);
+			path = "Button Cell ";
 			sourceTree = "<group>";
 		};
 		AE70AEA5286B8C9000B518F6 /* CurrentWeatherCell */ = {
@@ -164,16 +174,6 @@
 				AE70AEAC286BAE9500B518F6 /* CollectionCellForHourly.xib */,
 			);
 			path = CellForCollectionView;
-			sourceTree = "<group>";
-		};
-		AE70AEB4286BC92000B518F6 /* DailyWeatherCell */ = {
-			isa = PBXGroup;
-			children = (
-				AE70AEB0286BC90C00B518F6 /* DailyWeatherCell.swift */,
-				AE70AEB1286BC90C00B518F6 /* DailyWeatherCell.xib */,
-				AE70AEB9286BCA6E00B518F6 /* DailyCell */,
-			);
-			path = DailyWeatherCell;
 			sourceTree = "<group>";
 		};
 		AE70AEB9286BCA6E00B518F6 /* DailyCell */ = {
@@ -315,7 +315,7 @@
 				AE70AEA4286B8C7400B518F6 /* CurrentWeatherCell.xib in Resources */,
 				AE70AEC4286CD41400B518F6 /* TableViewCellForListReqest.xib in Resources */,
 				AE0C1444285F2E7B007C0BFD /* Assets.xcassets in Resources */,
-				AE70AEB3286BC90C00B518F6 /* DailyWeatherCell.xib in Resources */,
+				AE65F6182877165E00306FB8 /* ButtonCell.xib in Resources */,
 				AE0C1442285F2E7A007C0BFD /* Main.storyboard in Resources */,
 				AE70AEB8286BCA6200B518F6 /* DailyWeatherForTableCell.xib in Resources */,
 			);
@@ -331,6 +331,7 @@
 				AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */,
 				AE70AEA8286BAD7700B518F6 /* HourlyWeatherCell.swift in Sources */,
 				AE0C143F285F2E7A007C0BFD /* WeatherViewController.swift in Sources */,
+				AE65F6172877165E00306FB8 /* ButtonCell.swift in Sources */,
 				AE70AEA3286B8C7400B518F6 /* CurrentWeatherCell.swift in Sources */,
 				AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */,
 				AE70AEC3286CD41400B518F6 /* TableViewCellForListReqest.swift in Sources */,
@@ -345,7 +346,6 @@
 				AEF812DD286DA170002BC897 /* String+Extension.swift in Sources */,
 				AE70AEC7286CD6C200B518F6 /* ListViewController.swift in Sources */,
 				AE9968D32865F6DC002BB058 /* Constants.swift in Sources */,
-				AE70AEB2286BC90C00B518F6 /* DailyWeatherCell.swift in Sources */,
 				AEF812E0286DB327002BC897 /* Int+Extension.swift in Sources */,
 				AE0C143D285F2E7A007C0BFD /* SceneDelegate.swift in Sources */,
 			);
