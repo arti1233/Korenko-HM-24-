@@ -9,48 +9,73 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell alpha="0.84999999999999998" contentMode="scaleToFill" restorationIdentifier="DailyWeatherForTableCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="DailyWeatherForTableCell" rowHeight="101" id="KGk-i7-Jjw" customClass="DailyWeatherForTableCell" customModule="Korenko_HM_24" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="329" height="101"/>
+        <tableViewCell alpha="0.84999999999999998" contentMode="scaleToFill" restorationIdentifier="DailyWeatherForTableCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="DailyWeatherForTableCell" rowHeight="72" id="KGk-i7-Jjw" customClass="DailyWeatherForTableCell" customModule="Korenko_HM_24" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="361" height="72"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="329" height="101"/>
+                <rect key="frame" x="0.0" y="0.0" width="361" height="72"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLg-0H-uQe">
-                        <rect key="frame" x="0.0" y="0.0" width="329" height="66"/>
+                    <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLg-0H-uQe">
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="72"/>
                         <subviews>
+                            <visualEffectView opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-V6-kO4">
+                                <rect key="frame" x="0.0" y="0.0" width="361" height="72"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="C1B-AT-tcD">
+                                    <rect key="frame" x="0.0" y="0.0" width="361" height="72"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nK1-cN-4af">
+                                            <rect key="frame" x="0.0" y="0.0" width="121" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="h8M-by-FtX">
+                                                <rect key="frame" x="0.0" y="0.0" width="121" height="0.0"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="regular"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3ow-fh-Ttn">
-                                <rect key="frame" x="131.5" y="0.0" width="66" height="66"/>
+                                <rect key="frame" x="144.5" y="0.0" width="72" height="72"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ah7-7z-MRO">
-                                <rect key="frame" x="8" y="0.0" width="115.5" height="66"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="21"/>
+                                <rect key="frame" x="8" y="0.0" width="128.5" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R50-4w-1jW">
-                                <rect key="frame" x="205.5" y="0.0" width="115.5" height="66"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="21"/>
+                                <rect key="frame" x="224.5" y="0.0" width="128.5" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ah7-7z-MRO" firstAttribute="leading" secondItem="CLg-0H-uQe" secondAttribute="leading" constant="8" id="3Ek-y3-Th4"/>
                             <constraint firstItem="Ah7-7z-MRO" firstAttribute="top" secondItem="CLg-0H-uQe" secondAttribute="top" id="BIc-Nm-gNl"/>
                             <constraint firstItem="3ow-fh-Ttn" firstAttribute="centerX" secondItem="CLg-0H-uQe" secondAttribute="centerX" id="K3P-BW-gOh"/>
+                            <constraint firstItem="gQf-V6-kO4" firstAttribute="top" secondItem="CLg-0H-uQe" secondAttribute="top" id="Qth-t2-ggp"/>
                             <constraint firstAttribute="bottom" secondItem="Ah7-7z-MRO" secondAttribute="bottom" id="SbG-XO-Iag"/>
                             <constraint firstItem="3ow-fh-Ttn" firstAttribute="centerY" secondItem="CLg-0H-uQe" secondAttribute="centerY" id="UD7-Fb-sBP"/>
                             <constraint firstItem="R50-4w-1jW" firstAttribute="top" secondItem="CLg-0H-uQe" secondAttribute="top" id="Z0v-oO-BSZ"/>
                             <constraint firstItem="R50-4w-1jW" firstAttribute="leading" secondItem="3ow-fh-Ttn" secondAttribute="trailing" constant="8" id="blD-ZX-2cc"/>
                             <constraint firstItem="3ow-fh-Ttn" firstAttribute="height" secondItem="CLg-0H-uQe" secondAttribute="width" multiplier="0.2" id="cG1-Cd-CIP"/>
                             <constraint firstAttribute="bottom" secondItem="3ow-fh-Ttn" secondAttribute="bottom" id="geh-n9-p6g"/>
+                            <constraint firstAttribute="bottom" secondItem="gQf-V6-kO4" secondAttribute="bottom" id="ivy-Dn-Rsc"/>
                             <constraint firstItem="3ow-fh-Ttn" firstAttribute="leading" secondItem="Ah7-7z-MRO" secondAttribute="trailing" constant="8" id="kDT-rT-IDR"/>
+                            <constraint firstItem="gQf-V6-kO4" firstAttribute="leading" secondItem="CLg-0H-uQe" secondAttribute="leading" id="l0U-bT-Roe"/>
                             <constraint firstAttribute="bottom" secondItem="R50-4w-1jW" secondAttribute="bottom" id="qSF-em-Cbd"/>
                             <constraint firstItem="3ow-fh-Ttn" firstAttribute="width" secondItem="CLg-0H-uQe" secondAttribute="width" multiplier="0.2" id="rAu-Q4-YaL"/>
                             <constraint firstAttribute="trailing" secondItem="R50-4w-1jW" secondAttribute="trailing" constant="8" id="sRd-if-lqL"/>
                             <constraint firstItem="3ow-fh-Ttn" firstAttribute="top" secondItem="CLg-0H-uQe" secondAttribute="top" id="w6C-ve-D9v"/>
+                            <constraint firstAttribute="trailing" secondItem="gQf-V6-kO4" secondAttribute="trailing" id="wsQ-m9-8Mh"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -70,7 +95,7 @@
                 <outlet property="tempLabel" destination="R50-4w-1jW" id="YHQ-WS-gzp"/>
                 <outlet property="timeLabel" destination="Ah7-7z-MRO" id="b4O-Kr-p7m"/>
             </connections>
-            <point key="canvasLocation" x="141.30434782608697" y="87.388392857142847"/>
+            <point key="canvasLocation" x="164.49275362318841" y="77.008928571428569"/>
         </tableViewCell>
     </objects>
 </document>

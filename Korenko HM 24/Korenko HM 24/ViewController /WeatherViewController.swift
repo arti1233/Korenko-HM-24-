@@ -28,16 +28,21 @@ enum SectionTableView: Int {
     }
 }
 
-
-
 class WeatherViewController: UIViewController {
 
     private var apiProvider: RestAPIProviderProtocol!
 
 // MARK: IBOutlet
     
+    @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     @IBOutlet weak var mainTableView: UITableView!
-    var cityName = String()
+    let myRefreshControll: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(rehresh(sender:)), for: .valueChanged)
+        return refreshControl
+    }()
+    
+    var cityName = "moscow"
     var weatherData: WeatherData?
     var weatherDataHourly: [Hourly]?
     var weatherDataCurrent: Current?
@@ -48,6 +53,11 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinnerView.hidesWhenStopped = true
+        spinnerView.startAnimating()
+        
+        mainTableView.refreshControl = myRefreshControll
+        
         apiProvider = AlamofireProvider()
         mainTableView.dataSource = self
         mainTableView.delegate = self
@@ -57,15 +67,17 @@ class WeatherViewController: UIViewController {
         mainTableView.register(UINib(nibName: HourlyWeatherCell.key, bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         mainTableView.register(UINib(nibName: DailyWeatherForTableCell.key, bundle: nil), forCellReuseIdentifier: DailyWeatherForTableCell.key)
         mainTableView.register(UINib(nibName: ButtonCell.key, bundle: nil), forCellReuseIdentifier: ButtonCell.key)
-        getCoordinatesByName(name: "moscow")
-        
-        
+        getCoordinatesByName(name: cityName)
     
-        
-        
     }
     
 // MARK: METODS
+    
+    @objc private func rehresh(sender: UIRefreshControl){
+        getCoordinatesByName(name: cityName)
+        sender.endRefreshing()
+    }
+    
     
     // Chose City alertController
     
@@ -80,6 +92,8 @@ class WeatherViewController: UIViewController {
                   let self = self else { return }
             let textWithoutWhitespace = text.trimmingCharacters(in: .whitespaces)
             self.getCoordinatesByName(name: textWithoutWhitespace)
+            self.spinnerView.hidesWhenStopped = true
+            self.spinnerView.startAnimating()
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
         
@@ -90,9 +104,10 @@ class WeatherViewController: UIViewController {
     
     fileprivate func getCoordinatesByName(name: String) {
         apiProvider.getCoordinateByName(name: name) { [weak self] result in
-                guard let self = self else {return}
+                guard let self = self else { return }
                 switch result {
                 case .success(let value):
+                    self.cityName = name
                     if let city = value.first {
                         self.getWeatherByCoordinates(city: city)
                     }
@@ -108,10 +123,17 @@ class WeatherViewController: UIViewController {
                 case .success(let value):
                     guard let weather = value.current.weather.first else { return }
                     self.weatherData = value
-                    self.addObjectInRealm(weather: value)
-                    self.getNotificationForWeather(weatherData: value.hourly)
-                    self.getImageForWeatherView(weather: weather.id)
-                    self.mainTableView.reloadData()
+                    DispatchQueue.global().async { [weak self] in
+                        guard let self = self else { return }
+                        self.addObjectInRealm(weather: value)
+                        self.getNotificationForWeather(weatherData: value.hourly)
+                        let imageBackground = self.getImageForWeatherView(weather: weather.id)
+                        DispatchQueue.main.async {
+                            self.view.backgroundColor = imageBackground
+                            self.mainTableView.reloadData()
+                            self.spinnerView.stopAnimating()
+                        }
+                    }
                 case .failure(let error):
                     self.errorAlertController(error: error.localizedDescription)
                 }
@@ -165,18 +187,23 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    func getImageForWeatherView(weather: Int) {
+    func getImageForWeatherView(weather: Int) -> UIColor {
            switch weather {
            case 500...531:
-               view.backgroundColor = UIColor(patternImage: UIImage(named: "Rain")!)
+               guard let image = UIImage(named: "Rain") else { return UIColor()}
+               return UIColor(patternImage: image)
            case 800:
-               view.backgroundColor = UIColor(patternImage: UIImage(named: "Vilage")!)
+               guard let image = UIImage(named: "Vilage") else { return UIColor()}
+               return UIColor(patternImage: image)
            case 801...804:
-               view.backgroundColor = UIColor(patternImage: UIImage(named: "Cloudly")!)
+               guard let image = UIImage(named: "Cloudly") else { return UIColor()}
+               return UIColor(patternImage: image)
            case 210...232:
-               view.backgroundColor = UIColor(patternImage: UIImage(named: "groza")!)
+               guard let image = UIImage(named: "groza") else { return UIColor()}
+               return UIColor(patternImage: image)
            default:
-               view.backgroundColor = UIColor(patternImage: UIImage(named: "Sun")!)
+               guard let image = UIImage(named: "Sun") else { return UIColor()}
+               return UIColor(patternImage: image)
            }
        }
 }
@@ -184,7 +211,11 @@ class WeatherViewController: UIViewController {
 // MARK: TableView extension
 extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        4
+        if weatherData == nil {
+            return 0
+        } else {
+            return 4
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -244,7 +275,4 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             choseCityAlertController()
         }
     }
-    
-    
-    
 }

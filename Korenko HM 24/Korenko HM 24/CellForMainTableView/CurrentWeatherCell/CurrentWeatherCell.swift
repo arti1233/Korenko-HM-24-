@@ -20,11 +20,10 @@ class CurrentWeatherCell: UITableViewCell {
     @IBOutlet weak var speedWindLabel: UILabel!
     @IBOutlet weak var sunriseLabel: UILabel!
     @IBOutlet weak var sunsetLabel: UILabel!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        mainView.layer.cornerRadius = 20
+        contentView.layer.cornerRadius = 20
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

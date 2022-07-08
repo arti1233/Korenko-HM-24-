@@ -16,25 +16,44 @@
                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <visualEffectView opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzf-ta-M03">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="i0s-2B-rOe">
+                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lnm-uO-t1q">
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ugB-eC-wtP">
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
+                                    <vibrancyEffect>
+                                        <blurEffect style="regular"/>
+                                    </vibrancyEffect>
+                                </visualEffectView>
+                            </subviews>
+                        </view>
+                        <blurEffect style="regular"/>
+                    </visualEffectView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tu4-7Y-fk4">
-                        <rect key="frame" x="0.0" y="8" width="120" height="16.5"/>
-                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="15"/>
+                        <rect key="frame" x="0.0" y="8" width="120" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dkd-sh-MUI">
-                        <rect key="frame" x="0.0" y="32.5" width="120" height="55"/>
+                        <rect key="frame" x="0.0" y="34" width="120" height="52"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0c-gi-rkf">
-                        <rect key="frame" x="0.0" y="95.5" width="120" height="16.5"/>
-                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="15"/>
+                        <rect key="frame" x="0.0" y="94" width="120" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Dkd-sh-MUI" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="128-es-P36"/>
                 <constraint firstAttribute="bottom" secondItem="U0c-gi-rkf" secondAttribute="bottom" constant="8" id="2as-gk-USI"/>
@@ -43,11 +62,15 @@
                 <constraint firstItem="U0c-gi-rkf" firstAttribute="top" secondItem="Dkd-sh-MUI" secondAttribute="bottom" constant="8" id="Dch-8t-1Lk"/>
                 <constraint firstItem="tu4-7Y-fk4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Mnh-tL-4kT"/>
                 <constraint firstItem="Dkd-sh-MUI" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="P2Z-na-k9l"/>
+                <constraint firstAttribute="bottom" secondItem="dzf-ta-M03" secondAttribute="bottom" id="R5V-7P-PYL"/>
                 <constraint firstItem="U0c-gi-rkf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SRG-zs-c2p"/>
+                <constraint firstItem="dzf-ta-M03" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Sho-ol-Mup"/>
                 <constraint firstItem="Dkd-sh-MUI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Yy7-3M-bLL"/>
                 <constraint firstAttribute="trailing" secondItem="U0c-gi-rkf" secondAttribute="trailing" id="bjb-fB-JAn"/>
+                <constraint firstItem="dzf-ta-M03" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dow-ZF-mxO"/>
                 <constraint firstItem="Dkd-sh-MUI" firstAttribute="top" secondItem="tu4-7Y-fk4" secondAttribute="bottom" constant="8" id="jJF-0d-gS3"/>
                 <constraint firstAttribute="trailing" secondItem="tu4-7Y-fk4" secondAttribute="trailing" id="s97-Xa-Ttf"/>
+                <constraint firstAttribute="trailing" secondItem="dzf-ta-M03" secondAttribute="trailing" id="vSj-2t-Mdl"/>
             </constraints>
             <size key="customSize" width="193" height="202"/>
             <connections>
@@ -55,7 +78,7 @@
                 <outlet property="tempLabel" destination="U0c-gi-rkf" id="RNY-bj-htM"/>
                 <outlet property="timeLabel" destination="tu4-7Y-fk4" id="mhI-qT-yTm"/>
             </connections>
-            <point key="canvasLocation" x="155.79710144927537" y="91.741071428571431"/>
+            <point key="canvasLocation" x="155.07246376811597" y="91.741071428571431"/>
         </collectionViewCell>
     </objects>
 </document>

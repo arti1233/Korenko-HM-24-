@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -51,21 +52,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2kc-V7-oNn">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2kc-V7-oNn">
                                 <rect key="frame" x="10.5" y="44" width="393" height="761"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hsT-f1-qJW">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="color" name="AccentColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gU8-aF-R5J"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gU8-aF-R5J" firstAttribute="bottom" secondItem="2kc-V7-oNn" secondAttribute="bottom" constant="8" id="73q-Rq-xz3"/>
                             <constraint firstItem="2kc-V7-oNn" firstAttribute="top" secondItem="gU8-aF-R5J" secondAttribute="top" id="EEM-oA-LUZ"/>
+                            <constraint firstItem="hsT-f1-qJW" firstAttribute="leading" secondItem="gU8-aF-R5J" secondAttribute="leading" id="PgK-WA-SGO"/>
+                            <constraint firstItem="hsT-f1-qJW" firstAttribute="top" secondItem="gU8-aF-R5J" secondAttribute="top" id="aJx-rZ-AJ1"/>
                             <constraint firstItem="2kc-V7-oNn" firstAttribute="centerX" secondItem="6zu-c6-0R5" secondAttribute="centerX" id="hGS-ZL-Jxn"/>
+                            <constraint firstItem="gU8-aF-R5J" firstAttribute="trailing" secondItem="hsT-f1-qJW" secondAttribute="trailing" id="nCd-xU-V6l"/>
+                            <constraint firstItem="gU8-aF-R5J" firstAttribute="bottom" secondItem="hsT-f1-qJW" secondAttribute="bottom" id="uLb-ZQ-vLM"/>
                             <constraint firstItem="2kc-V7-oNn" firstAttribute="width" secondItem="6zu-c6-0R5" secondAttribute="width" multiplier="0.95" id="ubE-X6-uW9"/>
                         </constraints>
                     </view>
@@ -74,6 +81,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="mainTableView" destination="2kc-V7-oNn" id="TXj-wh-oqc"/>
+                        <outlet property="spinnerView" destination="hsT-f1-qJW" id="Twg-aN-yr4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0KT-GZ-4aM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -204,6 +212,9 @@
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
