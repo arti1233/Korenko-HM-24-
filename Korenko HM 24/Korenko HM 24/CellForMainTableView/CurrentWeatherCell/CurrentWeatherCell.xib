@@ -37,7 +37,7 @@
                         </view>
                         <blurEffect style="regular"/>
                     </visualEffectView>
-                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w73-dQ-hmt">
+                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w73-dQ-hmt" customClass="RoundView" customModule="Korenko_HM_24" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Za-2b-Bfe">
@@ -129,6 +129,11 @@
                             <constraint firstAttribute="trailing" secondItem="9KL-f7-BgM" secondAttribute="trailing" id="pna-Wv-ZdI"/>
                             <constraint firstAttribute="bottom" secondItem="9KL-f7-BgM" secondAttribute="bottom" constant="8" id="q6y-m9-u9j"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>
@@ -143,6 +148,11 @@
                     <constraint firstAttribute="trailing" secondItem="7UV-jS-dgD" secondAttribute="trailing" id="wh6-Xg-vFQ"/>
                     <constraint firstAttribute="trailing" secondItem="w73-dQ-hmt" secondAttribute="trailing" id="ymc-2n-ZUJ"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                        <real key="value" value="20"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

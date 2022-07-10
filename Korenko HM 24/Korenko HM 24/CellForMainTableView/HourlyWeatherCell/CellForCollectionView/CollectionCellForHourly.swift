@@ -24,7 +24,7 @@ class CollectionCellForHourly: UICollectionViewCell {
 
     
     func reloadWeatherData(weatherData: Hourly) {
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global(qos: .utility).async { [weak self] in
             guard let self = self,
                   let weather = weatherData.weather.first else { return }
             let icon = weather.icon.image

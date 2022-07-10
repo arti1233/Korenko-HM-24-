@@ -227,7 +227,8 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return 1
         case 2:
-            return weather.daily.count
+            let weatherSevenDay = weather.daily.dropFirst()
+            return weatherSevenDay.count
         case 3:
             return 1
         default:
@@ -253,7 +254,8 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             hourlyCell.weatherHourly = weather.hourly
             return hourlyCell
         case 2:
-            dailyCell.reloadWeatherData(weatherData: weather.daily[indexPath.row])
+            let weather = weather.daily.dropFirst()
+            dailyCell.reloadWeatherData(weatherData: weather[indexPath.row + 1])
             return dailyCell
         case 3:
             return  buttonCell
@@ -274,5 +276,11 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         if key == .changeCity {
             choseCityAlertController()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = .white
+        header.backgroundConfiguration = .clear()
     }
 }

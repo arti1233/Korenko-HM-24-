@@ -20,8 +20,6 @@ class DailyWeatherForTableCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.layer.cornerRadius = 15 
-        
     }
 
     
@@ -33,12 +31,12 @@ class DailyWeatherForTableCell: UITableViewCell {
     }
     
     func reloadWeatherData(weatherData: Daily) {
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global(qos: .utility).async { [weak self] in
             guard let self = self,
                   let weather = weatherData.weather.first else { return }
             let icon = weather.icon.image
             DispatchQueue.main.async {
-                self.timeLabel.text = weatherData.dt.timeMMMd
+                self.timeLabel.text = weatherData.dt.timeEEEE
                 self.iconView.image = icon
                 self.tempLabel.text = "\(Int(weatherData.temp.min)) - \(Int(weatherData.temp.max)) C"
             }
