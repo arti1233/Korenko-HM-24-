@@ -123,6 +123,9 @@ class WeatherViewController: UIViewController {
                 case .success(let value):
                     guard let weather = value.current.weather.first else { return }
                     self.weatherData = value
+                    var weatherDaily = value.daily
+                    weatherDaily.removeFirst()
+                    self.weatherDataDaily = weatherDaily
                     DispatchQueue.global().async { [weak self] in
                         guard let self = self else { return }
                         self.addObjectInRealm(weather: value)
@@ -136,6 +139,7 @@ class WeatherViewController: UIViewController {
                     }
                 case .failure(let error):
                     self.errorAlertController(error: error.localizedDescription)
+                    self.spinnerView.stopAnimating()
                 }
             }
         }
@@ -219,7 +223,9 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let weather = weatherData else { return 0}
+        guard let weather = weatherData,
+              let weatherDaily = weatherDataDaily else { return 0}
+        
         
         switch section {
         case 0:
@@ -227,8 +233,7 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return 1
         case 2:
-            let weatherSevenDay = weather.daily.dropFirst()
-            return weatherSevenDay.count
+            return weatherDaily.count
         case 3:
             return 1
         default:
@@ -242,10 +247,12 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
 
         guard let hourlyCell = mainTableView.dequeueReusableCell(withIdentifier: HourlyWeatherCell.key) as? HourlyWeatherCell else { return UITableViewCell() }
        
-        guard let dailyCell = mainTableView.dequeueReusableCell(withIdentifier: DailyWeatherForTableCell.key) as? DailyWeatherForTableCell else { return UITableViewCell() }
+        guard let dailyCell = mainTableView.dequeueReusableCell(withIdentifier: DailyWeatherForTableCell.key) as? DailyWeatherForTableCell,
+              let weatherDaily = weatherDataDaily  else { return UITableViewCell() }
        
         guard let buttonCell = mainTableView.dequeueReusableCell(withIdentifier: ButtonCell.key) as? ButtonCell else { return UITableViewCell() }
-    
+       
+        
         switch indexPath.section{
         case 0:
             currentCell.reloadWeatheData(weatherData: weather)
@@ -254,8 +261,7 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             hourlyCell.weatherHourly = weather.hourly
             return hourlyCell
         case 2:
-            let weather = weather.daily.dropFirst()
-            dailyCell.reloadWeatherData(weatherData: weather[indexPath.row + 1])
+            dailyCell.reloadWeatherData(weatherData: weatherDaily[indexPath.row])
             return dailyCell
         case 3:
             return  buttonCell
@@ -279,8 +285,9 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = .white
+        guard let header = view as? UITableViewHeaderFooterView,
+              let headerText = header.textLabel  else { return }
+        headerText.textColor = .white
         header.backgroundConfiguration = .clear()
     }
 }

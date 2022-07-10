@@ -9,15 +9,15 @@ import Foundation
 import UIKit
 
 @IBDesignable
-class RoundView: UIView {
+extension UIView {
     
     @IBInspectable
-    var cornerRadius: CGFloat {
+    var cornerRadius: CGFloat{
         get {
-            return layer.cornerRadius
+            return self.layer.cornerRadius
         }
         set {
-            layer.cornerRadius = newValue
+            self.layer.cornerRadius = newValue
         }
     }
 }
