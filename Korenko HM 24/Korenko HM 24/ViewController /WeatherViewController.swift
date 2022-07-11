@@ -228,14 +228,10 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         switch section {
-        case 0:
-            return 1
-        case 1:
+        case 0, 1, 3:
             return 1
         case 2:
             return weatherDaily.count
-        case 3:
-            return 1
         default:
             return 0
         }
@@ -288,6 +284,12 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         guard let header = view as? UITableViewHeaderFooterView,
               let headerText = header.textLabel  else { return }
         headerText.textColor = .white
-        header.backgroundConfiguration = .clear()
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        header.clipsToBounds = true
+        header.layer.cornerRadius = 10
+        blurEffectView.frame = header.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        header.backgroundView = blurEffectView
     }
 }

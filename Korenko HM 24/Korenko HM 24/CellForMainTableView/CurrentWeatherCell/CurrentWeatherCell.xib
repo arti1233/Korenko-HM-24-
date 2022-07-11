@@ -16,8 +16,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="279"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <visualEffectView opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7UV-jS-dgD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="272"/>
+                    <visualEffectView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7UV-jS-dgD">
+                        <rect key="frame" x="0.0" y="8" width="320" height="272"/>
                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DQe-P7-iGC">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="272"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,9 +36,14 @@
                             </subviews>
                         </view>
                         <blurEffect style="regular"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </visualEffectView>
-                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w73-dQ-hmt" customClass="RoundView" customModule="Korenko_HM_24" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
+                    <view clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w73-dQ-hmt">
+                        <rect key="frame" x="0.0" y="8" width="320" height="144"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Za-2b-Bfe">
                                 <rect key="frame" x="8" y="8" width="184" height="27.5"/>
@@ -142,15 +147,15 @@
                     <constraint firstItem="w73-dQ-hmt" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="OIB-kF-95B"/>
                     <constraint firstAttribute="bottom" secondItem="7UV-jS-dgD" secondAttribute="bottom" id="QEB-xC-MHG"/>
                     <constraint firstAttribute="bottom" secondItem="w73-dQ-hmt" secondAttribute="bottom" id="dNT-46-m6r"/>
-                    <constraint firstItem="7UV-jS-dgD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lKR-KB-oJa"/>
+                    <constraint firstItem="7UV-jS-dgD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="lKR-KB-oJa"/>
                     <constraint firstItem="w73-dQ-hmt" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.45" id="pdq-gb-cmU"/>
-                    <constraint firstItem="w73-dQ-hmt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wEQ-rO-xts"/>
+                    <constraint firstItem="w73-dQ-hmt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="wEQ-rO-xts"/>
                     <constraint firstAttribute="trailing" secondItem="7UV-jS-dgD" secondAttribute="trailing" id="wh6-Xg-vFQ"/>
                     <constraint firstAttribute="trailing" secondItem="w73-dQ-hmt" secondAttribute="trailing" id="ymc-2n-ZUJ"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                        <real key="value" value="20"/>
+                        <real key="value" value="0.0"/>
                     </userDefinedRuntimeAttribute>
                 </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
@@ -167,7 +172,7 @@
                 <outlet property="timeLabel" destination="1Za-2b-Bfe" id="yat-5M-gly"/>
                 <outlet property="weatherLabel" destination="MBo-ug-3xg" id="xEk-oc-KIz"/>
             </connections>
-            <point key="canvasLocation" x="150.72463768115944" y="22.433035714285712"/>
+            <point key="canvasLocation" x="288" y="7"/>
         </tableViewCell>
     </objects>
     <resources>

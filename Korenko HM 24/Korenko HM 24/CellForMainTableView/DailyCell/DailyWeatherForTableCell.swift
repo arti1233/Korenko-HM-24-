@@ -20,6 +20,7 @@ class DailyWeatherForTableCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
 
     

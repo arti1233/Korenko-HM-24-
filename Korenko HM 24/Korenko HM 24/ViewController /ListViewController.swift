@@ -70,7 +70,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.coordinateLabel.text = "lat = \(item.lat), lot = \(item.lon)"
         cell.timeLabel.text = time.timeHHmmDDMMYYYY
         cell.tempLabel.text = "temp = \(weather.temp), feelsLike = \(weather.feelsLike)"
-        cell.weatherDescriptionLabel.text = "\(weather.descriptionWeather)"
+        cell.weatherDescriptionLabel.text = weather.descriptionWeather
         cell.iconView.image = weather.icon.image
         return cell
     }    
