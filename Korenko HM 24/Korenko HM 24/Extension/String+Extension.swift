@@ -11,7 +11,7 @@ import UIKit
 // запрос для получения картинки
 extension String {
     var image: UIImage {
-        let api = "https://openweathermap.org/img/wn/\(self)@2x.png"
+        let api = "https://openweathermap.org/img/wn/\(self)@4x.png"
         guard let apiURL = URL(string: api) else { return UIImage() }
         let data = try! Data(contentsOf: apiURL)
         guard let image = UIImage(data: data) else { return UIImage() }

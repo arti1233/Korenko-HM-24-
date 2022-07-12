@@ -14,6 +14,7 @@ class DailyWeatherForTableCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var mainView: UIView!
     
     var daily: Daily?
     
@@ -31,12 +32,15 @@ class DailyWeatherForTableCell: UITableViewCell {
     }
     
     func reloadWeatherData(weatherData: Daily) {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.global(qos: .utility).async { [weak self] in
             guard let self = self,
                   let weather = weatherData.weather.first else { return }
-            self.timeLabel.text = weatherData.dt.timeMMMd
-            self.iconView.image = weather.icon.image
-            self.tempLabel.text = "\(Int(weatherData.temp.min)) - \(Int(weatherData.temp.max)) C"
+            let icon = weather.icon.image
+            DispatchQueue.main.async {
+                self.timeLabel.text = weatherData.dt.timeEEEE
+                self.iconView.image = icon
+                self.tempLabel.text = "\(Int(weatherData.temp.min)) - \(Int(weatherData.temp.max)) C"
+            }
         }
     }
 }

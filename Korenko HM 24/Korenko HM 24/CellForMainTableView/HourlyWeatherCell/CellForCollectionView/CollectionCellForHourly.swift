@@ -24,12 +24,15 @@ class CollectionCellForHourly: UICollectionViewCell {
 
     
     func reloadWeatherData(weatherData: Hourly) {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.global(qos: .utility).async { [weak self] in
             guard let self = self,
                   let weather = weatherData.weather.first else { return }
-            self.timeLabel.text = weatherData.dt.timeHHmm
-            self.iconImageView.image = weather.icon.image
-            self.tempLabel.text = "\(Int(weatherData.temp)) C"
+            let icon = weather.icon.image
+            DispatchQueue.main.async {
+                self.iconImageView.image = icon
+                self.timeLabel.text = weatherData.dt.timeHHmm
+                self.tempLabel.text = "\(Int(weatherData.temp)) C"
+            }
         }
     }
 }

@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,9 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Og6-LX-1eB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Og6-LX-1eB">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="separatorColor" red="0.59804571370000004" green="0.44773390759999998" blue="0.77961373140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <sections/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g3f-sa-q2b"/>
@@ -32,6 +35,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="List " image="list.dash" catalog="system" id="dwA-yY-htc">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <imageReference key="selectedImage" image="list.dash" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
@@ -50,40 +54,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcc-gs-wx1">
-                                <rect key="frame" x="0.0" y="44" width="414" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Chose city "/>
-                                <connections>
-                                    <action selector="choseCityButton:" destination="vN7-oE-Dct" eventType="touchUpInside" id="wx7-Td-9AM"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2kc-V7-oNn">
-                                <rect key="frame" x="0.0" y="83" width="414" height="730"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2kc-V7-oNn">
+                                <rect key="frame" x="10.5" y="44" width="393" height="761"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hsT-f1-qJW">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="color" name="AccentColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gU8-aF-R5J"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2kc-V7-oNn" firstAttribute="top" secondItem="xcc-gs-wx1" secondAttribute="bottom" constant="8" symbolic="YES" id="Ccj-eB-670"/>
-                            <constraint firstItem="xcc-gs-wx1" firstAttribute="leading" secondItem="gU8-aF-R5J" secondAttribute="leading" id="L07-oc-Q0i"/>
-                            <constraint firstItem="2kc-V7-oNn" firstAttribute="leading" secondItem="gU8-aF-R5J" secondAttribute="leading" id="LOr-ET-BYn"/>
-                            <constraint firstItem="xcc-gs-wx1" firstAttribute="top" secondItem="gU8-aF-R5J" secondAttribute="top" id="RKR-ar-7rM"/>
-                            <constraint firstItem="xcc-gs-wx1" firstAttribute="trailing" secondItem="gU8-aF-R5J" secondAttribute="trailing" id="dmd-BQ-Htb"/>
-                            <constraint firstItem="2kc-V7-oNn" firstAttribute="bottom" secondItem="gU8-aF-R5J" secondAttribute="bottom" id="iNO-iX-N1A"/>
-                            <constraint firstItem="2kc-V7-oNn" firstAttribute="trailing" secondItem="gU8-aF-R5J" secondAttribute="trailing" id="kGD-9j-pO0"/>
+                            <constraint firstItem="gU8-aF-R5J" firstAttribute="bottom" secondItem="2kc-V7-oNn" secondAttribute="bottom" constant="8" id="73q-Rq-xz3"/>
+                            <constraint firstItem="2kc-V7-oNn" firstAttribute="top" secondItem="gU8-aF-R5J" secondAttribute="top" id="EEM-oA-LUZ"/>
+                            <constraint firstItem="hsT-f1-qJW" firstAttribute="leading" secondItem="gU8-aF-R5J" secondAttribute="leading" id="PgK-WA-SGO"/>
+                            <constraint firstItem="hsT-f1-qJW" firstAttribute="top" secondItem="gU8-aF-R5J" secondAttribute="top" id="aJx-rZ-AJ1"/>
+                            <constraint firstItem="2kc-V7-oNn" firstAttribute="centerX" secondItem="6zu-c6-0R5" secondAttribute="centerX" id="hGS-ZL-Jxn"/>
+                            <constraint firstItem="gU8-aF-R5J" firstAttribute="trailing" secondItem="hsT-f1-qJW" secondAttribute="trailing" id="nCd-xU-V6l"/>
+                            <constraint firstItem="gU8-aF-R5J" firstAttribute="bottom" secondItem="hsT-f1-qJW" secondAttribute="bottom" id="uLb-ZQ-vLM"/>
+                            <constraint firstItem="2kc-V7-oNn" firstAttribute="width" secondItem="6zu-c6-0R5" secondAttribute="width" multiplier="0.95" id="ubE-X6-uW9"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Weather" image="cloud" catalog="system" id="EHx-Xw-fXu"/>
+                    <tabBarItem key="tabBarItem" title="Weather" id="EHx-Xw-fXu">
+                        <imageReference key="image" image="cloud" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="mainTableView" destination="2kc-V7-oNn" id="TXj-wh-oqc"/>
+                        <outlet property="spinnerView" destination="hsT-f1-qJW" id="Twg-aN-yr4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0KT-GZ-4aM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="751" y="839"/>
+            <point key="canvasLocation" x="750.72463768115949" y="838.39285714285711"/>
         </scene>
         <!--Map-->
         <scene sceneID="Zft-Y2-ER2">
@@ -166,7 +171,9 @@
                             <constraint firstItem="So5-4e-dOZ" firstAttribute="width" secondItem="nzV-hr-7Og" secondAttribute="width" multiplier="0.5" id="sDZ-Hi-a40"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="magnifyingglass" catalog="system" springLoaded="YES" id="ieA-gr-BRq"/>
+                    <tabBarItem key="tabBarItem" title="Map" springLoaded="YES" id="ieA-gr-BRq">
+                        <imageReference key="image" image="magnifyingglass" catalog="system"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="exitButton" destination="Rz3-s8-jeE" id="qKb-0h-DPi"/>
                         <outlet property="feelsLikeLabel" destination="e92-aM-geU" id="fu7-U0-Qkj"/>
@@ -185,10 +192,11 @@
             <objects>
                 <tabBarController id="QpO-xJ-mbs" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="lwa-pG-HxZ"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Oug-72-sK1">
+                    <tabBar key="tabBar" alpha="0.90000000000000002" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="Oug-72-sK1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" systemColor="placeholderTextColor"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="J3j-fa-w6m" kind="relationship" relationship="viewControllers" id="dwr-At-CpW"/>
@@ -206,9 +214,9 @@
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
-        <systemColor name="placeholderTextColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
