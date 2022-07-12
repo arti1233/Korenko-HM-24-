@@ -12,7 +12,6 @@ enum SectionTableView: Int {
     case current = 0
     case hourly = 1
     case daily = 2
-    case changeCity = 3
     
     var description: String {
         switch self {
@@ -21,9 +20,7 @@ enum SectionTableView: Int {
         case .hourly:
             return "HOURLY FORECAST"
         case .daily:
-            return "8-DAY FORECAST"
-        case .changeCity:
-            return "CHOOSE CITY"
+            return "7-DAY FORECAST"
         }
     }
 }
@@ -123,9 +120,7 @@ class WeatherViewController: UIViewController {
                 case .success(let value):
                     guard let weather = value.current.weather.first else { return }
                     self.weatherData = value
-                    var weatherDaily = value.daily
-                    weatherDaily.removeFirst()
-                    self.weatherDataDaily = weatherDaily
+                    self.weatherDataDaily = Array(value.daily.dropFirst())
                     DispatchQueue.global().async { [weak self] in
                         guard let self = self else { return }
                         self.addObjectInRealm(weather: value)
@@ -223,12 +218,11 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let weather = weatherData,
-              let weatherDaily = weatherDataDaily else { return 0}
+        guard let weatherDaily = weatherDataDaily else { return 0}
         
         
         switch section {
-        case 0, 1, 3:
+        case 0, 1:
             return 1
         case 2:
             return weatherDaily.count
@@ -246,8 +240,6 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         guard let dailyCell = mainTableView.dequeueReusableCell(withIdentifier: DailyWeatherForTableCell.key) as? DailyWeatherForTableCell,
               let weatherDaily = weatherDataDaily  else { return UITableViewCell() }
        
-        guard let buttonCell = mainTableView.dequeueReusableCell(withIdentifier: ButtonCell.key) as? ButtonCell else { return UITableViewCell() }
-       
         
         switch indexPath.section{
         case 0:
@@ -259,8 +251,6 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         case 2:
             dailyCell.reloadWeatherData(weatherData: weatherDaily[indexPath.row])
             return dailyCell
-        case 3:
-            return  buttonCell
         default:
             return  UITableViewCell()
         }
@@ -270,14 +260,6 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let key = SectionTableView(rawValue: section) else { return ""}
         return key.description
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let key = SectionTableView(rawValue: indexPath.section) else { return }
-        
-        if key == .changeCity {
-            choseCityAlertController()
-        }
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
