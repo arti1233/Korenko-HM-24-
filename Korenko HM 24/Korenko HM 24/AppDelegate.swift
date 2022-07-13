@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMaps
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationCentre.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             guard granted else { return }
         }
+        
+        let config = Realm.Configuration(schemaVersion: 1, migrationBlock: { migration, oldSchemaVersion in if oldSchemaVersion < 1 {}})
+                
+        Realm.Configuration.defaultConfiguration = config
+        
+        
         
         return true
     }

@@ -82,7 +82,7 @@ class WeatherViewController: UIViewController {
        
         let results = realm.objects(RequestListRealmData.self)
         
-        if let results = results.last {
+        if let results = results.last, results.isLocation {
             refreshController(lat: results.lat, lon: results.lon)
         } else {
             refreshController(lat: 54.029, lon: 27.579)
@@ -125,7 +125,8 @@ class WeatherViewController: UIViewController {
     
     
     func refreshController(lat: Double, lon: Double) {
-        apiProvider.getWeatherForCityCoordinates(lat: lat, lon: lon, measurement: measurement.description) { result in
+        apiProvider.getWeatherForCityCoordinates(lat: lat, lon: lon, measurement: measurement.description) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let value):
                 guard let weather = value.current.weather.first else { return }
@@ -133,8 +134,7 @@ class WeatherViewController: UIViewController {
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
-                DispatchQueue.global().async { [weak self] in
-                    guard let self = self else { return }
+                DispatchQueue.global().async {
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
                     DispatchQueue.main.async {
@@ -153,7 +153,8 @@ class WeatherViewController: UIViewController {
     
 // MARK: METODS FOR LOCATION BUTTON
     func getWeatherForLocationButton(coordinate: CLLocation) {
-        apiProvider.getWeatherForCityCoordinates(lat: coordinate.coordinate.latitude, lon: coordinate.coordinate.longitude, measurement: measurement.description) { result in
+        apiProvider.getWeatherForCityCoordinates(lat: coordinate.coordinate.latitude, lon: coordinate.coordinate.longitude, measurement: measurement.description) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let value):
                 guard let weather = value.current.weather.first else { return }
@@ -161,9 +162,8 @@ class WeatherViewController: UIViewController {
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
-                DispatchQueue.global().async { [weak self] in
-                    guard let self = self else { return }
-                    self.addObjectInRealm(weather: value, metod: "Location")
+                DispatchQueue.global().async {
+                    self.addObjectInRealm(weather: value, isLocation: true)
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
                     DispatchQueue.main.async {
@@ -199,7 +199,8 @@ class WeatherViewController: UIViewController {
         }
         
     private func getWeatherByCoordinates(city: Geocoding) {
-        apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon, measurement: measurement.description) { result in
+        apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon, measurement: measurement.description) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let value):
                 guard let weather = value.current.weather.first else { return }
@@ -207,9 +208,8 @@ class WeatherViewController: UIViewController {
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
-                DispatchQueue.global().async { [weak self] in
-                    guard let self = self else { return }
-                    self.addObjectInRealm(weather: value, metod: "Search")
+                DispatchQueue.global().async {
+                    self.addObjectInRealm(weather: value, isLocation: true)
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
                     DispatchQueue.main.async {
@@ -244,7 +244,7 @@ class WeatherViewController: UIViewController {
             textField.placeholder = "Name city"
         }
         let okButton = UIAlertAction(title: "Enter", style: .default) { [weak self] _ in
-            guard let textField = alertController.textFields?[0],
+            guard let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let self = self else { return }
             let textWithoutWhitespace = text.trimmingCharacters(in: .whitespaces)
@@ -412,8 +412,8 @@ extension WeatherViewController: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locations1 = locations.first else { return }
-        getWeatherForLocationButton(coordinate: locations1)
+        guard let userLocation = locations.first else { return }
+        getWeatherForLocationButton(coordinate: userLocation)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

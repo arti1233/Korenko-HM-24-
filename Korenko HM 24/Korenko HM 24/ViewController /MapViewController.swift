@@ -63,12 +63,12 @@ extension MapViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         mapView.clear()
         
-        apiProvider.getWeatherForCityCoordinates(lat: coordinate.latitude, lon: coordinate.longitude, measurement: measurement.description) { result in
+        apiProvider.getWeatherForCityCoordinates(lat: coordinate.latitude, lon: coordinate.longitude, measurement: measurement.description) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let value):
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.addObjectInRealm(weather: value, metod: "Map")
+                DispatchQueue.main.async { 
+                    self.addObjectInRealm(weather: value, isLocation: false)
                     self.weatherCurrent = value.current
                     self.createMarker(map: self.mapView , coordinate: coordinate)
                 }
