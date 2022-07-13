@@ -68,7 +68,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let weather = item.weather else { return UITableViewCell() }
         let time = Int(item.time.timeIntervalSince1970)
         cell.coordinateLabel.text = "lat = \(item.lat), lot = \(item.lon)"
-        cell.timeLabel.text = time.timeHHmmDDMMYYYY
+        cell.timeLabel.text = "Metod = \(item.metod), time = \(time.timeHHmm)"
         cell.tempLabel.text = "temp = \(weather.temp), feelsLike = \(weather.feelsLike)"
         cell.weatherDescriptionLabel.text = weather.descriptionWeather
         cell.iconView.image = weather.icon.image

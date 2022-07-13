@@ -16,8 +16,6 @@
 		AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */; };
 		AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D33452868C2EE009DDDD1 /* MapViewController.swift */; };
 		AE4D33492868CCA4009DDDD1 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = AE4D33482868CCA4009DDDD1 /* GoogleMaps */; };
-		AE65F6172877165E00306FB8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE65F6152877165E00306FB8 /* ButtonCell.swift */; };
-		AE65F6182877165E00306FB8 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE65F6162877165E00306FB8 /* ButtonCell.xib */; };
 		AE65FA73287AE5250006743A /* UIView+extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE65FA72287AE5250006743A /* UIView+extension .swift */; };
 		AE70AEA3286B8C7400B518F6 /* CurrentWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEA1286B8C7400B518F6 /* CurrentWeatherCell.swift */; };
 		AE70AEA4286B8C7400B518F6 /* CurrentWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEA2286B8C7400B518F6 /* CurrentWeatherCell.xib */; };
@@ -54,8 +52,6 @@
 		AE0C1448285F2E7B007C0BFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherData.swift; sourceTree = "<group>"; };
 		AE4D33452868C2EE009DDDD1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		AE65F6152877165E00306FB8 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
-		AE65F6162877165E00306FB8 /* ButtonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		AE65FA72287AE5250006743A /* UIView+extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension .swift"; sourceTree = "<group>"; };
 		AE70AEA1286B8C7400B518F6 /* CurrentWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCell.swift; sourceTree = "<group>"; };
 		AE70AEA2286B8C7400B518F6 /* CurrentWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWeatherCell.xib; sourceTree = "<group>"; };
@@ -133,21 +129,11 @@
 		AE4D334C2869CE5E009DDDD1 /* CellForMainTableView */ = {
 			isa = PBXGroup;
 			children = (
-				AE65F612287715FE00306FB8 /* Button Cell  */,
 				AE70AEB9286BCA6E00B518F6 /* DailyCell */,
 				AE70AEA5286B8C9000B518F6 /* CurrentWeatherCell */,
 				AE70AEAA286BAD7D00B518F6 /* HourlyWeatherCell */,
 			);
 			path = CellForMainTableView;
-			sourceTree = "<group>";
-		};
-		AE65F612287715FE00306FB8 /* Button Cell  */ = {
-			isa = PBXGroup;
-			children = (
-				AE65F6152877165E00306FB8 /* ButtonCell.swift */,
-				AE65F6162877165E00306FB8 /* ButtonCell.xib */,
-			);
-			path = "Button Cell ";
 			sourceTree = "<group>";
 		};
 		AE70AEA5286B8C9000B518F6 /* CurrentWeatherCell */ = {
@@ -318,7 +304,6 @@
 				AE70AEA4286B8C7400B518F6 /* CurrentWeatherCell.xib in Resources */,
 				AE70AEC4286CD41400B518F6 /* TableViewCellForListReqest.xib in Resources */,
 				AE0C1444285F2E7B007C0BFD /* Assets.xcassets in Resources */,
-				AE65F6182877165E00306FB8 /* ButtonCell.xib in Resources */,
 				AE0C1442285F2E7A007C0BFD /* Main.storyboard in Resources */,
 				AE70AEB8286BCA6200B518F6 /* DailyWeatherForTableCell.xib in Resources */,
 			);
@@ -334,7 +319,6 @@
 				AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */,
 				AE70AEA8286BAD7700B518F6 /* HourlyWeatherCell.swift in Sources */,
 				AE0C143F285F2E7A007C0BFD /* WeatherViewController.swift in Sources */,
-				AE65F6172877165E00306FB8 /* ButtonCell.swift in Sources */,
 				AE70AEA3286B8C7400B518F6 /* CurrentWeatherCell.swift in Sources */,
 				AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */,
 				AE65FA73287AE5250006743A /* UIView+extension .swift in Sources */,

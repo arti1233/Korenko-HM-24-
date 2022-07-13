@@ -36,7 +36,6 @@ class MapViewController: UIViewController {
         view.addSubview(mapView)
         view.addSubview(mainView)
         
-        
     }
     
     
@@ -55,7 +54,7 @@ class MapViewController: UIViewController {
             switch result {
             case .success(let value):
                 self.reloadMainView(weather: value.current)
-                self.addObjectInRealm(weather: value)
+                self.addObjectInRealm(weather: value, metod: "Map")
             case .failure(let error):
                 self.errorAlertController(error: error.localizedDescription)
             }
