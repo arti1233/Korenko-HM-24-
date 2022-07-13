@@ -406,7 +406,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
             locationButton.isEnabled = false
         } else if coreManager.authorizationStatus == .authorizedAlways || coreManager.authorizationStatus == .authorizedWhenInUse {
             coreManager.requestLocation()
-            let image = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
+            guard let image = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal) else { return }
             locationButton.setImage(image, for: .normal)
         }
     }
