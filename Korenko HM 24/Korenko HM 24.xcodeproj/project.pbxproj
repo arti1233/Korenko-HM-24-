@@ -27,7 +27,7 @@
 		AE70AEB8286BCA6200B518F6 /* DailyWeatherForTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEB6286BCA6200B518F6 /* DailyWeatherForTableCell.xib */; };
 		AE70AEBC286C8EA800B518F6 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AE70AEBB286C8EA800B518F6 /* Realm */; };
 		AE70AEBE286C8EA800B518F6 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AE70AEBD286C8EA800B518F6 /* RealmSwift */; };
-		AE70AEC0286C8F6C00B518F6 /* RequestListRealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEBF286C8F6C00B518F6 /* RequestListRealmData.swift */; };
+		AE70AEC0286C8F6C00B518F6 /* ServiceRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEBF286C8F6C00B518F6 /* ServiceRealm.swift */; };
 		AE70AEC3286CD41400B518F6 /* TableViewCellForListReqest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEC1286CD41400B518F6 /* TableViewCellForListReqest.swift */; };
 		AE70AEC4286CD41400B518F6 /* TableViewCellForListReqest.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEC2286CD41400B518F6 /* TableViewCellForListReqest.xib */; };
 		AE70AEC7286CD6C200B518F6 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEC6286CD6C200B518F6 /* ListViewController.swift */; };
@@ -63,7 +63,7 @@
 		AE70AEAC286BAE9500B518F6 /* CollectionCellForHourly.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCellForHourly.xib; sourceTree = "<group>"; };
 		AE70AEB5286BCA6200B518F6 /* DailyWeatherForTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherForTableCell.swift; sourceTree = "<group>"; };
 		AE70AEB6286BCA6200B518F6 /* DailyWeatherForTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyWeatherForTableCell.xib; sourceTree = "<group>"; };
-		AE70AEBF286C8F6C00B518F6 /* RequestListRealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListRealmData.swift; sourceTree = "<group>"; };
+		AE70AEBF286C8F6C00B518F6 /* ServiceRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRealm.swift; sourceTree = "<group>"; };
 		AE70AEC1286CD41400B518F6 /* TableViewCellForListReqest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellForListReqest.swift; sourceTree = "<group>"; };
 		AE70AEC2286CD41400B518F6 /* TableViewCellForListReqest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellForListReqest.xib; sourceTree = "<group>"; };
 		AE70AEC6286CD6C200B518F6 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 		AEF812DE286DA22E002BC897 /* ServiceRealm */ = {
 			isa = PBXGroup;
 			children = (
-				AE70AEBF286C8F6C00B518F6 /* RequestListRealmData.swift */,
+				AE70AEBF286C8F6C00B518F6 /* ServiceRealm.swift */,
 			);
 			path = ServiceRealm;
 			sourceTree = "<group>";
@@ -338,7 +338,7 @@
 				AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */,
 				AE65FA73287AE5250006743A /* UIView+extension .swift in Sources */,
 				AE70AEC3286CD41400B518F6 /* TableViewCellForListReqest.swift in Sources */,
-				AE70AEC0286C8F6C00B518F6 /* RequestListRealmData.swift in Sources */,
+				AE70AEC0286C8F6C00B518F6 /* ServiceRealm.swift in Sources */,
 				AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */,
 				AE70AEAD286BAE9500B518F6 /* CollectionCellForHourly.swift in Sources */,
 				AE0C143B285F2E7A007C0BFD /* AppDelegate.swift in Sources */,

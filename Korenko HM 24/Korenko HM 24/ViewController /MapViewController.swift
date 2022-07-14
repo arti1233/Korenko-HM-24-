@@ -12,6 +12,7 @@ import RealmSwift
 class MapViewController: UIViewController {
     static let key = "MapViewController"
     private var apiProvider: RestAPIProviderProtocol!
+    private var realmProvider: AddObjectInRealmProtocol!
     var measurement = UnitsOfMeasurement.metric
     let realm = try! Realm()
     var weatherCurrent: Current?
@@ -22,6 +23,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         apiProvider = AlamofireProvider()
+        realmProvider = ServiceRealm()
 
         camera = GMSCameraPosition.camera(withLatitude: 54.029, longitude: 27.579, zoom: 6.0)
         mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
@@ -67,8 +69,8 @@ extension MapViewController: GMSMapViewDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let value):
-                DispatchQueue.main.async { 
-                    self.addObjectInRealm(weather: value, isLocation: false)
+                self.realmProvider.addObjectInRealm(weather: value, isLocation: false)
+                DispatchQueue.main.async {
                     self.weatherCurrent = value.current
                     self.createMarker(map: self.mapView , coordinate: coordinate)
                 }
@@ -81,7 +83,7 @@ extension MapViewController: GMSMapViewDelegate {
     
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        guard let view = Bundle.main.loadNibNamed(InfoWindow.key, owner: self)?[0] as? InfoWindow else { return UIView()}
+        guard let view = Bundle.main.loadNibNamed(InfoWindow.key, owner: self)?.first as? InfoWindow else { return UIView()}
        
         if let weather = weatherCurrent {
             view.reloadMainView(weather: weather)

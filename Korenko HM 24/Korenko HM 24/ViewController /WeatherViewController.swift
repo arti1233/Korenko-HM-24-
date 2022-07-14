@@ -29,7 +29,7 @@ enum SectionTableView: Int {
 class WeatherViewController: UIViewController {
 
     private var apiProvider: RestAPIProviderProtocol!
-
+    private var realmProvider: AddObjectInRealmProtocol!
 // MARK: IBOutlet
     
     @IBOutlet weak var regionLabel: UILabel!
@@ -60,9 +60,8 @@ class WeatherViewController: UIViewController {
     var measurement = UnitsOfMeasurement.metric
     let notificationCenter = UNUserNotificationCenter.current()
     let notificationIdentifier = "WeatherNotification"
-    
-    let realm = try! Realm()
-    var items: Results<RequestListRealmData>!
+    let keyForUserDefaults = "1"
+    let lastCityName = "city"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +71,7 @@ class WeatherViewController: UIViewController {
         mainTableView.refreshControl = myRefreshControll
         
         apiProvider = AlamofireProvider()
+        realmProvider = ServiceRealm()
         mainTableView.dataSource = self
         mainTableView.delegate = self
         
@@ -80,14 +80,14 @@ class WeatherViewController: UIViewController {
         mainTableView.register(UINib(nibName: HourlyWeatherCell.key, bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         mainTableView.register(UINib(nibName: DailyWeatherForTableCell.key, bundle: nil), forCellReuseIdentifier: DailyWeatherForTableCell.key)
        
-        let results = realm.objects(RequestListRealmData.self)
-        
-        if let results = results.last, results.isLocation {
-            refreshController(lat: results.lat, lon: results.lon)
-        } else {
-            refreshController(lat: 54.029, lon: 27.579)
+    
+        if !UserDefaults.standard.bool(forKey: keyForUserDefaults) {
+            if let city = UserDefaults.standard.string(forKey: lastCityName), !city.isEmpty {
+                getCoordinatesByName(name: city)
+            } else {
+                getCoordinatesByName(name: cityName)
+            }
         }
-        
         
         
         coreManager.delegate = self
@@ -158,15 +158,20 @@ class WeatherViewController: UIViewController {
             switch result {
             case .success(let value):
                 guard let weather = value.current.weather.first else { return }
+                UserDefaults.standard.set(true, forKey: self.keyForUserDefaults)
                 self.longitude = value.lon
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
                 DispatchQueue.global().async {
-                    self.addObjectInRealm(weather: value, isLocation: true)
+                    self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
+                    guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.white, renderingMode: .alwaysOriginal),
+                          let imageLocation = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal) else { return }
                     DispatchQueue.main.async {
+                        self.searchButton.setImage(imageSearch, for: .normal)
+                        self.locationButton.setImage(imageLocation, for: .normal)
                         self.regionLabel.text = value.timezone
                         self.view.backgroundColor = imageBackground
                         self.mainTableView.reloadData()
@@ -188,7 +193,7 @@ class WeatherViewController: UIViewController {
                 guard let self = self else { return }
                 switch result {
                 case .success(let value):
-                    self.cityName = name
+                    UserDefaults.standard.set(name, forKey: self.lastCityName)
                     if let city = value.first {
                         self.getWeatherByCoordinates(city: city)
                     }
@@ -204,21 +209,22 @@ class WeatherViewController: UIViewController {
             switch result {
             case .success(let value):
                 guard let weather = value.current.weather.first else { return }
+                UserDefaults.standard.set(false, forKey: self.keyForUserDefaults)
                 self.longitude = value.lon
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
                 DispatchQueue.global().async {
-                    self.addObjectInRealm(weather: value, isLocation: true)
+                    self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
+                    guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+                          let imageLocation = UIImage(systemName: "location")?.withTintColor(.white, renderingMode: .alwaysOriginal) else { return }
                     DispatchQueue.main.async {
-                        let image = UIImage(systemName: "location")
-                        self.locationButton.setImage(image, for: .normal)
-                        self.locationButton.isEnabled = false
+                        self.locationButton.setImage(imageLocation, for: .normal)
+                        self.searchButton.setImage(imageSearch, for: .normal)
                         self.regionLabel.text = value.timezone
                         self.view.backgroundColor = imageBackground
-                        self.locationButton.isEnabled = false
                         self.mainTableView.reloadData()
                         self.spinnerView.stopAnimating()
                     }
@@ -234,7 +240,24 @@ class WeatherViewController: UIViewController {
     
 // MARK: METODS
     
+   // состояние кнопок
     
+    func changeButtonCondition(isLocation: Bool) {
+        if isLocation {
+            guard let imageLocation = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+                  let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.white, renderingMode: .alwaysOriginal) else { return }
+            locationButton.setImage(imageLocation, for: .normal)
+            searchButton.setImage(imageSearch, for: .normal)
+        } else {
+            guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+                  let imageLocation = UIImage(systemName: "location")?.withTintColor(.white, renderingMode: .alwaysOriginal) else { return }
+            searchButton.setImage(imageSearch, for: .normal)
+            locationButton.setImage(imageLocation, for: .normal)
+        }
+        
+        
+        
+    }
     
     // Chose City alertController
     
@@ -402,12 +425,22 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if coreManager.authorizationStatus == .denied {
-//            coreManager.requestWhenInUseAuthorization()
             locationButton.isEnabled = false
         } else if coreManager.authorizationStatus == .authorizedAlways || coreManager.authorizationStatus == .authorizedWhenInUse {
-            coreManager.requestLocation()
-            guard let image = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal) else { return }
-            locationButton.setImage(image, for: .normal)
+            
+            if UserDefaults.standard.bool(forKey: keyForUserDefaults) {
+                coreManager.requestLocation()
+            guard let imageLocation = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+                  let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.white, renderingMode: .alwaysOriginal) else { return }
+            locationButton.setImage(imageLocation, for: .normal)
+            searchButton.setImage(imageSearch, for: .normal)
+            } else {
+                guard let imageLocation = UIImage(systemName: "location.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal),
+                      let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal) else { return }
+                locationButton.setImage(imageLocation, for: .normal)
+                searchButton.setImage(imageSearch, for: .normal)
+            }
+            
         }
     }
 

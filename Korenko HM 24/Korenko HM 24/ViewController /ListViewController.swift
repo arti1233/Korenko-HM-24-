@@ -11,20 +11,19 @@ import UIKit
 
 class ListViewController: UIViewController {
     static let key = "ListViewController"
-    let realm = try! Realm()
     var items: Results<RequestListRealmData>!
-    var itemsWeather: Results<WeatherDataRealm>!
     var notificationToken: NotificationToken?
     
     @IBOutlet weak var tableView: UITableView!
-    
+    private var realmProvider: AddObjectInRealmProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        realmProvider = ServiceRealm()
         
-        let results = realm.objects(RequestListRealmData.self)
+        items = realmProvider.reloadListRequest()
         
-        notificationToken = results.observe{ [weak self] (changes: RealmCollectionChange) in
+        notificationToken = items.observe{ [weak self] (changes: RealmCollectionChange) in
             guard let self = self else { return }
             switch changes {
             case .initial:
@@ -44,8 +43,6 @@ class ListViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UINib(nibName: TableViewCellForListReqest.key, bundle: nil), forCellReuseIdentifier: TableViewCellForListReqest.key)
         
-        items = realm.objects(RequestListRealmData.self)
-        itemsWeather = realm.objects(WeatherDataRealm.self)
     }
     
     deinit{
