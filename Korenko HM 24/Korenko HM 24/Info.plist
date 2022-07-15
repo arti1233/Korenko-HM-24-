@@ -25,5 +25,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Need gps </string>
 </dict>
 </plist>

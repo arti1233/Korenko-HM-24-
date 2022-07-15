@@ -16,8 +16,6 @@
 		AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */; };
 		AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D33452868C2EE009DDDD1 /* MapViewController.swift */; };
 		AE4D33492868CCA4009DDDD1 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = AE4D33482868CCA4009DDDD1 /* GoogleMaps */; };
-		AE65F6172877165E00306FB8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE65F6152877165E00306FB8 /* ButtonCell.swift */; };
-		AE65F6182877165E00306FB8 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE65F6162877165E00306FB8 /* ButtonCell.xib */; };
 		AE65FA73287AE5250006743A /* UIView+extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE65FA72287AE5250006743A /* UIView+extension .swift */; };
 		AE70AEA3286B8C7400B518F6 /* CurrentWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEA1286B8C7400B518F6 /* CurrentWeatherCell.swift */; };
 		AE70AEA4286B8C7400B518F6 /* CurrentWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEA2286B8C7400B518F6 /* CurrentWeatherCell.xib */; };
@@ -29,7 +27,7 @@
 		AE70AEB8286BCA6200B518F6 /* DailyWeatherForTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEB6286BCA6200B518F6 /* DailyWeatherForTableCell.xib */; };
 		AE70AEBC286C8EA800B518F6 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AE70AEBB286C8EA800B518F6 /* Realm */; };
 		AE70AEBE286C8EA800B518F6 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AE70AEBD286C8EA800B518F6 /* RealmSwift */; };
-		AE70AEC0286C8F6C00B518F6 /* RequestListRealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEBF286C8F6C00B518F6 /* RequestListRealmData.swift */; };
+		AE70AEC0286C8F6C00B518F6 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEBF286C8F6C00B518F6 /* RealmService.swift */; };
 		AE70AEC3286CD41400B518F6 /* TableViewCellForListReqest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEC1286CD41400B518F6 /* TableViewCellForListReqest.swift */; };
 		AE70AEC4286CD41400B518F6 /* TableViewCellForListReqest.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEC2286CD41400B518F6 /* TableViewCellForListReqest.xib */; };
 		AE70AEC7286CD6C200B518F6 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEC6286CD6C200B518F6 /* ListViewController.swift */; };
@@ -39,6 +37,8 @@
 		AE9968CD2865D693002BB058 /* AlamofierProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968CC2865D693002BB058 /* AlamofierProvider.swift */; };
 		AE9968D12865D806002BB058 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AE9968D02865D806002BB058 /* Alamofire */; };
 		AE9968D32865F6DC002BB058 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968D22865F6DB002BB058 /* Constants.swift */; };
+		AEAD2733287EFA61008FCD19 /* InfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAD2732287EFA60008FCD19 /* InfoWindow.swift */; };
+		AEAD2735287EFA74008FCD19 /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEAD2734287EFA74008FCD19 /* InfoWindow.xib */; };
 		AEF812DD286DA170002BC897 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF812DC286DA170002BC897 /* String+Extension.swift */; };
 		AEF812E0286DB327002BC897 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF812DF286DB327002BC897 /* Int+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -54,8 +54,6 @@
 		AE0C1448285F2E7B007C0BFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherData.swift; sourceTree = "<group>"; };
 		AE4D33452868C2EE009DDDD1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		AE65F6152877165E00306FB8 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
-		AE65F6162877165E00306FB8 /* ButtonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		AE65FA72287AE5250006743A /* UIView+extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension .swift"; sourceTree = "<group>"; };
 		AE70AEA1286B8C7400B518F6 /* CurrentWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCell.swift; sourceTree = "<group>"; };
 		AE70AEA2286B8C7400B518F6 /* CurrentWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWeatherCell.xib; sourceTree = "<group>"; };
@@ -65,7 +63,7 @@
 		AE70AEAC286BAE9500B518F6 /* CollectionCellForHourly.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCellForHourly.xib; sourceTree = "<group>"; };
 		AE70AEB5286BCA6200B518F6 /* DailyWeatherForTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherForTableCell.swift; sourceTree = "<group>"; };
 		AE70AEB6286BCA6200B518F6 /* DailyWeatherForTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyWeatherForTableCell.xib; sourceTree = "<group>"; };
-		AE70AEBF286C8F6C00B518F6 /* RequestListRealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListRealmData.swift; sourceTree = "<group>"; };
+		AE70AEBF286C8F6C00B518F6 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		AE70AEC1286CD41400B518F6 /* TableViewCellForListReqest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellForListReqest.swift; sourceTree = "<group>"; };
 		AE70AEC2286CD41400B518F6 /* TableViewCellForListReqest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellForListReqest.xib; sourceTree = "<group>"; };
 		AE70AEC6286CD6C200B518F6 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +72,8 @@
 		AE9968C92865D5B5002BB058 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		AE9968CC2865D693002BB058 /* AlamofierProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofierProvider.swift; sourceTree = "<group>"; };
 		AE9968D22865F6DB002BB058 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AEAD2732287EFA60008FCD19 /* InfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindow.swift; sourceTree = "<group>"; };
+		AEAD2734287EFA74008FCD19 /* InfoWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
 		AEF812DC286DA170002BC897 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		AEF812DF286DB327002BC897 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +126,7 @@
 				AE0C1443285F2E7B007C0BFD /* Assets.xcassets */,
 				AE0C1445285F2E7B007C0BFD /* LaunchScreen.storyboard */,
 				AE0C1448285F2E7B007C0BFD /* Info.plist */,
+				AEAD2736287EFD2C008FCD19 /* CustomInfoWindow */,
 			);
 			path = "Korenko HM 24";
 			sourceTree = "<group>";
@@ -133,21 +134,11 @@
 		AE4D334C2869CE5E009DDDD1 /* CellForMainTableView */ = {
 			isa = PBXGroup;
 			children = (
-				AE65F612287715FE00306FB8 /* Button Cell  */,
 				AE70AEB9286BCA6E00B518F6 /* DailyCell */,
 				AE70AEA5286B8C9000B518F6 /* CurrentWeatherCell */,
 				AE70AEAA286BAD7D00B518F6 /* HourlyWeatherCell */,
 			);
 			path = CellForMainTableView;
-			sourceTree = "<group>";
-		};
-		AE65F612287715FE00306FB8 /* Button Cell  */ = {
-			isa = PBXGroup;
-			children = (
-				AE65F6152877165E00306FB8 /* ButtonCell.swift */,
-				AE65F6162877165E00306FB8 /* ButtonCell.xib */,
-			);
-			path = "Button Cell ";
 			sourceTree = "<group>";
 		};
 		AE70AEA5286B8C9000B518F6 /* CurrentWeatherCell */ = {
@@ -225,10 +216,19 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		AEAD2736287EFD2C008FCD19 /* CustomInfoWindow */ = {
+			isa = PBXGroup;
+			children = (
+				AEAD2732287EFA60008FCD19 /* InfoWindow.swift */,
+				AEAD2734287EFA74008FCD19 /* InfoWindow.xib */,
+			);
+			path = CustomInfoWindow;
+			sourceTree = "<group>";
+		};
 		AEF812DE286DA22E002BC897 /* ServiceRealm */ = {
 			isa = PBXGroup;
 			children = (
-				AE70AEBF286C8F6C00B518F6 /* RequestListRealmData.swift */,
+				AE70AEBF286C8F6C00B518F6 /* RealmService.swift */,
 			);
 			path = ServiceRealm;
 			sourceTree = "<group>";
@@ -317,8 +317,8 @@
 				AE70AEAE286BAE9500B518F6 /* CollectionCellForHourly.xib in Resources */,
 				AE70AEA4286B8C7400B518F6 /* CurrentWeatherCell.xib in Resources */,
 				AE70AEC4286CD41400B518F6 /* TableViewCellForListReqest.xib in Resources */,
+				AEAD2735287EFA74008FCD19 /* InfoWindow.xib in Resources */,
 				AE0C1444285F2E7B007C0BFD /* Assets.xcassets in Resources */,
-				AE65F6182877165E00306FB8 /* ButtonCell.xib in Resources */,
 				AE0C1442285F2E7A007C0BFD /* Main.storyboard in Resources */,
 				AE70AEB8286BCA6200B518F6 /* DailyWeatherForTableCell.xib in Resources */,
 			);
@@ -334,12 +334,11 @@
 				AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */,
 				AE70AEA8286BAD7700B518F6 /* HourlyWeatherCell.swift in Sources */,
 				AE0C143F285F2E7A007C0BFD /* WeatherViewController.swift in Sources */,
-				AE65F6172877165E00306FB8 /* ButtonCell.swift in Sources */,
 				AE70AEA3286B8C7400B518F6 /* CurrentWeatherCell.swift in Sources */,
 				AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */,
 				AE65FA73287AE5250006743A /* UIView+extension .swift in Sources */,
 				AE70AEC3286CD41400B518F6 /* TableViewCellForListReqest.swift in Sources */,
-				AE70AEC0286C8F6C00B518F6 /* RequestListRealmData.swift in Sources */,
+				AE70AEC0286C8F6C00B518F6 /* RealmService.swift in Sources */,
 				AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */,
 				AE70AEAD286BAE9500B518F6 /* CollectionCellForHourly.swift in Sources */,
 				AE0C143B285F2E7A007C0BFD /* AppDelegate.swift in Sources */,
@@ -352,6 +351,7 @@
 				AE9968D32865F6DC002BB058 /* Constants.swift in Sources */,
 				AEF812E0286DB327002BC897 /* Int+Extension.swift in Sources */,
 				AE0C143D285F2E7A007C0BFD /* SceneDelegate.swift in Sources */,
+				AEAD2733287EFA61008FCD19 /* InfoWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,7 @@ class RequestListRealmData: Object {
     @objc dynamic var lat: Double = 0
     @objc dynamic var lon: Double = 0
     @objc dynamic var time = Date()
+    @objc dynamic var isLocation: Bool = false
     @objc dynamic var weather: WeatherDataRealm?
 }
 
@@ -24,14 +25,17 @@ class WeatherDataRealm: Object {
     @objc dynamic var icon: String = ""
 }
 
-extension UIViewController {
+class RealmService: RealmServiceProtocol {
     
-    func addObjectInRealm(weather: WeatherData) {
-        
+    let realm = try! Realm()
+    
+    func reloadListRequest() -> Results<RequestListRealmData> {
+        return realm.objects(RequestListRealmData.self)
+    }
+    
+   
+    func addObjectInRealm(weather: WeatherData, isLocation: Bool) {
         guard let weatherDiscription = weather.current.weather.first else { return }
-        
-        let realm = try! Realm()
-        
         let weatherObject = WeatherDataRealm()
         weatherObject.temp = weather.current.temp
         weatherObject.feelsLike = weather.current.feelsLike
@@ -42,12 +46,26 @@ extension UIViewController {
         object.lat = weather.lat
         object.time = Date()
         object.weather = weatherObject
-        
+        object.isLocation = isLocation
+    
         try! realm.write{
             realm.add(weatherObject)
             realm.add(object)
         }
-//        print(realm.configuration.fileURL)
     }
+    
+    
+    
+    
+    
+    
+    
 }
 
+protocol RealmServiceProtocol {
+    
+    func addObjectInRealm(weather: WeatherData, isLocation: Bool) 
+    
+    func reloadListRequest() -> Results<RequestListRealmData>
+    
+}

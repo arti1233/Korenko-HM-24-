@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import CoreLocation
 
 enum SectionTableView: Int {
     case current = 0
@@ -28,9 +29,12 @@ enum SectionTableView: Int {
 class WeatherViewController: UIViewController {
 
     private var apiProvider: RestAPIProviderProtocol!
-
+    private var realmProvider: RealmServiceProtocol!
 // MARK: IBOutlet
     
+    @IBOutlet weak var regionLabel: UILabel!
+    @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     @IBOutlet weak var mainTableView: UITableView!
     let myRefreshControll: UIRefreshControl = {
@@ -39,6 +43,15 @@ class WeatherViewController: UIViewController {
         return refreshControl
     }()
     
+    private lazy var coreManager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        return manager
+    }()
+    
+    
+    var latitude: Double?
+    var longitude: Double?
     var cityName = "moscow"
     var weatherData: WeatherData?
     var weatherDataHourly: [Hourly]?
@@ -47,6 +60,8 @@ class WeatherViewController: UIViewController {
     var measurement = UnitsOfMeasurement.metric
     let notificationCenter = UNUserNotificationCenter.current()
     let notificationIdentifier = "WeatherNotification"
+    let keyForUserDefaults = "1"
+    let lastCityName = "city"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +71,7 @@ class WeatherViewController: UIViewController {
         mainTableView.refreshControl = myRefreshControll
         
         apiProvider = AlamofireProvider()
+        realmProvider = RealmService()
         mainTableView.dataSource = self
         mainTableView.delegate = self
         
@@ -63,48 +79,121 @@ class WeatherViewController: UIViewController {
         mainTableView.register(UINib(nibName: CurrentWeatherCell.key, bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
         mainTableView.register(UINib(nibName: HourlyWeatherCell.key, bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         mainTableView.register(UINib(nibName: DailyWeatherForTableCell.key, bundle: nil), forCellReuseIdentifier: DailyWeatherForTableCell.key)
-        mainTableView.register(UINib(nibName: ButtonCell.key, bundle: nil), forCellReuseIdentifier: ButtonCell.key)
-        getCoordinatesByName(name: cityName)
+       
+    
+        if !UserDefaults.standard.bool(forKey: keyForUserDefaults) {
+            if let city = UserDefaults.standard.string(forKey: lastCityName), !city.isEmpty {
+                getCoordinatesByName(name: city)
+            } else {
+                getCoordinatesByName(name: cityName)
+            }
+        }
+        
+        
+        coreManager.delegate = self
     
     }
+
     
-// MARK: METODS
+// MARK: Actions
+    
+    
+    
+    @IBAction func searchButton(_ sender: Any) {
+        choseCityAlertController()
+    }
+    
+    
+    
+    @IBAction func locationButton(_ sender: Any) {
+        if coreManager.authorizationStatus == .notDetermined {
+            coreManager.requestWhenInUseAuthorization()
+        } else if coreManager.authorizationStatus == .authorizedAlways || coreManager.authorizationStatus == .authorizedWhenInUse {
+            coreManager.requestLocation()
+        }
+        
+        
+    }
+    
+// MARK: METODS for refreshController
     
     @objc private func rehresh(sender: UIRefreshControl){
-        getCoordinatesByName(name: cityName)
+        guard let lat = latitude, let lon = longitude else { return }
+        refreshController(lat: lat, lon: lon)
         sender.endRefreshing()
     }
     
     
-    // Chose City alertController
-    
-    func choseCityAlertController() {
-        let alertController = UIAlertController(title: "Chose city", message: "Please, enter the name of the city", preferredStyle: .alert)
-        alertController.addTextField { textField in
-            textField.placeholder = "Name city"
+    func refreshController(lat: Double, lon: Double) {
+        apiProvider.getWeatherForCityCoordinates(lat: lat, lon: lon, measurement: measurement.description) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                guard let weather = value.current.weather.first else { return }
+                self.longitude = value.lon
+                self.latitude = value.lat
+                self.weatherData = value
+                self.weatherDataDaily = Array(value.daily.dropFirst())
+                DispatchQueue.global().async {
+                    self.getNotificationForWeather(weatherData: value.hourly)
+                    let imageBackground = self.getImageForWeatherView(weather: weather.id)
+                    DispatchQueue.main.async {
+                        self.regionLabel.text = value.timezone
+                        self.view.backgroundColor = imageBackground
+                        self.mainTableView.reloadData()
+                        self.spinnerView.stopAnimating()
+                    }
+                }
+            case .failure(let error):
+                self.errorAlertController(error: error.localizedDescription)
+                self.spinnerView.stopAnimating()
+            }
         }
-        let okButton = UIAlertAction(title: "Enter", style: .default) { [weak self] _ in
-            guard let textField = alertController.textFields?[0],
-                  let text = textField.text,
-                  let self = self else { return }
-            let textWithoutWhitespace = text.trimmingCharacters(in: .whitespaces)
-            self.getCoordinatesByName(name: textWithoutWhitespace)
-            self.spinnerView.hidesWhenStopped = true
-            self.spinnerView.startAnimating()
-        }
-        let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
-        
-        alertController.addAction(okButton)
-        alertController.addAction(cancelButton)
-        present(alertController, animated: true)
     }
+    
+// MARK: METODS FOR LOCATION BUTTON
+    func getWeatherForLocationButton(coordinate: CLLocation) {
+        apiProvider.getWeatherForCityCoordinates(lat: coordinate.coordinate.latitude, lon: coordinate.coordinate.longitude, measurement: measurement.description) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                guard let weather = value.current.weather.first else { return }
+                UserDefaults.standard.set(true, forKey: self.keyForUserDefaults)
+                self.longitude = value.lon
+                self.latitude = value.lat
+                self.weatherData = value
+                self.weatherDataDaily = Array(value.daily.dropFirst())
+                DispatchQueue.global().async {
+                    self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
+                    self.getNotificationForWeather(weatherData: value.hourly)
+                    let imageBackground = self.getImageForWeatherView(weather: weather.id)
+                    guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.white, renderingMode: .alwaysOriginal),
+                          let imageLocation = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal) else { return }
+                    DispatchQueue.main.async {
+                        self.searchButton.setImage(imageSearch, for: .normal)
+                        self.locationButton.setImage(imageLocation, for: .normal)
+                        self.regionLabel.text = value.timezone
+                        self.view.backgroundColor = imageBackground
+                        self.mainTableView.reloadData()
+                        self.spinnerView.stopAnimating()
+                    }
+                }
+            case .failure(let error):
+                self.errorAlertController(error: error.localizedDescription)
+                self.spinnerView.stopAnimating()
+            }
+        }
+    }
+    
+    
+// MARK: METODS FOR SEARCH BUTTON
     
     fileprivate func getCoordinatesByName(name: String) {
         apiProvider.getCoordinateByName(name: name) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let value):
-                    self.cityName = name
+                    UserDefaults.standard.set(name, forKey: self.lastCityName)
                     if let city = value.first {
                         self.getWeatherByCoordinates(city: city)
                     }
@@ -114,35 +203,91 @@ class WeatherViewController: UIViewController {
             }
         }
         
-        private func getWeatherByCoordinates(city: Geocoding) {
-            apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon, measurement: measurement.description) { result in
-                switch result {
-                case .success(let value):
-                    guard let weather = value.current.weather.first else { return }
-                    self.weatherData = value
-                    self.weatherDataDaily = Array(value.daily.dropFirst())
-                    DispatchQueue.global().async { [weak self] in
-                        guard let self = self else { return }
-                        self.addObjectInRealm(weather: value)
-                        self.getNotificationForWeather(weatherData: value.hourly)
-                        let imageBackground = self.getImageForWeatherView(weather: weather.id)
-                        DispatchQueue.main.async {
-                            self.view.backgroundColor = imageBackground
-                            self.mainTableView.reloadData()
-                            self.spinnerView.stopAnimating()
-                        }
+    private func getWeatherByCoordinates(city: Geocoding) {
+        apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon, measurement: measurement.description) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                guard let weather = value.current.weather.first else { return }
+                UserDefaults.standard.set(false, forKey: self.keyForUserDefaults)
+                self.longitude = value.lon
+                self.latitude = value.lat
+                self.weatherData = value
+                self.weatherDataDaily = Array(value.daily.dropFirst())
+                self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
+                DispatchQueue.global().async {
+                    self.getNotificationForWeather(weatherData: value.hourly)
+                    let imageBackground = self.getImageForWeatherView(weather: weather.id)
+                    guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+                          let imageLocation = UIImage(systemName: "location")?.withTintColor(.white, renderingMode: .alwaysOriginal) else { return }
+                    DispatchQueue.main.async {
+                        self.locationButton.setImage(imageLocation, for: .normal)
+                        self.searchButton.setImage(imageSearch, for: .normal)
+                        self.regionLabel.text = value.timezone
+                        self.view.backgroundColor = imageBackground
+                        self.mainTableView.reloadData()
+                        self.spinnerView.stopAnimating()
                     }
-                case .failure(let error):
-                    self.errorAlertController(error: error.localizedDescription)
-                    self.spinnerView.stopAnimating()
                 }
+            case .failure(let error):
+                self.spinnerView.stopAnimating()
+                self.errorAlertController(error: error.localizedDescription)
             }
         }
+    }
+    
+    
+    
+// MARK: METODS
+    
+   // состояние кнопок
+    
+    func changeButtonCondition(isLocation: Bool) {
+        if isLocation {
+            guard let imageLocation = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+                  let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.white, renderingMode: .alwaysOriginal) else { return }
+            locationButton.setImage(imageLocation, for: .normal)
+            searchButton.setImage(imageSearch, for: .normal)
+        } else {
+            guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+                  let imageLocation = UIImage(systemName: "location")?.withTintColor(.white, renderingMode: .alwaysOriginal) else { return }
+            searchButton.setImage(imageSearch, for: .normal)
+            locationButton.setImage(imageLocation, for: .normal)
+        }
+        
+        
+        
+    }
+    
+    // Chose City alertController
+    
+    func choseCityAlertController() {
+        let alertController = UIAlertController(title: "Chose city", message: "Please, enter the name of the city", preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.placeholder = "Name city"
+        }
+        let okButton = UIAlertAction(title: "Enter", style: .default) { [weak self] _ in
+            guard let textField = alertController.textFields?.first,
+                  let text = textField.text,
+                  let self = self else { return }
+            let textWithoutWhitespace = text.trimmingCharacters(in: .whitespaces)
+            self.spinnerView.hidesWhenStopped = true
+            self.spinnerView.startAnimating()
+            self.getCoordinatesByName(name: textWithoutWhitespace)
+        }
+        let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
+        
+        alertController.addAction(okButton)
+        alertController.addAction(cancelButton)
+        present(alertController, animated: true)
+    }
     
     
     func errorAlertController(error: String) {
         let alrtController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "Repeat", style: .cancel)
+        let okButton = UIAlertAction(title: "Repeat", style: .cancel) { _ in
+            self.spinnerView.stopAnimating()
+        }
         alrtController.addAction(okButton)
         present(alrtController, animated: true)
     }
@@ -274,4 +419,39 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         header.backgroundView = blurEffectView
     }
+}
+
+
+extension WeatherViewController: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if coreManager.authorizationStatus == .denied {
+            locationButton.isEnabled = false
+        } else if coreManager.authorizationStatus == .authorizedAlways || coreManager.authorizationStatus == .authorizedWhenInUse {
+            
+            if UserDefaults.standard.bool(forKey: keyForUserDefaults) {
+                coreManager.requestLocation()
+            guard let imageLocation = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+                  let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.white, renderingMode: .alwaysOriginal) else { return }
+            locationButton.setImage(imageLocation, for: .normal)
+            searchButton.setImage(imageSearch, for: .normal)
+            } else {
+                guard let imageLocation = UIImage(systemName: "location.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal),
+                      let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal) else { return }
+                locationButton.setImage(imageLocation, for: .normal)
+                searchButton.setImage(imageSearch, for: .normal)
+            }
+            
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let userLocation = locations.first else { return }
+        getWeatherForLocationButton(coordinate: userLocation)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        errorAlertController(error: error.localizedDescription)
+    }
+    
+    
 }

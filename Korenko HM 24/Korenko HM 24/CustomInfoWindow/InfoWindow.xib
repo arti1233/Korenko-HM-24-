@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="InfoWindow" id="iN0-l3-epB" customClass="InfoWindow" customModule="Korenko_HM_24" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eJN-3n-OzM">
+                    <rect key="frame" x="0.0" y="8" width="160" height="76"/>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Iq2-IF-FHu">
+                    <rect key="frame" x="0.0" y="122" width="160" height="30"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="humidity.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ghd-r9-dh8">
+                            <rect key="frame" x="0.0" y="2" width="52" height="27"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="52" id="Rr8-Lg-lUa"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="dYp-WB-3DD"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVA-nf-FGU">
+                            <rect key="frame" x="52" y="0.0" width="108" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="cHf-rP-FbA"/>
+                    </constraints>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="LSD-h5-VzS">
+                    <rect key="frame" x="0.0" y="84" width="160" height="30"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thermometer" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YYL-W9-5i6">
+                            <rect key="frame" x="0.0" y="0.5" width="52" height="30.5"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="52" id="rEh-hW-Xdt"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iu0-xF-k3e">
+                            <rect key="frame" x="52" y="0.0" width="108" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="oW2-VI-klx"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemTealColor"/>
+            <constraints>
+                <constraint firstItem="eJN-3n-OzM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="10j-yN-EKE"/>
+                <constraint firstItem="Iq2-IF-FHu" firstAttribute="top" secondItem="LSD-h5-VzS" secondAttribute="bottom" constant="8" id="2fN-Sy-YZj"/>
+                <constraint firstItem="LSD-h5-VzS" firstAttribute="top" secondItem="eJN-3n-OzM" secondAttribute="bottom" id="2is-ZG-yA1"/>
+                <constraint firstItem="LSD-h5-VzS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="H19-U8-wMA"/>
+                <constraint firstItem="eJN-3n-OzM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Zmd-ja-Vlu"/>
+                <constraint firstItem="Iq2-IF-FHu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="izx-0X-bsj"/>
+                <constraint firstAttribute="bottom" secondItem="Iq2-IF-FHu" secondAttribute="bottom" constant="8" id="krI-6n-c4Q"/>
+                <constraint firstAttribute="trailing" secondItem="Iq2-IF-FHu" secondAttribute="trailing" id="pLF-2B-txd"/>
+                <constraint firstAttribute="trailing" secondItem="eJN-3n-OzM" secondAttribute="trailing" id="rNT-wv-T8K"/>
+                <constraint firstAttribute="trailing" secondItem="LSD-h5-VzS" secondAttribute="trailing" id="vIi-hS-jdF"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="humiditiLabel" destination="iVA-nf-FGU" id="SlZ-fm-bnv"/>
+                <outlet property="iconImage" destination="eJN-3n-OzM" id="EVW-Ha-eSV"/>
+                <outlet property="tempLabel" destination="Iu0-xF-k3e" id="HKg-NP-2Jd"/>
+            </connections>
+            <point key="canvasLocation" x="253.62318840579712" y="69.642857142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="humidity.fill" catalog="system" width="128" height="98"/>
+        <image name="thermometer" catalog="system" width="81" height="128"/>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
