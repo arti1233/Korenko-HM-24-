@@ -29,7 +29,7 @@ enum SectionTableView: Int {
 class WeatherViewController: UIViewController {
 
     private var apiProvider: RestAPIProviderProtocol!
-    private var realmProvider: AddObjectInRealmProtocol!
+    private var realmProvider: RealmServiceProtocol!
 // MARK: IBOutlet
     
     @IBOutlet weak var regionLabel: UILabel!
@@ -71,7 +71,7 @@ class WeatherViewController: UIViewController {
         mainTableView.refreshControl = myRefreshControll
         
         apiProvider = AlamofireProvider()
-        realmProvider = ServiceRealm()
+        realmProvider = RealmService()
         mainTableView.dataSource = self
         mainTableView.delegate = self
         
@@ -214,8 +214,8 @@ class WeatherViewController: UIViewController {
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
+                self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                 DispatchQueue.global().async {
-                    self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
                     guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),

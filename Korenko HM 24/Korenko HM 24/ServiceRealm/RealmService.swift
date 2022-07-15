@@ -25,16 +25,17 @@ class WeatherDataRealm: Object {
     @objc dynamic var icon: String = ""
 }
 
-class ServiceRealm: AddObjectInRealmProtocol {
+class RealmService: RealmServiceProtocol {
+    
+    let realm = try! Realm()
+    
     func reloadListRequest() -> Results<RequestListRealmData> {
-        let realm = try! Realm()
         return realm.objects(RequestListRealmData.self)
     }
     
    
     func addObjectInRealm(weather: WeatherData, isLocation: Bool) {
         guard let weatherDiscription = weather.current.weather.first else { return }
-        let realm = try! Realm()
         let weatherObject = WeatherDataRealm()
         weatherObject.temp = weather.current.temp
         weatherObject.feelsLike = weather.current.feelsLike
@@ -61,7 +62,7 @@ class ServiceRealm: AddObjectInRealmProtocol {
     
 }
 
-protocol AddObjectInRealmProtocol {
+protocol RealmServiceProtocol {
     
     func addObjectInRealm(weather: WeatherData, isLocation: Bool) 
     

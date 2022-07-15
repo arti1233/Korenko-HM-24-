@@ -12,7 +12,7 @@ import RealmSwift
 class MapViewController: UIViewController {
     static let key = "MapViewController"
     private var apiProvider: RestAPIProviderProtocol!
-    private var realmProvider: AddObjectInRealmProtocol!
+    private var realmProvider: RealmServiceProtocol!
     var measurement = UnitsOfMeasurement.metric
     let realm = try! Realm()
     var weatherCurrent: Current?
@@ -23,7 +23,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         apiProvider = AlamofireProvider()
-        realmProvider = ServiceRealm()
+        realmProvider = RealmService()
 
         camera = GMSCameraPosition.camera(withLatitude: 54.029, longitude: 27.579, zoom: 6.0)
         mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)

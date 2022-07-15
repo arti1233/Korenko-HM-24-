@@ -15,11 +15,11 @@ class ListViewController: UIViewController {
     var notificationToken: NotificationToken?
     
     @IBOutlet weak var tableView: UITableView!
-    private var realmProvider: AddObjectInRealmProtocol!
+    private var realmProvider: RealmServiceProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        realmProvider = ServiceRealm()
+        realmProvider = RealmService()
         
         items = realmProvider.reloadListRequest()
         
