@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  Korenko HM 24
+
+  Created by Artsiom Korenko on 16.07.22.
+  
+*/
+
+"m/s" = "m/s";
+"CURRENT FORECAST" = "CURRENT FORECAST";
+"HOURLY FORECAST" = "HOURLY FORECAST";
+"7-DAY FORECAST" = "7-DAY FORECAST";
+"Chose city" = "Chose city";
+"Please, enter the name of the city" = "Please, enter the name of the city";
+"Name city" = "Name city";
+"Enter" = "Enter";
+"Cancel" = "Cancel";
+"Error" = "Error";
+"Repeat" = "Repeat";
+"Warning" = "Warning";
+"will be in 30 minute!" = "will be in 30 minute!";
+"lat" = "lat";
+"lot" = "lot";
+"Is location" = "Is location";
+"time" = "time";
+"temp" = "temp";
+"feelsLike" =  "feelsLike";
+"lang" = "en";
+"Invalid city name" = "Invalid city name";
+"Error getting weather" = "Error getting weather";

@@ -42,8 +42,8 @@ class MapViewController: UIViewController {
     
     // errror контролер для выведения ошибки в норм виде
     func errorAlertController(error: String) {
-        let alrtController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "Repeat", style: .cancel)
+        let alrtController = UIAlertController(title: localize(key: "Error"), message: error, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: localize(key: "Repeat"), style: .cancel)
         
         alrtController.addAction(okButton)
         present(alrtController, animated: true)
@@ -92,4 +92,5 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
 }
+
 

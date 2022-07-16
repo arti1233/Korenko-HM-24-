@@ -17,11 +17,11 @@ enum SectionTableView: Int {
     var description: String {
         switch self {
         case .current:
-            return "CURRENT FORECAST"
+            return NSLocalizedString("CURRENT FORECAST", comment: "")
         case .hourly:
-            return "HOURLY FORECAST"
+            return NSLocalizedString("HOURLY FORECAST", comment: "")
         case .daily:
-            return "7-DAY FORECAST"
+            return NSLocalizedString("7-DAY FORECAST", comment: "")
         }
     }
 }
@@ -163,8 +163,8 @@ class WeatherViewController: UIViewController {
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
+                self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                 DispatchQueue.global().async {
-                    self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
                     guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.white, renderingMode: .alwaysOriginal),
@@ -199,6 +199,7 @@ class WeatherViewController: UIViewController {
                     }
                 case .failure(let error):
                     self.errorAlertController(error: error.localizedDescription)
+                    self.spinnerView.stopAnimating()
                 }
             }
         }
@@ -230,8 +231,8 @@ class WeatherViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                self.spinnerView.stopAnimating()
                 self.errorAlertController(error: error.localizedDescription)
+                self.spinnerView.stopAnimating()
             }
         }
     }
@@ -262,12 +263,12 @@ class WeatherViewController: UIViewController {
     // Chose City alertController
     
     func choseCityAlertController() {
-        let alertController = UIAlertController(title: "Chose city", message: "Please, enter the name of the city", preferredStyle: .alert)
+        let alertController = UIAlertController(title: localize(key: "Chose city"), message: localize(key: "Please, enter the name of the city"), preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "Name city"
+            textField.placeholder = self.localize(key: "Name city")
             textField.delegate = self
         }
-        let okButton = UIAlertAction(title: "Enter", style: .default) { [weak self] _ in
+        let okButton = UIAlertAction(title: localize(key: "Enter"), style: .default) { [weak self] _ in
             guard let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let self = self else { return }
@@ -276,7 +277,7 @@ class WeatherViewController: UIViewController {
             self.spinnerView.startAnimating()
             self.getCoordinatesByName(name: textWithoutWhitespace)
         }
-        let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
+        let cancelButton = UIAlertAction(title: localize(key: "Cancel"), style: .destructive)
         
         alertController.addAction(okButton)
         alertController.addAction(cancelButton)
@@ -285,8 +286,8 @@ class WeatherViewController: UIViewController {
     
     
     func errorAlertController(error: String) {
-        let alrtController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "Repeat", style: .cancel) { _ in
+        let alrtController = UIAlertController(title: localize(key: "Error"), message: error, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: localize(key: "Repeat"), style: .cancel) { _ in
             self.spinnerView.stopAnimating()
         }
         alrtController.addAction(okButton)
@@ -322,8 +323,8 @@ class WeatherViewController: UIViewController {
     func addNotification(weather: String, time: DateComponents) {
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
         let content = UNMutableNotificationContent()
-        content.title = "Warning"
-        content.body = "\(weather) will be in 30 minute!"
+        content.title = localize(key: "Warning")
+        content.body = "\(weather) \(localize(key: "will be in 30 minute!"))"
         content.sound = UNNotificationSound.default
         let triger = UNCalendarNotificationTrigger(dateMatching: time, repeats: false)
         let request = UNNotificationRequest(identifier: notificationIdentifier, content: content, trigger: triger)

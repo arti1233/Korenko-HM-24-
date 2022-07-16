@@ -1,0 +1,18 @@
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "0jt-eT-cqJ"; */
+"0jt-eT-cqJ.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "A3q-7F-tSt"; */
+"A3q-7F-tSt.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Weather"; ObjectID = "EHx-Xw-fXu"; */
+"EHx-Xw-fXu.title" = "Погода";
+
+/* Class = "UITabBarItem"; title = "List "; ObjectID = "dwA-yY-htc"; */
+"dwA-yY-htc.title" = "Список";
+
+/* Class = "UITabBarItem"; title = "Map"; ObjectID = "ieA-gr-BRq"; */
+"ieA-gr-BRq.title" = "Карта";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "sD1-R1-GKn"; */
+"sD1-R1-GKn.normalTitle" = "Button";

@@ -26,6 +26,6 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Need gps </string>
+	<string>Access to geolocation is necessary to track your weather</string>
 </dict>
 </plist>

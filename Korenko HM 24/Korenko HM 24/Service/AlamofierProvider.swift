@@ -20,14 +20,14 @@ protocol RestAPIProviderProtocol {
 class AlamofireProvider: RestAPIProviderProtocol {
     func getWeatherForCityCoordinates(lat: Double, lon: Double, measurement: String, completion: @escaping (Result<WeatherData, Error>) -> Void) {
         
-        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exclude": "minutely,alerts", "units": measurement])
+        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exclude": "minutely,alerts", "units": measurement, "lang": NSLocalizedString("lang", comment: "")])
         
         AF.request(Constants.weatherURL, method: .get, parameters: params).responseDecodable(of: WeatherData.self) { response in
             switch response.result {
             case .success(let result):
                 return completion(.success(result))
-            case .failure(let result):
-                return completion(.failure(result))
+            case .failure:
+                return completion(.failure(MaccoError.invalidCoordinate))
             }
         }
     }
@@ -39,8 +39,8 @@ class AlamofireProvider: RestAPIProviderProtocol {
             switch response.result {
             case .success(let result):
                 return completion(.success(result))
-            case .failure(let result):
-                return completion(.failure(result))
+            case .failure:
+                return completion(.failure(MaccoError.invalidNameCity))
             }
         }
     }
@@ -52,4 +52,20 @@ private func addParams(queryItems: [String: String]) -> [String: String] {
     params = queryItems
     params["appid"] = key
     return params
+}
+
+enum MaccoError: LocalizedError {
+    
+    case invalidNameCity
+    case invalidCoordinate
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidNameCity:
+            return NSLocalizedString("Invalid city name", comment: "")
+        case .invalidCoordinate:
+            return NSLocalizedString("Error getting weather", comment: "")
+        }
+    }
+    
 }
