@@ -265,6 +265,7 @@ class WeatherViewController: UIViewController {
         let alertController = UIAlertController(title: "Chose city", message: "Please, enter the name of the city", preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = "Name city"
+            textField.delegate = self
         }
         let okButton = UIAlertAction(title: "Enter", style: .default) { [weak self] _ in
             guard let textField = alertController.textFields?.first,
@@ -453,5 +454,13 @@ extension WeatherViewController: CLLocationManagerDelegate {
         errorAlertController(error: error.localizedDescription)
     }
     
+    
+}
+
+extension WeatherViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: string)) else { return false }
+        return true
+    }
     
 }
