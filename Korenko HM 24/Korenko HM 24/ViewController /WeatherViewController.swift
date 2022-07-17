@@ -62,6 +62,7 @@ class WeatherViewController: UIViewController {
     let notificationIdentifier = "WeatherNotification"
     let keyForUserDefaults = "1"
     let lastCityName = "city"
+    let localize = NSLocale.preferredLanguages.first
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -190,12 +191,17 @@ class WeatherViewController: UIViewController {
     
     fileprivate func getCoordinatesByName(name: String) {
         apiProvider.getCoordinateByName(name: name) { [weak self] result in
-                guard let self = self else { return }
+                guard let self = self,
+                      let locale = self.localize else { return }
                 switch result {
                 case .success(let value):
-                    UserDefaults.standard.set(name, forKey: self.lastCityName)
                     if let city = value.first {
+                        UserDefaults.standard.set(name, forKey: self.lastCityName)
                         self.getWeatherByCoordinates(city: city)
+                        self.regionLabel.text = city.localNames[locale]
+                    } else {
+                        self.errorAlertController(error: MaccoError.invalidNameCity.localizedDescription)
+                        self.spinnerView.stopAnimating()
                     }
                 case .failure(let error):
                     self.errorAlertController(error: error.localizedDescription)
@@ -224,7 +230,6 @@ class WeatherViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.locationButton.setImage(imageLocation, for: .normal)
                         self.searchButton.setImage(imageSearch, for: .normal)
-                        self.regionLabel.text = value.timezone
                         self.view.backgroundColor = imageBackground
                         self.mainTableView.reloadData()
                         self.spinnerView.stopAnimating()
@@ -272,10 +277,9 @@ class WeatherViewController: UIViewController {
             guard let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let self = self else { return }
-            let textWithoutWhitespace = text.trimmingCharacters(in: .whitespaces)
             self.spinnerView.hidesWhenStopped = true
             self.spinnerView.startAnimating()
-            self.getCoordinatesByName(name: textWithoutWhitespace)
+            self.getCoordinatesByName(name: text)
         }
         let cancelButton = UIAlertAction(title: "Cancel".localize, style: .destructive)
         
@@ -460,7 +464,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
 
 extension WeatherViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: string)) else { return false }
+        guard CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: string)) || CharacterSet(charactersIn: "-'. ,").isSuperset(of:  CharacterSet(charactersIn: string)) else { return false }
         return true
     }
     

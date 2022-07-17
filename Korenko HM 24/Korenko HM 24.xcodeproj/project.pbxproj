@@ -34,6 +34,7 @@
 		AE986F512883014F00329C0B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE986F532883014F00329C0B /* Localizable.strings */; };
 		AE986F5C28833BDB00329C0B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE986F592883310F00329C0B /* Info.plist */; };
 		AE986F5F288411CE00329C0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE986F61288411CE00329C0B /* InfoPlist.strings */; };
+		AE986F642884636B00329C0B /* Bool+extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE986F632884636B00329C0B /* Bool+extension .swift */; };
 		AE9968C52865D53D002BB058 /* HourlyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C42865D53D002BB058 /* HourlyWeatherData.swift */; };
 		AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C62865D57D002BB058 /* CurrentWeatherData.swift */; };
 		AE9968CA2865D5B5002BB058 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968C92865D5B5002BB058 /* Geocoding.swift */; };
@@ -78,6 +79,7 @@
 		AE986F582883310F00329C0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 		AE986F60288411CE00329C0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE986F62288411D000329C0B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AE986F632884636B00329C0B /* Bool+extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+extension .swift"; sourceTree = "<group>"; };
 		AE9968C42865D53D002BB058 /* HourlyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherData.swift; sourceTree = "<group>"; };
 		AE9968C62865D57D002BB058 /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
 		AE9968C92865D5B5002BB058 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
@@ -129,7 +131,6 @@
 				AE0C143C285F2E7A007C0BFD /* SceneDelegate.swift */,
 				AEF812E3286DB42C002BC897 /* Extension */,
 				AE70AEC5286CD42E00B518F6 /* CellForListReqest  */,
-				AEF812DE286DA22E002BC897 /* ServiceRealm */,
 				AE9968C82865D59A002BB058 /* Models */,
 				AE9968C32865D4B8002BB058 /* ViewController  */,
 				AE9968CB2865D648002BB058 /* Service */,
@@ -224,6 +225,7 @@
 		AE9968CB2865D648002BB058 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				AE70AEBF286C8F6C00B518F6 /* RealmService.swift */,
 				AE9968CC2865D693002BB058 /* AlamofierProvider.swift */,
 			);
 			path = Service;
@@ -238,20 +240,13 @@
 			path = CustomInfoWindow;
 			sourceTree = "<group>";
 		};
-		AEF812DE286DA22E002BC897 /* ServiceRealm */ = {
-			isa = PBXGroup;
-			children = (
-				AE70AEBF286C8F6C00B518F6 /* RealmService.swift */,
-			);
-			path = ServiceRealm;
-			sourceTree = "<group>";
-		};
 		AEF812E3286DB42C002BC897 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				AEF812DC286DA170002BC897 /* String+Extension.swift */,
 				AEF812DF286DB327002BC897 /* Int+Extension.swift */,
 				AE65FA72287AE5250006743A /* UIView+extension .swift */,
+				AE986F632884636B00329C0B /* Bool+extension .swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -352,6 +347,7 @@
 				AE70AEA8286BAD7700B518F6 /* HourlyWeatherCell.swift in Sources */,
 				AE0C143F285F2E7A007C0BFD /* WeatherViewController.swift in Sources */,
 				AE70AEA3286B8C7400B518F6 /* CurrentWeatherCell.swift in Sources */,
+				AE986F642884636B00329C0B /* Bool+extension .swift in Sources */,
 				AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */,
 				AE65FA73287AE5250006743A /* UIView+extension .swift in Sources */,
 				AE70AEC3286CD41400B518F6 /* TableViewCellForListReqest.swift in Sources */,

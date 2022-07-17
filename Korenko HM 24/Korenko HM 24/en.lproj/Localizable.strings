@@ -21,10 +21,12 @@
 "will be in 30 minute!" = "will be in 30 minute!";
 "lat" = "lat";
 "lot" = "lot";
-"Is location" = "Is location";
+"Data with" = "Data with";
 "time" = "time";
 "temp" = "temp";
 "feelsLike" =  "feelsLike";
 "lang" = "en";
 "Invalid city name" = "Invalid city name";
 "Error getting weather" = "Error getting weather";
+"current weather" = "current weather";
+"map" = "map"; 

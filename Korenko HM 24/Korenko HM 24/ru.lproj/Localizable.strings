@@ -21,10 +21,12 @@
 "will be in 30 minute!" = "будет через 30 минут";
 "lat" = "Широта";
 "lot" = "Долгота";
-"Is location" = "Геопозиция";
+"Data with" = "Данные с";
 "time" = "время";
 "temp" = "темп";
 "feelsLike" =  "ощущается как";
 "lang" = "ru";
 "Invalid city name" = "Неверное имя города";
 "Error getting weather" = "Ошибка получения погоды";
+"current weather" = "текущей погоды";
+"map" = "карты";
