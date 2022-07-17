@@ -40,7 +40,7 @@ class RealmService: RealmServiceProtocol {
         weatherObject.temp = weather.current.temp
         weatherObject.feelsLike = weather.current.feelsLike
         weatherObject.icon = weatherDiscription.icon
-        weatherObject.descriptionWeather = weatherDiscription.weatherDescription.description
+        weatherObject.descriptionWeather = weatherDiscription.weatherDescription
         let object = RequestListRealmData()
         object.lon = weather.lon
         object.lat = weather.lat

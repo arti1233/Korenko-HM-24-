@@ -17,4 +17,8 @@ extension String {
         guard let image = UIImage(data: data) else { return UIImage() }
         return image
     }
+    
+    var localize: String {
+        return NSLocalizedString(self, comment: "")
+    }
 }

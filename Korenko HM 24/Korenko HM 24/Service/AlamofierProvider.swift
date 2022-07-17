@@ -20,7 +20,19 @@ protocol RestAPIProviderProtocol {
 class AlamofireProvider: RestAPIProviderProtocol {
     func getWeatherForCityCoordinates(lat: Double, lon: Double, measurement: String, completion: @escaping (Result<WeatherData, Error>) -> Void) {
         
-        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exclude": "minutely,alerts", "units": measurement, "lang": NSLocalizedString("lang", comment: "")])
+        guard let locale = NSLocale.preferredLanguages.first else { return }
+        var language = String()
+        if locale == "en" {
+            language = locale
+        } else if locale == "ru" {
+            language = locale
+        } else {
+            // я сделал что-то на подобии дефолтного языка для запроса 
+            language = "en"
+        }
+        
+        
+        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exclude": "minutely,alerts", "units": measurement, "lang": language])
         
         AF.request(Constants.weatherURL, method: .get, parameters: params).responseDecodable(of: WeatherData.self) { response in
             switch response.result {

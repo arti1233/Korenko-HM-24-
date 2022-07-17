@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  Korenko HM 24
+
+  Created by Artsiom Korenko on 17.07.22.
+  
+*/
+"NSLocationWhenInUseUsageDescription" = "Доступ к геолокации необходим для отслеживания вашей погоды";

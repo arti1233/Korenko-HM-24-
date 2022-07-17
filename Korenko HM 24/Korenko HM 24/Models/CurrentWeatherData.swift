@@ -79,7 +79,7 @@ struct Rain: Codable {
 struct Weather: Codable {
     let id: Int
     let main: Main
-    let weatherDescription: Description
+    let weatherDescription: String
     let icon: String
 
     enum CodingKeys: String, CodingKey {
@@ -95,34 +95,6 @@ enum Main: String, Codable {
     case rain = "Rain"
 }
 
-enum Description: String, Codable {
-    case brokenClouds = "broken clouds"
-    case clearSky = "clear sky"
-    case fewClouds = "few clouds"
-    case lightRain = "light rain"
-    case moderateRain = "moderate rain"
-    case overcastClouds = "overcast clouds"
-    case scatteredClouds = "scattered clouds"
-    
-    var description: String {
-        switch self {
-        case .brokenClouds:
-            return "broken clouds"
-        case .clearSky:
-            return  "clear sky"
-        case .fewClouds:
-            return "few clouds"
-        case .lightRain:
-            return "light rain"
-        case .moderateRain:
-            return "moderate rain"
-        case .overcastClouds:
-            return "overcast clouds"
-        case .scatteredClouds:
-            return "scattered clouds"
-        }
-    }
-}
 
 // MARK: - FeelsLike
 struct FeelsLike: Codable {
