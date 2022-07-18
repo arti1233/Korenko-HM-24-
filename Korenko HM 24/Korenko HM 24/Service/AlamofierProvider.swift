@@ -19,14 +19,9 @@ protocol RestAPIProviderProtocol {
 
 class AlamofireProvider: RestAPIProviderProtocol {
     
-    func getlanguage() -> String {
-        guard let locale = NSLocale.preferredLanguages.first else { return "en"}
-        return locale
-    }
-    
     func getWeatherForCityCoordinates(lat: Double, lon: Double, measurement: String, completion: @escaping (Result<WeatherData, Error>) -> Void) {
     
-        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exclude": "minutely,alerts", "units": measurement, "lang": getlanguage()])
+        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exclude": "minutely,alerts", "units": measurement, "lang": getCurrentLanguage()])
         
         AF.request(Constants.weatherURL, method: .get, parameters: params).responseDecodable(of: WeatherData.self) { response in
             switch response.result {
@@ -39,7 +34,7 @@ class AlamofireProvider: RestAPIProviderProtocol {
     }
     
     func getCoordinateByName(name: String, completion: @escaping (Result<[Geocoding], Error>) -> Void) {
-        let params = addParams(queryItems: ["q": name, "lang": getlanguage()])
+        let params = addParams(queryItems: ["q": name, "lang": getCurrentLanguage()])
         
         AF.request(Constants.getCodingURL, method: .get, parameters: params).responseDecodable(of: [Geocoding].self) { response in
             switch response.result {
@@ -58,6 +53,11 @@ private func addParams(queryItems: [String: String]) -> [String: String] {
     params = queryItems
     params["appid"] = key
     return params
+}
+
+private func getCurrentLanguage() -> String {
+    guard let locale = NSLocale.preferredLanguages.first else { return "en"}
+    return locale
 }
 
 enum MaccoError: LocalizedError {

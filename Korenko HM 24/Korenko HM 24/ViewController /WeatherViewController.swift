@@ -196,9 +196,8 @@ class WeatherViewController: UIViewController {
                 switch result {
                 case .success(let value):
                     if let city = value.first {
-                        UserDefaults.standard.set(name, forKey: self.lastCityName)
-                        self.getWeatherByCoordinates(city: city)
-                        self.regionLabel.text = city.localNames[locale]
+                        guard let localNameCity = city.localNames[locale] else { return }
+                        self.getWeatherByCoordinates(city: city, nameCity: localNameCity)
                     } else {
                         self.errorAlertController(error: MaccoError.invalidNameCity.localizedDescription)
                         self.spinnerView.stopAnimating()
@@ -210,18 +209,18 @@ class WeatherViewController: UIViewController {
             }
         }
         
-    private func getWeatherByCoordinates(city: Geocoding) {
+    private func getWeatherByCoordinates(city: Geocoding, nameCity: String) {
         apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon, measurement: measurement.description) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let value):
                 guard let weather = value.current.weather.first else { return }
                 UserDefaults.standard.set(false, forKey: self.keyForUserDefaults)
+                UserDefaults.standard.set(nameCity, forKey: self.lastCityName)
                 self.longitude = value.lon
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
-                self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                 DispatchQueue.global().async {
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
@@ -233,8 +232,10 @@ class WeatherViewController: UIViewController {
                         self.view.backgroundColor = imageBackground
                         self.mainTableView.reloadData()
                         self.spinnerView.stopAnimating()
+                        self.regionLabel.text = nameCity
                     }
                 }
+                self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
             case .failure(let error):
                 self.errorAlertController(error: error.localizedDescription)
                 self.spinnerView.stopAnimating()

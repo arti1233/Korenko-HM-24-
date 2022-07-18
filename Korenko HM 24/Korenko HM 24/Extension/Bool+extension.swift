@@ -12,10 +12,6 @@ import UIKit
 extension Bool {
     
     var locationDescription: String {
-        if self == true {
-            return "current weather"
-        } else {
-            return "map"
-        }
+        self ? "current weather" : "map"
     }
 }
