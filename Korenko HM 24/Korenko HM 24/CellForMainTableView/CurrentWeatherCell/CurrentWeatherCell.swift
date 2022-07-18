@@ -39,13 +39,12 @@ class CurrentWeatherCell: UITableViewCell {
                   let self = self else { return }
             self.timeLabel.text = weather.dt.timeHHmmDDMMYYYY
             self.cityLabel.text = weatherData.timezone
-            self.weatherLabel.text = weatherDescription.weatherDescription.description
+            self.weatherLabel.text = weatherDescription.weatherDescription
             self.tempLabel.text = "\(Int(weather.temp)) C"
             self.cloudlyLabel.text = "\(weather.clouds) %"
-            self.speedWindLabel.text = "\(Int(weather.windSpeed)) m/s"
+            self.speedWindLabel.text = "\(Int(weather.windSpeed)) \("m/s".localize)"
             self.sunriseLabel.text = "\(weather.sunrise.timeHHmm)"
             self.sunsetLabel.text = "\(weather.sunset.timeHHmm)"
-            
         }
     }
 }

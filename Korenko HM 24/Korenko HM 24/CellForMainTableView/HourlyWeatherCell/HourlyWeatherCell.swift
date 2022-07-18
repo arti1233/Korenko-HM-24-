@@ -10,36 +10,20 @@ import UIKit
 class HourlyWeatherCell: UITableViewCell {
     
     static let key = "HourlyWeatherCell"
-    
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
     var weatherHourly: [Hourly]? 
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         collectionView.dataSource = self
         collectionView.delegate = self
-        
         collectionView.register(UINib(nibName: CollectionCellForHourly.key, bundle: nil), forCellWithReuseIdentifier: CollectionCellForHourly.key)
-        
-        
     }
 
-    
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        
     }
-    
-    
-    
-    
 }
-
 
 extension HourlyWeatherCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

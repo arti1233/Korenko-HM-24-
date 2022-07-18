@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  Korenko HM 24
+
+  Created by Artsiom Korenko on 16.07.22.
+  
+*/
+
+"m/s" = "м/с";
+"CURRENT FORECAST" = "ТЕКУЩАЯ ПОГОДА";
+"HOURLY FORECAST" = "ПОЧАСОВАЯ ПОГОДА";
+"7-DAY FORECAST" = "ПОГОДА НА 7 ДНЕЙ";
+"Chose city" = "Выбор города";
+"Please, enter the name of the city" = "Пожалуйста, введите название города";
+"Name city" = "Название города";
+"Enter" = "Ввод";
+"Cancel" = "Назад";
+"Error" = "Ошибка";
+"Repeat" = "Повторить";
+"Warning" = "Осторожно";
+"will be in 30 minute!" = "будет через 30 минут";
+"lat" = "Широта";
+"lot" = "Долгота";
+"Data with" = "Данные с";
+"time" = "время";
+"temp" = "темп";
+"feelsLike" =  "ощущается как";
+"lang" = "ru";
+"Invalid city name" = "Неверное имя города";
+"Error getting weather" = "Ошибка получения погоды";
+"current weather" = "текущей погоды";
+"map" = "карты";

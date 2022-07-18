@@ -17,11 +17,11 @@ enum SectionTableView: Int {
     var description: String {
         switch self {
         case .current:
-            return "CURRENT FORECAST"
+            return "CURRENT FORECAST".localize
         case .hourly:
-            return "HOURLY FORECAST"
+            return "HOURLY FORECAST".localize
         case .daily:
-            return "7-DAY FORECAST"
+            return "7-DAY FORECAST".localize
         }
     }
 }
@@ -62,6 +62,7 @@ class WeatherViewController: UIViewController {
     let notificationIdentifier = "WeatherNotification"
     let keyForUserDefaults = "1"
     let lastCityName = "city"
+    let localize = NSLocale.preferredLanguages.first
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,8 +164,8 @@ class WeatherViewController: UIViewController {
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
+                self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                 DispatchQueue.global().async {
-                    self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
                     guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.white, renderingMode: .alwaysOriginal),
@@ -190,31 +191,36 @@ class WeatherViewController: UIViewController {
     
     fileprivate func getCoordinatesByName(name: String) {
         apiProvider.getCoordinateByName(name: name) { [weak self] result in
-                guard let self = self else { return }
+                guard let self = self,
+                      let locale = self.localize else { return }
                 switch result {
                 case .success(let value):
-                    UserDefaults.standard.set(name, forKey: self.lastCityName)
                     if let city = value.first {
-                        self.getWeatherByCoordinates(city: city)
+                        guard let localNameCity = city.localNames[locale] else { return }
+                        self.getWeatherByCoordinates(city: city, nameCity: localNameCity)
+                    } else {
+                        self.errorAlertController(error: MaccoError.invalidNameCity.localizedDescription)
+                        self.spinnerView.stopAnimating()
                     }
                 case .failure(let error):
                     self.errorAlertController(error: error.localizedDescription)
+                    self.spinnerView.stopAnimating()
                 }
             }
         }
         
-    private func getWeatherByCoordinates(city: Geocoding) {
+    private func getWeatherByCoordinates(city: Geocoding, nameCity: String) {
         apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon, measurement: measurement.description) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let value):
                 guard let weather = value.current.weather.first else { return }
                 UserDefaults.standard.set(false, forKey: self.keyForUserDefaults)
+                UserDefaults.standard.set(nameCity, forKey: self.lastCityName)
                 self.longitude = value.lon
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
-                self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                 DispatchQueue.global().async {
                     self.getNotificationForWeather(weatherData: value.hourly)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
@@ -223,15 +229,16 @@ class WeatherViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.locationButton.setImage(imageLocation, for: .normal)
                         self.searchButton.setImage(imageSearch, for: .normal)
-                        self.regionLabel.text = value.timezone
                         self.view.backgroundColor = imageBackground
                         self.mainTableView.reloadData()
                         self.spinnerView.stopAnimating()
+                        self.regionLabel.text = nameCity
                     }
                 }
+                self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
             case .failure(let error):
-                self.spinnerView.stopAnimating()
                 self.errorAlertController(error: error.localizedDescription)
+                self.spinnerView.stopAnimating()
             }
         }
     }
@@ -262,20 +269,20 @@ class WeatherViewController: UIViewController {
     // Chose City alertController
     
     func choseCityAlertController() {
-        let alertController = UIAlertController(title: "Chose city", message: "Please, enter the name of the city", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Chose city".localize, message: "Please, enter the name of the city".localize, preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "Name city"
+            textField.placeholder = "Name city".localize
+            textField.delegate = self
         }
-        let okButton = UIAlertAction(title: "Enter", style: .default) { [weak self] _ in
+        let okButton = UIAlertAction(title: "Enter".localize, style: .default) { [weak self] _ in
             guard let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let self = self else { return }
-            let textWithoutWhitespace = text.trimmingCharacters(in: .whitespaces)
             self.spinnerView.hidesWhenStopped = true
             self.spinnerView.startAnimating()
-            self.getCoordinatesByName(name: textWithoutWhitespace)
+            self.getCoordinatesByName(name: text)
         }
-        let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
+        let cancelButton = UIAlertAction(title: "Cancel".localize, style: .destructive)
         
         alertController.addAction(okButton)
         alertController.addAction(cancelButton)
@@ -284,8 +291,8 @@ class WeatherViewController: UIViewController {
     
     
     func errorAlertController(error: String) {
-        let alrtController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "Repeat", style: .cancel) { _ in
+        let alrtController = UIAlertController(title: "Error".localize, message: error, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Repeat".localize, style: .cancel) { _ in
             self.spinnerView.stopAnimating()
         }
         alrtController.addAction(okButton)
@@ -321,8 +328,8 @@ class WeatherViewController: UIViewController {
     func addNotification(weather: String, time: DateComponents) {
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
         let content = UNMutableNotificationContent()
-        content.title = "Warning"
-        content.body = "\(weather) will be in 30 minute!"
+        content.title = "Warning".localize
+        content.body = "\(weather) \("will be in 30 minute!".localize)"
         content.sound = UNNotificationSound.default
         let triger = UNCalendarNotificationTrigger(dateMatching: time, repeats: false)
         let request = UNNotificationRequest(identifier: notificationIdentifier, content: content, trigger: triger)
@@ -453,5 +460,13 @@ extension WeatherViewController: CLLocationManagerDelegate {
         errorAlertController(error: error.localizedDescription)
     }
     
+    
+}
+
+extension WeatherViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: string)) || CharacterSet(charactersIn: "-'. ,").isSuperset(of:  CharacterSet(charactersIn: string)) else { return false }
+        return true
+    }
     
 }

@@ -31,7 +31,7 @@ class InfoWindow: UITableViewCell {
         guard let weatherDescription = weather.weather.first else { return }
         let icon = weatherDescription.icon.image
         self.iconImage.image = icon
-        self.tempLabel.text = "\(weather.temp) C"
+        self.tempLabel.text = "\(Int(weather.temp)) C"
         self.humiditiLabel.text = "\(weather.humidity) %"
     }
     
