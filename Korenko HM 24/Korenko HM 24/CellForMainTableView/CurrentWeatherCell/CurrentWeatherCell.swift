@@ -62,8 +62,8 @@ class CurrentWeatherCell: UITableViewCell {
             self.tempLabel.text = "\(Int(weather.temp)) \((self.temperature).localize)"
             self.cloudlyLabel.text = "\(weather.clouds) %"
             self.speedWindLabel.text = "\(Int(weather.windSpeed)) \("m/s".localize)"
-            self.sunriseLabel.text = "\(weather.sunrise.timeHHmm)"
-            self.sunsetLabel.text = "\(weather.sunset.timeHHmm)"
+            self.sunriseLabel.text = "\(weather.sunrise.timeHHmm(isTimeFormate24: self.timeFormat24))"
+            self.sunsetLabel.text = "\(weather.sunset.timeHHmm(isTimeFormate24: self.timeFormat24))"
         }
     }
 }
