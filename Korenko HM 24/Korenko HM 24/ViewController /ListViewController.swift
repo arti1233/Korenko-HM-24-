@@ -1,8 +1,8 @@
 //
-//  ListViewController.swift
+//  ListViewController1.swift
 //  Korenko HM 24
 //
-//  Created by Artsiom Korenko on 29.06.22.
+//  Created by Artsiom Korenko on 20.07.22.
 //
 
 import Foundation
@@ -70,5 +70,6 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.weatherDescriptionLabel.text = weather.descriptionWeather
         cell.iconView.image = weather.icon.image
         return cell
-    }    
+    }
 }
+

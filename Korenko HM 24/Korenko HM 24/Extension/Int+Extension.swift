@@ -11,13 +11,13 @@ import RealmSwift
 
 extension Int{
   
-    var timeHHmm: String {
+    func timeHHmm(isTimeFormate24: Bool) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(self))
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.locale = NSLocale.current
         dateFormatter.timeZone = .current
-        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.dateFormat = isTimeFormate24 ? "HH:mm" : "h:mm a"
         let strDate = dateFormatter.string(from: date)
         return strDate
     }
@@ -40,12 +40,12 @@ extension Int{
     }
     
     
-    var timeHHmmDDMMYYYY: String {
+    func timeHHmmDDMMYYYY(isTimeFormat24: Bool) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(self))
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "HH:mm dd.MM.yyyy"
+        dateFormatter.dateFormat = isTimeFormat24 ? "MM.dd.yyyy HH:mm" : "MM.dd.yyyy h:mm a"
         let strDate = dateFormatter.string(from: date)
         return strDate
     }
@@ -60,6 +60,5 @@ extension Int{
         return strDate
     }
     
-    
-    
+   
 }

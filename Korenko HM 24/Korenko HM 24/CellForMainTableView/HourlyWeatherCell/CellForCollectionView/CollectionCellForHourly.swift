@@ -15,12 +15,22 @@ class CollectionCellForHourly: UICollectionViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
     
+    var timeFormat24 = Bool()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         
     }
+    
+    func changeParams(isTimeFormat24: Bool) {
+        if isTimeFormat24 {
+            timeFormat24 = isTimeFormat24
+        } else {
+            timeFormat24 = isTimeFormat24
+        }
+    }
+    
 
     
     func reloadWeatherData(weatherData: Hourly) {
@@ -30,7 +40,7 @@ class CollectionCellForHourly: UICollectionViewCell {
             let icon = weather.icon.image
             DispatchQueue.main.async {
                 self.iconImageView.image = icon
-                self.timeLabel.text = weatherData.dt.timeHHmm
+                self.timeLabel.text = weatherData.dt.timeHHmm(isTimeFormate24: self.timeFormat24)
                 self.tempLabel.text = "\(Int(weatherData.temp)) C"
             }
         }

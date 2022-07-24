@@ -9,7 +9,7 @@ import UIKit
 import GoogleMaps
 import RealmSwift
 
-@main
+ @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let notificationCentre = UNUserNotificationCenter.current()
@@ -22,12 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationCentre.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             guard granted else { return }
         }
-        
-        let config = Realm.Configuration(schemaVersion: 1)
+        let config = Realm.Configuration(schemaVersion: 2)
                 
         Realm.Configuration.defaultConfiguration = config
-        
-        
         
         return true
     }

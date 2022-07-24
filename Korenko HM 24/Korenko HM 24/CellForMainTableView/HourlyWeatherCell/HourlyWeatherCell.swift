@@ -11,7 +11,8 @@ class HourlyWeatherCell: UITableViewCell {
     
     static let key = "HourlyWeatherCell"
     @IBOutlet weak var collectionView: UICollectionView!
-    var weatherHourly: [Hourly]? 
+    var weatherHourly: [Hourly]?
+    var timeFormat24 = Bool()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +38,7 @@ extension HourlyWeatherCell: UICollectionViewDelegate, UICollectionViewDataSourc
               let weather = weatherHourly else { return UICollectionViewCell() }
         cell.layer.cornerRadius = 20
         cell.reloadWeatherData(weatherData: weather[indexPath.row])
-        
+        cell.timeFormat24 = timeFormat24
         return cell
     }
     

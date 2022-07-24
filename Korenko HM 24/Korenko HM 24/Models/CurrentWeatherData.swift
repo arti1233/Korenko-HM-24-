@@ -8,16 +8,16 @@
 import Foundation
 
 
-enum UnitsOfMeasurement {
+enum UnitsOfMeasurement: CaseIterable {
     case metric
     case imperial
     
     var description: String {
         switch self {
         case .metric:
-            return "metric"
+            return "Metric"
         case .imperial:
-            return "imperial"
+            return "Imperial"
         }
     }
 }

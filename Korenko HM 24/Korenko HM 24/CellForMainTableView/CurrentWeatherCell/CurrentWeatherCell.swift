@@ -21,6 +21,8 @@ class CurrentWeatherCell: UITableViewCell {
     @IBOutlet weak var sunriseLabel: UILabel!
     @IBOutlet weak var sunsetLabel: UILabel!
     
+    var temperature = String()
+    var timeFormat24 = Bool()
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -31,16 +33,33 @@ class CurrentWeatherCell: UITableViewCell {
         
     }
     
+    func changeParams(isMetric: UnitsOfMeasurement, isTimeFormat24: Bool) {
+        if isMetric == UnitsOfMeasurement.metric {
+            temperature = "C"
+        } else {
+            temperature = "F"
+        }
+        
+        if isTimeFormat24 {
+            timeFormat24 = isTimeFormat24
+        } else {
+            timeFormat24 = isTimeFormat24
+        }
+    }
+    
+  
+    
+    
     
     func reloadWeatheData(weatherData: WeatherData) {
         DispatchQueue.main.async { [weak self] in
             let weather = weatherData.current
             guard let weatherDescription = weather.weather.first,
                   let self = self else { return }
-            self.timeLabel.text = weather.dt.timeHHmmDDMMYYYY
+            self.timeLabel.text = weather.dt.timeHHmmDDMMYYYY(isTimeFormat24: self.timeFormat24)
             self.cityLabel.text = weatherData.timezone
             self.weatherLabel.text = weatherDescription.weatherDescription
-            self.tempLabel.text = "\(Int(weather.temp)) C"
+            self.tempLabel.text = "\(Int(weather.temp)) \((self.temperature).localize)"
             self.cloudlyLabel.text = "\(weather.clouds) %"
             self.speedWindLabel.text = "\(Int(weather.windSpeed)) \("m/s".localize)"
             self.sunriseLabel.text = "\(weather.sunrise.timeHHmm)"

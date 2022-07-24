@@ -15,14 +15,25 @@ class DailyWeatherForTableCell: UITableViewCell {
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var mainView: UIView!
-    
+    var temperature = String()
     var daily: Daily?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        
+        
+        
+        
     }
 
+    func changeMetricTemperature(isMetric: UnitsOfMeasurement) {
+        if isMetric == UnitsOfMeasurement.metric {
+            temperature = "C"
+        } else {
+            temperature = "F"
+        }
+    }
     
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,7 +50,7 @@ class DailyWeatherForTableCell: UITableViewCell {
             DispatchQueue.main.async {
                 self.timeLabel.text = weatherData.dt.timeEEEE
                 self.iconView.image = icon
-                self.tempLabel.text = "\(Int(weatherData.temp.min)) - \(Int(weatherData.temp.max)) C"
+                self.tempLabel.text = "\(Int(weatherData.temp.min)) - \(Int(weatherData.temp.max)) \((self.temperature).localize)"
             }
         }
     }
