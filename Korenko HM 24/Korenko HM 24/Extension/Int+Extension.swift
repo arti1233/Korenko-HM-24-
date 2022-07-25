@@ -21,6 +21,18 @@ extension Int{
         let strDate = dateFormatter.string(from: date)
         return strDate
     }
+    
+    var timeHHmm: String {
+        let date = Date(timeIntervalSince1970: TimeInterval(self))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.timeZone = .current
+        dateFormatter.dateFormat = "HH:mm"
+        let strDate = dateFormatter.string(from: date)
+        return strDate
+    }
+    
     var timeMMMd: String {
         let date = Date(timeIntervalSince1970: TimeInterval(self))
         let dateFormatter = DateFormatter()
