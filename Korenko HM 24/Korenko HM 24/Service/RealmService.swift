@@ -93,7 +93,7 @@ class RealmService: RealmServiceProtocol {
     }
     
     
-    func reloadListSetting() -> Results<SettingRealm> {
+    func getListSetting() -> Results<SettingRealm> {
         return realm.objects(SettingRealm.self)
     }
     
@@ -116,7 +116,5 @@ protocol RealmServiceProtocol {
     
     func addSettingRealm(isTimeFormat24: Bool)
    
-    func reloadListSetting() -> Results<SettingRealm>
-    
-    func getSettingObject() -> SettingRealm
+    func getListSetting() -> Results<SettingRealm>
 }

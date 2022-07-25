@@ -15,7 +15,8 @@ class CollectionCellForHourly: UICollectionViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
     
-    var timeFormat24 = Bool()
+    var temperature: String!
+    var isFullTime: Bool!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,25 +24,24 @@ class CollectionCellForHourly: UICollectionViewCell {
         
     }
     
-    func changeParams(isTimeFormat24: Bool) {
-        if isTimeFormat24 {
-            timeFormat24 = isTimeFormat24
-        } else {
-            timeFormat24 = isTimeFormat24
-        }
+
+    func changeParams(isMetric: UnitsOfMeasurement, isTimeFormat24: Bool) {
+        temperature = isMetric == UnitsOfMeasurement.metric ? "C" : "F"
+        isFullTime = isTimeFormat24
     }
-    
 
     
     func reloadWeatherData(weatherData: Hourly) {
         DispatchQueue.global(qos: .utility).async { [weak self] in
             guard let self = self,
-                  let weather = weatherData.weather.first else { return }
+                  let weather = weatherData.weather.first,
+                  let temperature = self.temperature,
+                  let isFullTime = self.isFullTime else { return }
             let icon = weather.icon.image
             DispatchQueue.main.async {
                 self.iconImageView.image = icon
-                self.timeLabel.text = weatherData.dt.timeHHmm(isTimeFormate24: self.timeFormat24)
-                self.tempLabel.text = "\(Int(weatherData.temp)) C"
+                self.timeLabel.text = weatherData.dt.timeHHmm(isTimeFormate24: isFullTime)
+                self.tempLabel.text = "\(Int(weatherData.temp)) \((temperature).localize)"
             }
         }
     }

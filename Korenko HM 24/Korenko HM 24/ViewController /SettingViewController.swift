@@ -26,7 +26,7 @@ enum SettingSection: Int, CaseIterable {
     }
 }
 
-enum UnfavorableWeather: CaseIterable {
+enum UncomfortableWeather: CaseIterable {
     case snow
     case rain
     case thunder
@@ -107,7 +107,7 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         realmProvider = RealmService()
-        items = realmProvider.reloadListSetting()
+        items = realmProvider.getListSetting()
         
         if let item = items.first {
             badWeather.rawValue = item.weather
@@ -140,8 +140,7 @@ class SettingViewController: UIViewController {
     
     
     @IBAction func showListRequest(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "ListStoryboard", bundle: nil)
-        if let VC = storyboard.instantiateViewController(withIdentifier: ListViewController.key) as? ListViewController {
+        if let VC = UIStoryboard(name: "ListStoryboard", bundle: nil).instantiateViewController(withIdentifier: ListViewController.key) as? ListViewController {
             present(VC, animated: true)
         }
     }
@@ -157,11 +156,10 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let values = SettingSection.allCases[section]
-        
-        switch values {
+    
+        switch SettingSection.allCases[section] {
         case .weather:
-            return UnfavorableWeather.allCases.count
+            return UncomfortableWeather.allCases.count
         case .measurement:
             return 1
         case .timeFormat:
@@ -170,28 +168,24 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.key) as? SettingCell else { return UITableViewCell()}
-        guard let cellSetting = tableView.dequeueReusableCell(withIdentifier: MeasurmentSettingCell.key) as?  MeasurmentSettingCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.key) as? SettingCell,
+              let cellSetting = tableView.dequeueReusableCell(withIdentifier: MeasurmentSettingCell.key) as?  MeasurmentSettingCell else { return UITableViewCell()}
  
         let values = SettingSection.allCases[indexPath.section]
-        let weather1 = UnfavorableWeather.allCases[indexPath.row]
+        let uncomfortableWeather = UncomfortableWeather.allCases[indexPath.row]
         cellSetting.selectionStyle = .none
         cell.selectionStyle = .none
         switch values {
         case .weather:
-            cell.settingLabel.text = weather1.description
-            cell.setSelectedAttribute(isSelected: badWeather.contains(weather1.badWeather))
+            cell.settingLabel.text = uncomfortableWeather.description
+            cell.setSelectedAttribute(isSelected: badWeather.contains(uncomfortableWeather.badWeather))
             return cell
         case .measurement:
             cellSetting.settingLabel.text = UnitsOfMeasurement.allCases[indexPath.row].description.localize
             cellSetting.switchSetting.isOn = isMeasurment
             cellSetting.completion = { [weak self] result in
                 guard let self = self else { return }
-                if result {
-                    self.realmProvider.addSettingRealm(isMetricUnits: result)
-                } else {
-                    self.realmProvider.addSettingRealm(isMetricUnits: result)
-                }
+                self.realmProvider.addSettingRealm(isMetricUnits: result)
             }
             return cellSetting
         case .timeFormat:
@@ -199,11 +193,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             cellSetting.switchSetting.isOn = isTimeFormat
             cellSetting.completion = { [weak self] result in
                 guard let self = self else { return }
-                if result {
-                    self.realmProvider.addSettingRealm(isTimeFormat24: result)
-                } else {
-                    self.realmProvider.addSettingRealm(isTimeFormat24: result)
-                }
+                self.realmProvider.addSettingRealm(isTimeFormat24: result)
             }
             return cellSetting
         }
@@ -212,7 +202,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let values = SettingSection.allCases[indexPath.section]
-        let weather = UnfavorableWeather.allCases[indexPath.row]
+        let weather = UncomfortableWeather.allCases[indexPath.row]
 
         switch values {
         case .weather:
@@ -237,7 +227,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let values = SettingSection.allCases[indexPath.section]
-        let weather = UnfavorableWeather.allCases[indexPath.row]
+        let weather = UncomfortableWeather.allCases[indexPath.row]
 
         switch values {
         case .weather:

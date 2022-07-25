@@ -81,7 +81,7 @@ class WeatherViewController: UIViewController {
         
         apiProvider = AlamofireProvider()
         realmProvider = RealmService()
-        items = realmProvider.reloadListSetting()
+        items = realmProvider.getListSetting()
         
         mainTableView.dataSource = self
         mainTableView.delegate = self
@@ -124,7 +124,7 @@ class WeatherViewController: UIViewController {
             guard let self = self else { return }
             switch change {
             case .change(_, _):
-                guard let changeWeather = self.realmProvider.reloadListSetting().first else { return }
+                guard let changeWeather = self.realmProvider.getListSetting().first else { return }
                 self.badWeather.rawValue = changeWeather.weather
                 if changeWeather.isMetricUnits {
                     self.measurement = UnitsOfMeasurement.metric
@@ -438,7 +438,8 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             return currentCell
         case 1:
             hourlyCell.weatherHourly = weather.hourly
-            hourlyCell.timeFormat24 = timeFormat24
+            hourlyCell.fullTimeFormat = timeFormat24
+            hourlyCell.isMetricUnits = measurement
             return hourlyCell
         case 2:
             dailyCell.reloadWeatherData(weatherData: weatherDaily[indexPath.row])

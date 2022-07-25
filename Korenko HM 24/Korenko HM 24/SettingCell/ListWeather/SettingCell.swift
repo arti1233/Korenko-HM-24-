@@ -22,12 +22,11 @@ class SettingCell: UITableViewCell {
     }
 
     func setSelectedAttribute(isSelected: Bool) {
-        guard let imageCircle = UIImage(systemName: "circle"),
-              let imageCircleFill = UIImage(systemName: "circle.fill") else { return }
-        
         if isSelected {
+            guard let imageCircleFill = UIImage(systemName: "circle.fill") else { return }
             iconView.image = imageCircleFill
         } else {
+            guard let imageCircle = UIImage(systemName: "circle") else { return }
             iconView.image = imageCircle
         }
     }

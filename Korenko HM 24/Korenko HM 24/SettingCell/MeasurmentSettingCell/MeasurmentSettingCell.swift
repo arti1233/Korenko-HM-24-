@@ -13,9 +13,6 @@ class MeasurmentSettingCell: UITableViewCell {
     
     @IBOutlet weak var settingLabel: UILabel!
     @IBOutlet weak var switchSetting: UISwitch!
-    var isTimeFormat = Bool()
-    var isMeasurment = Bool()
-    
     var completion: ((Bool) -> Void)?
     
     override func awakeFromNib() {
@@ -38,11 +35,7 @@ class MeasurmentSettingCell: UITableViewCell {
     
     @objc func switchChange(target: UISwitch) {
         guard let completion = completion else { return }
-        if target.isOn {
-            completion(true)
-        } else {
-            completion(false)
-        }
+        completion(target.isOn)
     }
     
 }
