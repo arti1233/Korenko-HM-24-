@@ -34,7 +34,7 @@ class CurrentWeatherCell: UITableViewCell {
     }
     
     func changeParams(isMetric: UnitsOfMeasurement, isTimeFormat24: Bool) {
-        temperature = isMetric == UnitsOfMeasurement.metric ? "C" : "F"
+        temperature = isMetric.temperatureSymbols
         isFullTime = isTimeFormat24
     }
     

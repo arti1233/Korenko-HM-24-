@@ -28,7 +28,7 @@ class DailyWeatherForTableCell: UITableViewCell {
     }
 
     func changeMetricTemperature(isMetric: UnitsOfMeasurement) {
-        temperature = isMetric == UnitsOfMeasurement.metric ? "C" : "F"
+        temperature = isMetric.temperatureSymbols
     }
     
     

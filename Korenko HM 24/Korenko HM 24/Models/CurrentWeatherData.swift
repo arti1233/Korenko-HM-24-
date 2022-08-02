@@ -20,6 +20,15 @@ enum UnitsOfMeasurement: CaseIterable {
             return "Imperial"
         }
     }
+    
+    var temperatureSymbols: String {
+        switch self {
+        case .metric:
+             return "C"
+        case .imperial:
+            return "F"
+        }
+    }
 }
 
 // MARK: - WeatherData

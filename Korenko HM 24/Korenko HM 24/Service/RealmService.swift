@@ -8,7 +8,6 @@
 import Foundation
 import RealmSwift
 import UIKit
-import CloudKit
 
 
 class RequestListRealmData: Object {
