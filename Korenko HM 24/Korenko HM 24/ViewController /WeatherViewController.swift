@@ -28,6 +28,8 @@ enum SectionTableView: Int {
 
 class WeatherViewController: UIViewController {
 
+    static let key = "WeatherViewController"
+    
     private var apiProvider: RestAPIProviderProtocol!
     private var realmProvider: RealmServiceProtocol!
 // MARK: IBOutlet
@@ -58,11 +60,17 @@ class WeatherViewController: UIViewController {
     var weatherDataCurrent: Current?
     var weatherDataDaily: [Daily]?
     var measurement = UnitsOfMeasurement.metric
+    var timeFormat24 = Bool()
     let notificationCenter = UNUserNotificationCenter.current()
-    let notificationIdentifier = "WeatherNotification"
+    let notificationIdentifierSnow = "WeatherNotification"
+    let notificationIdentifierRain = "WeatherNotification"
+    let notificationIdentifierThunder = "WeatherNotification"
     let keyForUserDefaults = "1"
     let lastCityName = "city"
     let localize = NSLocale.preferredLanguages.first
+    var badWeather = BadWeather()
+    var items: Results<SettingRealm>!
+    var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,9 +81,11 @@ class WeatherViewController: UIViewController {
         
         apiProvider = AlamofireProvider()
         realmProvider = RealmService()
+        items = realmProvider.getListSetting()
+        
         mainTableView.dataSource = self
         mainTableView.delegate = self
-        
+        coreManager.delegate = self
         
         mainTableView.register(UINib(nibName: CurrentWeatherCell.key, bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
         mainTableView.register(UINib(nibName: HourlyWeatherCell.key, bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
@@ -84,27 +94,67 @@ class WeatherViewController: UIViewController {
     
         if !UserDefaults.standard.bool(forKey: keyForUserDefaults) {
             if let city = UserDefaults.standard.string(forKey: lastCityName), !city.isEmpty {
-                getCoordinatesByName(name: city)
+                getCoordinatesByName(name: cityName)
             } else {
                 getCoordinatesByName(name: cityName)
             }
         }
         
+        if let item = items.first {
+            badWeather.rawValue = item.weather
+            if item.isMetricUnits {
+                measurement = UnitsOfMeasurement.metric
+            } else {
+                measurement = UnitsOfMeasurement.imperial
+            }
+            if item.isTimeFormat24 {
+                timeFormat24 = item.isTimeFormat24
+            } else {
+                timeFormat24 = item.isTimeFormat24
+            }
+        } else {
+            realmProvider.addSettingRealm(isTimeFormat24: true)
+            realmProvider.addSettingRealm(isMetricUnits: true)
+            realmProvider.addSettingRealm(weather: 0)
+        }
         
-        coreManager.delegate = self
-    
+        guard let item = items.first else { return }
+        
+        notificationToken = item.observe{ [weak self] change in
+            guard let self = self else { return }
+            switch change {
+            case .change(_, _):
+                guard let changeWeather = self.realmProvider.getListSetting().first else { return }
+                self.badWeather.rawValue = changeWeather.weather
+                if changeWeather.isMetricUnits {
+                    self.measurement = UnitsOfMeasurement.metric
+                } else {
+                    self.measurement = UnitsOfMeasurement.imperial
+                }
+                if changeWeather.isTimeFormat24 {
+                    self.timeFormat24 = changeWeather.isTimeFormat24
+                } else {
+                    self.timeFormat24 = changeWeather.isTimeFormat24
+                }
+                guard let lat = self.latitude, let lon = self.longitude else { return }
+                self.refreshController(lat: lat, lon: lon)
+            default:
+                break
+            }
+        }
+        
     }
 
+    deinit {
+        guard let token = notificationToken else { return }
+        token.invalidate()
+    }
     
 // MARK: Actions
-    
-    
     
     @IBAction func searchButton(_ sender: Any) {
         choseCityAlertController()
     }
-    
-    
     
     @IBAction func locationButton(_ sender: Any) {
         if coreManager.authorizationStatus == .notDetermined {
@@ -124,7 +174,6 @@ class WeatherViewController: UIViewController {
         sender.endRefreshing()
     }
     
-    
     func refreshController(lat: Double, lon: Double) {
         apiProvider.getWeatherForCityCoordinates(lat: lat, lon: lon, measurement: measurement.description) { [weak self] result in
             guard let self = self else { return }
@@ -136,7 +185,7 @@ class WeatherViewController: UIViewController {
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
                 DispatchQueue.global().async {
-                    self.getNotificationForWeather(weatherData: value.hourly)
+                    self.getNotificationForWeather(weatherData: value.hourly, badWeather: self.badWeather)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
                     DispatchQueue.main.async {
                         self.regionLabel.text = value.timezone
@@ -166,7 +215,7 @@ class WeatherViewController: UIViewController {
                 self.weatherDataDaily = Array(value.daily.dropFirst())
                 self.realmProvider.addObjectInRealm(weather: value, isLocation: true)
                 DispatchQueue.global().async {
-                    self.getNotificationForWeather(weatherData: value.hourly)
+                    self.getNotificationForWeather(weatherData: value.hourly, badWeather: self.badWeather)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
                     guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.white, renderingMode: .alwaysOriginal),
                           let imageLocation = UIImage(systemName: "location.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal) else { return }
@@ -185,7 +234,6 @@ class WeatherViewController: UIViewController {
             }
         }
     }
-    
     
 // MARK: METODS FOR SEARCH BUTTON
     
@@ -221,8 +269,8 @@ class WeatherViewController: UIViewController {
                 self.latitude = value.lat
                 self.weatherData = value
                 self.weatherDataDaily = Array(value.daily.dropFirst())
-                DispatchQueue.global().async {
-                    self.getNotificationForWeather(weatherData: value.hourly)
+                DispatchQueue.global(qos: .userInteractive).async {
+                    self.getNotificationForWeather(weatherData: value.hourly, badWeather: self.badWeather)
                     let imageBackground = self.getImageForWeatherView(weather: weather.id)
                     guard let imageSearch = UIImage(systemName: "magnifyingglass")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
                           let imageLocation = UIImage(systemName: "location")?.withTintColor(.white, renderingMode: .alwaysOriginal) else { return }
@@ -243,8 +291,6 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    
-    
 // MARK: METODS
     
    // состояние кнопок
@@ -261,9 +307,6 @@ class WeatherViewController: UIViewController {
             searchButton.setImage(imageSearch, for: .normal)
             locationButton.setImage(imageLocation, for: .normal)
         }
-        
-        
-        
     }
     
     // Chose City alertController
@@ -301,32 +344,29 @@ class WeatherViewController: UIViewController {
     
     
     // метод проверки почасовой погоды
-    func getNotificationForWeather(weatherData: [Hourly]) {
+    func getNotificationForWeather(weatherData: [Hourly], badWeather: BadWeather) {
+        notificationCenter.removeDeliveredNotifications(withIdentifiers: [notificationIdentifierSnow, notificationIdentifierRain, notificationIdentifierThunder])
         for weather in weatherData.dropFirst() {
-            var counter = 0
-            guard let weatherId = weather.weather.first, counter == 0 else { return }
-            switch weatherId.id {
-            case 200...232:
-                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification)
-                counter += 1
-                break
-            case 500...531:
-                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification)
-                counter += 1
-                break
-            case 600...622:
-                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification)
-                counter += 1 
-                break
-            default:
-                break
+            var counterSnow = 0
+            var counterRain = 0
+            var counterThunder = 0
+            guard let weatherId = weather.weather.first else { return }
+            
+            if badWeather.contains(.thunder), counterThunder == 0, WeatherId.thunder.badWeatherRange.contains(weatherId.id)  {
+                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification, notificationIdentifier: notificationIdentifierThunder)
+                counterThunder += 1
+            } else if badWeather.contains(.rain), counterRain == 0, WeatherId.rain.badWeatherRange.contains(weatherId.id) {
+                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification, notificationIdentifier: notificationIdentifierRain)
+                counterRain += 1
+            } else if badWeather.contains(.snow), counterSnow == 0, WeatherId.snow.badWeatherRange.contains(weatherId.id) {
+                addNotification(weather: weatherId.main.rawValue, time: weather.dt.getTimeForNotification, notificationIdentifier: notificationIdentifierSnow)
+                counterSnow += 1
             }
         }
     }
     
     // метод добавления уведомления
-    func addNotification(weather: String, time: DateComponents) {
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
+    func addNotification(weather: String, time: DateComponents, notificationIdentifier: String ) {
         let content = UNMutableNotificationContent()
         content.title = "Warning".localize
         content.body = "\(weather) \("will be in 30 minute!".localize)"
@@ -372,7 +412,6 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let weatherDaily = weatherDataDaily else { return 0}
         
-        
         switch section {
         case 0, 1:
             return 1
@@ -392,16 +431,19 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         guard let dailyCell = mainTableView.dequeueReusableCell(withIdentifier: DailyWeatherForTableCell.key) as? DailyWeatherForTableCell,
               let weatherDaily = weatherDataDaily  else { return UITableViewCell() }
        
-        
         switch indexPath.section{
         case 0:
             currentCell.reloadWeatheData(weatherData: weather)
+            currentCell.changeParams(isMetric: measurement, isTimeFormat24: timeFormat24)
             return currentCell
         case 1:
             hourlyCell.weatherHourly = weather.hourly
+            hourlyCell.fullTimeFormat = timeFormat24
+            hourlyCell.isMetricUnits = measurement
             return hourlyCell
         case 2:
             dailyCell.reloadWeatherData(weatherData: weatherDaily[indexPath.row])
+            dailyCell.changeMetricTemperature(isMetric: measurement)
             return dailyCell
         default:
             return  UITableViewCell()
@@ -447,7 +489,6 @@ extension WeatherViewController: CLLocationManagerDelegate {
                 locationButton.setImage(imageLocation, for: .normal)
                 searchButton.setImage(imageSearch, for: .normal)
             }
-            
         }
     }
 
@@ -468,5 +509,4 @@ extension WeatherViewController: UITextFieldDelegate {
         guard CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: string)) || CharacterSet(charactersIn: "-'. ,").isSuperset(of:  CharacterSet(charactersIn: string)) else { return false }
         return true
     }
-    
 }

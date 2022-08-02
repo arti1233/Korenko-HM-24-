@@ -30,3 +30,16 @@
 "Error getting weather" = "Ошибка получения погоды";
 "current weather" = "текущей погоды";
 "map" = "карты";
+"Settings" = "Настройки";
+"Weather Notifications" = "Уведомления о погоде";
+"Units of measurement" = "Единицы изамерения";
+"Time format" = "Формат времени";
+"Snow" = "Снег";
+"Rain" = "Дождь";
+"Thunder" = "Гроза";
+"Time format 12" = "12 часовой формат";
+"Time format 24" = "24 часовой формат";
+"Metric" = "Метрическая";
+"Imperial" = "Имперская";
+"F" = "Ф";
+"C" = "C";

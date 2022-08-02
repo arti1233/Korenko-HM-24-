@@ -11,7 +11,9 @@ class HourlyWeatherCell: UITableViewCell {
     
     static let key = "HourlyWeatherCell"
     @IBOutlet weak var collectionView: UICollectionView!
-    var weatherHourly: [Hourly]? 
+    var weatherHourly: [Hourly]?
+    var fullTimeFormat: Bool!
+    var isMetricUnits: UnitsOfMeasurement!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,10 +36,12 @@ extension HourlyWeatherCell: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellForHourly.key, for: indexPath) as? CollectionCellForHourly,
+              let fullTimeFormat = fullTimeFormat,
+              let isMetricUnits = isMetricUnits,
               let weather = weatherHourly else { return UICollectionViewCell() }
         cell.layer.cornerRadius = 20
         cell.reloadWeatherData(weatherData: weather[indexPath.row])
-        
+        cell.changeParams(isMetric: isMetricUnits, isTimeFormat24: fullTimeFormat)
         return cell
     }
     

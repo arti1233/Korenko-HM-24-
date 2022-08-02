@@ -16,6 +16,10 @@
 		AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */; };
 		AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D33452868C2EE009DDDD1 /* MapViewController.swift */; };
 		AE4D33492868CCA4009DDDD1 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = AE4D33482868CCA4009DDDD1 /* GoogleMaps */; };
+		AE5521C52888230B00E895F9 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5521C42888230B00E895F9 /* ListViewController.swift */; };
+		AE5521C72888237600E895F9 /* ListStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE5521C62888237600E895F9 /* ListStoryboard.storyboard */; };
+		AE5521CA2888298400E895F9 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5521C82888298400E895F9 /* SettingCell.swift */; };
+		AE5521CB2888298400E895F9 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5521C92888298400E895F9 /* SettingCell.xib */; };
 		AE65FA73287AE5250006743A /* UIView+extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE65FA72287AE5250006743A /* UIView+extension .swift */; };
 		AE70AEA3286B8C7400B518F6 /* CurrentWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEA1286B8C7400B518F6 /* CurrentWeatherCell.swift */; };
 		AE70AEA4286B8C7400B518F6 /* CurrentWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEA2286B8C7400B518F6 /* CurrentWeatherCell.xib */; };
@@ -30,7 +34,7 @@
 		AE70AEC0286C8F6C00B518F6 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEBF286C8F6C00B518F6 /* RealmService.swift */; };
 		AE70AEC3286CD41400B518F6 /* TableViewCellForListReqest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEC1286CD41400B518F6 /* TableViewCellForListReqest.swift */; };
 		AE70AEC4286CD41400B518F6 /* TableViewCellForListReqest.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE70AEC2286CD41400B518F6 /* TableViewCellForListReqest.xib */; };
-		AE70AEC7286CD6C200B518F6 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEC6286CD6C200B518F6 /* ListViewController.swift */; };
+		AE70AEC7286CD6C200B518F6 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70AEC6286CD6C200B518F6 /* SettingViewController.swift */; };
 		AE986F512883014F00329C0B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE986F532883014F00329C0B /* Localizable.strings */; };
 		AE986F5C28833BDB00329C0B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE986F592883310F00329C0B /* Info.plist */; };
 		AE986F5F288411CE00329C0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE986F61288411CE00329C0B /* InfoPlist.strings */; };
@@ -41,6 +45,8 @@
 		AE9968CD2865D693002BB058 /* AlamofierProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968CC2865D693002BB058 /* AlamofierProvider.swift */; };
 		AE9968D12865D806002BB058 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AE9968D02865D806002BB058 /* Alamofire */; };
 		AE9968D32865F6DC002BB058 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9968D22865F6DB002BB058 /* Constants.swift */; };
+		AEA53EAA2889436A0014B6A7 /* MeasurmentSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA53EA82889436A0014B6A7 /* MeasurmentSettingCell.swift */; };
+		AEA53EAB2889436A0014B6A7 /* MeasurmentSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA53EA92889436A0014B6A7 /* MeasurmentSettingCell.xib */; };
 		AEAD2733287EFA61008FCD19 /* InfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAD2732287EFA60008FCD19 /* InfoWindow.swift */; };
 		AEAD2735287EFA74008FCD19 /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEAD2734287EFA74008FCD19 /* InfoWindow.xib */; };
 		AEF812DD286DA170002BC897 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF812DC286DA170002BC897 /* String+Extension.swift */; };
@@ -57,6 +63,10 @@
 		AE0C1446285F2E7B007C0BFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE0C144E285F433F007C0BFD /* DailyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherData.swift; sourceTree = "<group>"; };
 		AE4D33452868C2EE009DDDD1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		AE5521C42888230B00E895F9 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		AE5521C62888237600E895F9 /* ListStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListStoryboard.storyboard; sourceTree = "<group>"; };
+		AE5521C82888298400E895F9 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		AE5521C92888298400E895F9 /* SettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
 		AE65FA72287AE5250006743A /* UIView+extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension .swift"; sourceTree = "<group>"; };
 		AE70AEA1286B8C7400B518F6 /* CurrentWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCell.swift; sourceTree = "<group>"; };
 		AE70AEA2286B8C7400B518F6 /* CurrentWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWeatherCell.xib; sourceTree = "<group>"; };
@@ -69,7 +79,7 @@
 		AE70AEBF286C8F6C00B518F6 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		AE70AEC1286CD41400B518F6 /* TableViewCellForListReqest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellForListReqest.swift; sourceTree = "<group>"; };
 		AE70AEC2286CD41400B518F6 /* TableViewCellForListReqest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellForListReqest.xib; sourceTree = "<group>"; };
-		AE70AEC6286CD6C200B518F6 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		AE70AEC6286CD6C200B518F6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		AE986F492882FF5100329C0B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		AE986F4A2882FF5100329C0B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		AE986F4E2882FF5B00329C0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -85,6 +95,8 @@
 		AE9968C92865D5B5002BB058 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		AE9968CC2865D693002BB058 /* AlamofierProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofierProvider.swift; sourceTree = "<group>"; };
 		AE9968D22865F6DB002BB058 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AEA53EA82889436A0014B6A7 /* MeasurmentSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurmentSettingCell.swift; sourceTree = "<group>"; };
+		AEA53EA92889436A0014B6A7 /* MeasurmentSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeasurmentSettingCell.xib; sourceTree = "<group>"; };
 		AEAD2732287EFA60008FCD19 /* InfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindow.swift; sourceTree = "<group>"; };
 		AEAD2734287EFA74008FCD19 /* InfoWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
 		AEF812DC286DA170002BC897 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -131,12 +143,12 @@
 				AE0C143C285F2E7A007C0BFD /* SceneDelegate.swift */,
 				AEF812E3286DB42C002BC897 /* Extension */,
 				AE70AEC5286CD42E00B518F6 /* CellForListReqest  */,
+				AE5521CC2888298C00E895F9 /* SettingCell */,
 				AE9968C82865D59A002BB058 /* Models */,
 				AE9968C32865D4B8002BB058 /* ViewController  */,
 				AE9968CB2865D648002BB058 /* Service */,
-				AE0C1440285F2E7A007C0BFD /* Main.storyboard */,
+				AE5521C3288822CC00E895F9 /* Storyboard */,
 				AE0C1443285F2E7B007C0BFD /* Assets.xcassets */,
-				AE0C1445285F2E7B007C0BFD /* LaunchScreen.storyboard */,
 				AE986F592883310F00329C0B /* Info.plist */,
 				AE986F61288411CE00329C0B /* InfoPlist.strings */,
 				AEAD2736287EFD2C008FCD19 /* CustomInfoWindow */,
@@ -153,6 +165,25 @@
 				AE70AEAA286BAD7D00B518F6 /* HourlyWeatherCell */,
 			);
 			path = CellForMainTableView;
+			sourceTree = "<group>";
+		};
+		AE5521C3288822CC00E895F9 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				AE0C1445285F2E7B007C0BFD /* LaunchScreen.storyboard */,
+				AE0C1440285F2E7A007C0BFD /* Main.storyboard */,
+				AE5521C62888237600E895F9 /* ListStoryboard.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		AE5521CC2888298C00E895F9 /* SettingCell */ = {
+			isa = PBXGroup;
+			children = (
+				AEA53EA228888ED40014B6A7 /* ListWeather */,
+				AEA53EAC2889436F0014B6A7 /* MeasurmentSettingCell */,
+			);
+			path = SettingCell;
 			sourceTree = "<group>";
 		};
 		AE70AEA5286B8C9000B518F6 /* CurrentWeatherCell */ = {
@@ -205,8 +236,9 @@
 			isa = PBXGroup;
 			children = (
 				AE0C143E285F2E7A007C0BFD /* WeatherViewController.swift */,
+				AE70AEC6286CD6C200B518F6 /* SettingViewController.swift */,
 				AE4D33452868C2EE009DDDD1 /* MapViewController.swift */,
-				AE70AEC6286CD6C200B518F6 /* ListViewController.swift */,
+				AE5521C42888230B00E895F9 /* ListViewController.swift */,
 			);
 			path = "ViewController ";
 			sourceTree = "<group>";
@@ -229,6 +261,24 @@
 				AE9968CC2865D693002BB058 /* AlamofierProvider.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		AEA53EA228888ED40014B6A7 /* ListWeather */ = {
+			isa = PBXGroup;
+			children = (
+				AE5521C92888298400E895F9 /* SettingCell.xib */,
+				AE5521C82888298400E895F9 /* SettingCell.swift */,
+			);
+			path = ListWeather;
+			sourceTree = "<group>";
+		};
+		AEA53EAC2889436F0014B6A7 /* MeasurmentSettingCell */ = {
+			isa = PBXGroup;
+			children = (
+				AEA53EA82889436A0014B6A7 /* MeasurmentSettingCell.swift */,
+				AEA53EA92889436A0014B6A7 /* MeasurmentSettingCell.xib */,
+			);
+			path = MeasurmentSettingCell;
 			sourceTree = "<group>";
 		};
 		AEAD2736287EFD2C008FCD19 /* CustomInfoWindow */ = {
@@ -323,14 +373,17 @@
 			files = (
 				AE0C1447285F2E7B007C0BFD /* LaunchScreen.storyboard in Resources */,
 				AE986F5F288411CE00329C0B /* InfoPlist.strings in Resources */,
+				AE5521CB2888298400E895F9 /* SettingCell.xib in Resources */,
 				AE70AEA9286BAD7700B518F6 /* HourlyWeatherCell.xib in Resources */,
 				AE70AEAE286BAE9500B518F6 /* CollectionCellForHourly.xib in Resources */,
 				AE70AEA4286B8C7400B518F6 /* CurrentWeatherCell.xib in Resources */,
 				AE70AEC4286CD41400B518F6 /* TableViewCellForListReqest.xib in Resources */,
 				AE986F512883014F00329C0B /* Localizable.strings in Resources */,
 				AEAD2735287EFA74008FCD19 /* InfoWindow.xib in Resources */,
+				AE5521C72888237600E895F9 /* ListStoryboard.storyboard in Resources */,
 				AE0C1444285F2E7B007C0BFD /* Assets.xcassets in Resources */,
 				AE986F5C28833BDB00329C0B /* Info.plist in Resources */,
+				AEA53EAB2889436A0014B6A7 /* MeasurmentSettingCell.xib in Resources */,
 				AE0C1442285F2E7A007C0BFD /* Main.storyboard in Resources */,
 				AE70AEB8286BCA6200B518F6 /* DailyWeatherForTableCell.xib in Resources */,
 			);
@@ -345,22 +398,25 @@
 			files = (
 				AE0C144F285F433F007C0BFD /* DailyWeatherData.swift in Sources */,
 				AE70AEA8286BAD7700B518F6 /* HourlyWeatherCell.swift in Sources */,
+				AE5521CA2888298400E895F9 /* SettingCell.swift in Sources */,
 				AE0C143F285F2E7A007C0BFD /* WeatherViewController.swift in Sources */,
 				AE70AEA3286B8C7400B518F6 /* CurrentWeatherCell.swift in Sources */,
 				AE986F642884636B00329C0B /* Bool+extension.swift in Sources */,
 				AE9968C72865D57D002BB058 /* CurrentWeatherData.swift in Sources */,
 				AE65FA73287AE5250006743A /* UIView+extension .swift in Sources */,
+				AE5521C52888230B00E895F9 /* ListViewController.swift in Sources */,
 				AE70AEC3286CD41400B518F6 /* TableViewCellForListReqest.swift in Sources */,
 				AE70AEC0286C8F6C00B518F6 /* RealmService.swift in Sources */,
 				AE4D33462868C2EE009DDDD1 /* MapViewController.swift in Sources */,
 				AE70AEAD286BAE9500B518F6 /* CollectionCellForHourly.swift in Sources */,
+				AEA53EAA2889436A0014B6A7 /* MeasurmentSettingCell.swift in Sources */,
 				AE0C143B285F2E7A007C0BFD /* AppDelegate.swift in Sources */,
 				AE9968C52865D53D002BB058 /* HourlyWeatherData.swift in Sources */,
 				AE9968CD2865D693002BB058 /* AlamofierProvider.swift in Sources */,
 				AE70AEB7286BCA6200B518F6 /* DailyWeatherForTableCell.swift in Sources */,
 				AE9968CA2865D5B5002BB058 /* Geocoding.swift in Sources */,
 				AEF812DD286DA170002BC897 /* String+Extension.swift in Sources */,
-				AE70AEC7286CD6C200B518F6 /* ListViewController.swift in Sources */,
+				AE70AEC7286CD6C200B518F6 /* SettingViewController.swift in Sources */,
 				AE9968D32865F6DC002BB058 /* Constants.swift in Sources */,
 				AEF812E0286DB327002BC897 /* Int+Extension.swift in Sources */,
 				AE0C143D285F2E7A007C0BFD /* SceneDelegate.swift in Sources */,
@@ -545,7 +601,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NY9SGUADU3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Korenko HM 24/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -573,7 +629,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NY9SGUADU3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Korenko HM 24/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

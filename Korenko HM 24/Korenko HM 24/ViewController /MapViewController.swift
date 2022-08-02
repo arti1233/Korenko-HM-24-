@@ -14,8 +14,9 @@ class MapViewController: UIViewController {
     private var apiProvider: RestAPIProviderProtocol!
     private var realmProvider: RealmServiceProtocol!
     var measurement = UnitsOfMeasurement.metric
-    let realm = try! Realm()
     var weatherCurrent: Current?
+    
+    let realm = try! Realm()
     
     var mapView = GMSMapView()
     var camera = GMSCameraPosition()
@@ -29,12 +30,8 @@ class MapViewController: UIViewController {
         mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
         mapView.delegate = self
         view.addSubview(mapView)
-    
-        let locale = NSLocale.preferredLanguages.first
-        print("---------------------")
-        print(locale)
-        print("---------------------")
-        
+
+        print(realm.configuration.fileURL)
     }
     
     
@@ -70,10 +67,8 @@ extension MapViewController: GMSMapViewDelegate {
             switch result {
             case .success(let value):
                 self.realmProvider.addObjectInRealm(weather: value, isLocation: false)
-                DispatchQueue.main.async {
-                    self.weatherCurrent = value.current
-                    self.createMarker(map: self.mapView , coordinate: coordinate)
-                }
+                self.weatherCurrent = value.current
+                self.createMarker(map: self.mapView , coordinate: coordinate)
             case .failure(let error):
                 self.errorAlertController(error: error.localizedDescription)
             }
